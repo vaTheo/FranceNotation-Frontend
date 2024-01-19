@@ -44,19 +44,20 @@ const MainPage = () => {
         cityValue.trim(),
         addressValue.trim()
       );
-      const endpoints = ["/fetchGeorisque", "/Fetcheau", "/fethParcCarto"]; // Added '/fetchPolice'
+      const endpoints = ["/fetchGeorisque", "/Fetcheau", "/fethParcCarto",'/fethDPE']; // Added '/fetchPolice'
       const promises = endpoints.map((endpoint) =>
         handleRequest(endpoint, addressObject)
       );
 
       // Await all promises, handling errors individually
-      const [rateGeorisque, rateEau, rateParcCarto] = await Promise.all(
+      const [rateGeorisque, rateEau, rateParcCarto,rateDPE] = await Promise.all(
         promises.map((p) => p.catch((e) => e))
       );
 
       console.log("Rate Georisque: ", rateGeorisque);
       console.log("Rate Eau: ", rateEau);
-      console.log("Rate Police: ", rateParcCarto); // Log the result of fetchPolice
+      console.log("Rate ParcCarto: ", rateParcCarto); // Log the result of fetchPolice
+      console.log('Rates DPE ' , rateDPE)
     } catch (err) {
       console.error("Error in one or more requests: ", err);
     }
