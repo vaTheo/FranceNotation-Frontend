@@ -5,6 +5,7 @@ import CustomButton from "../components/button/button";
 import { initiateCycle, fetchData, testAPI } from "../services/api/api.service";
 import { AddressObject } from "../apiResponseType/apiResponse";
 import CustomLoadingIndicator from "../components/loading/loadingBar";
+import AddressSearch from "../components/BanField/banfield";
 
 const MainPage = () => {
   const [postcodeValue, setPostcodeValue] = useState("");
@@ -37,37 +38,39 @@ const MainPage = () => {
   };
   const handleButtonClick = async () => {
     console.log("Button clicked!");
-    console.log(postcodeValue)
+    console.log(postcodeValue);
     try {
       const addressObject = await initiateCycle(
         postcodeValue.trim(), //Remove space beginning and end of the string
         cityValue.trim(),
         addressValue.trim()
       );
-      const endpoints = ["/fetchGeorisque", "/Fetcheau", "/fethParcCarto",'/fethDPE']; // Added '/fetchPolice'
+      const endpoints = [
+        "/fetchGeorisque",
+        "/Fetcheau",
+        "/fethParcCarto",
+        "/fethDPE",
+      ]; // Added '/fetchPolice'
       const promises = endpoints.map((endpoint) =>
         handleRequest(endpoint, addressObject)
       );
 
       // Await all promises, handling errors individually
-      const [rateGeorisque, rateEau, rateParcCarto,rateDPE] = await Promise.all(
-        promises.map((p) => p.catch((e) => e))
-      );
+      const [rateGeorisque, rateEau, rateParcCarto, rateDPE] =
+        await Promise.all(promises.map((p) => p.catch((e) => e)));
 
       console.log("Rate Georisque: ", rateGeorisque);
       console.log("Rate Eau: ", rateEau);
       console.log("Rate ParcCarto: ", rateParcCarto); // Log the result of fetchPolice
-      console.log('Rates DPE ' , rateDPE)
+      console.log("Rates DPE ", rateDPE);
     } catch (err) {
       console.error("Error in one or more requests: ", err);
     }
   };
 
   const handleButtTest = async () => {
-
-    testAPI()
+    testAPI();
   };
-
 
   return (
     <div className="mainPage">
@@ -100,11 +103,13 @@ const MainPage = () => {
             onClick={handleButtonClick}
             disabled={!areAllFieldsFilled}
           />
-           <CustomButton
+          <CustomButton
             text="TEST API"
             onClick={handleButtTest}
             disabled={false}
           />
+          {/* Replace your address input with AddressSearch if needed */}
+          <AddressSearch />
         </div>
         <div className="Loading">
           <CustomLoadingIndicator isLoading={loadingStatus.fetchGeorisque} />

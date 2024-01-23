@@ -15,6 +15,7 @@
     "@types/react": "^18.2.46",
     "@types/react-dom": "^18.2.18",
     "axios": "^1.6.4",
+    "lodash": "^4.17.21",
     "node-sass": "^9.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -23,7 +24,8 @@
     "web-vitals": "^2.1.4"
   },
   "devDependencies": {
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@types/lodash": "^4.14.202"
   },
   "scripts": {
     "start": "react-scripts start",
