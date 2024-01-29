@@ -4,11 +4,9 @@ import { AddressObject } from "../../apiResponseType/apiResponse";
 const URL = "http://localhost:3001";
 
 export const initiateCycle = async (
-  postCode: string,
-  city: string,
-  street: string
+  address: string,
 ): Promise<AddressObject> => {
-  const jsonData = { postCode, city, street };
+  const jsonData = { address };
   // Initiate the DB request, associate user with addresse ID, return address object
   const responseGetrate = await axios.post(
     `${URL}/ratingcontroller/getrate`,

@@ -1,22 +1,24 @@
 import React, { useState } from "react";
 import CustomInputField from "../components/fieldsMainPage/fieldsMainPage";
-import "./mainPage.scss";
+import "../styles/mainPage.scss";
+
 import CustomButton from "../components/button/button";
 import { initiateCycle, fetchData, testAPI } from "../services/api/api.service";
 import { AddressObject } from "../apiResponseType/apiResponse";
 import CustomLoadingIndicator from "../components/loading/loadingBar";
-import AddressSearch from "../components/BanField/banfield";
+import AddressSearchBar from "../components/BanField/banfield";
+import Button from "@mui/material/Button";
 
 const MainPage = () => {
-  const [postcodeValue, setPostcodeValue] = useState("");
-  const [cityValue, setCityValue] = useState("");
-  const [addressValue, setAddressValue] = useState("");
+  const [valueAddressSearchBar, setValueAddressSearchBar] =
+    useState<string>("");
   // All fields filled
-  const areAllFieldsFilled = postcodeValue && cityValue && addressValue;
+  const areAllFieldsFilled = !valueAddressSearchBar;
   const [loadingStatus, setLoadingStatus] = useState({
     fetchGeorisque: false,
     fetcheau: false,
-    fetchPolice: false, // New state for fetchPolice loading status
+    fethParcCarto: false,
+    fethDPE: false,
   });
 
   const handleRequest = async (
@@ -38,19 +40,15 @@ const MainPage = () => {
   };
   const handleButtonClick = async () => {
     console.log("Button clicked!");
-    console.log(postcodeValue);
+    console.log(valueAddressSearchBar);
     try {
-      const addressObject = await initiateCycle(
-        postcodeValue.trim(), //Remove space beginning and end of the string
-        cityValue.trim(),
-        addressValue.trim()
-      );
+      const addressObject = await initiateCycle(valueAddressSearchBar.trim());
       const endpoints = [
         "/fetchGeorisque",
         "/Fetcheau",
         "/fethParcCarto",
         "/fethDPE",
-      ]; // Added '/fetchPolice'
+      ];
       const promises = endpoints.map((endpoint) =>
         handleRequest(endpoint, addressObject)
       );
@@ -68,55 +66,39 @@ const MainPage = () => {
     }
   };
 
-  const handleButtTest = async () => {
-    testAPI();
+  // Callback management
+  const handleValueAddressSearchBar = (newValue: string) => {
+    setValueAddressSearchBar(newValue);
+    console.log(">>>>>", valueAddressSearchBar);
   };
 
   return (
     <div className="mainPage">
       <header className="mainPage-header">
-        <h1>Entre ton addresse pour avoir la note</h1>
+        <h1>Est-ce qu’il fait bon vivre chez vous ?</h1>
+        <h2>Renseignez l’adresse de votre choix et découvrez sa note</h2>
       </header>
 
       <section className="mainPage-content">
         <div className="inputs-field">
-          <CustomInputField
-            label="Code postal"
-            type="text"
-            value={postcodeValue}
-            onChange={setPostcodeValue}
+          {/* Include AddressSearch component here */}
+          <AddressSearchBar
+            valueAddressSearchBarProps={handleValueAddressSearchBar}
           />
-          <CustomInputField
-            label="Ville"
-            type="text"
-            value={cityValue}
-            onChange={setCityValue}
-          />
-          <CustomInputField
-            label="Adresse"
-            type="text"
-            value={addressValue}
-            onChange={setAddressValue}
-          />
-          <CustomButton
-            text="lancer la recherche"
+          <Button
+            className="button"
+            size="medium"
             onClick={handleButtonClick}
-            disabled={!areAllFieldsFilled}
-          />
-          <CustomButton
-            text="TEST API"
-            onClick={handleButtTest}
-            disabled={false}
-          />
-          {/* Replace your address input with AddressSearch if needed */}
-          <AddressSearch />
+            disabled={areAllFieldsFilled}
+          >
+            RECHERCHER
+          </Button>
         </div>
-        <div className="Loading">
-          <CustomLoadingIndicator isLoading={loadingStatus.fetchGeorisque} />
-        </div>
-        <div className="Loading">
-          <CustomLoadingIndicator isLoading={loadingStatus.fetcheau} />
-        </div>
+        <p>
+          Nous avons croisées les données disponible en libre service
+          d’écologie, de risques de catastrophe naturelle (et bien plus) pour
+          que chaque français puisse voir les informations sur l’indice
+        </p>
       </section>
     </div>
   );
