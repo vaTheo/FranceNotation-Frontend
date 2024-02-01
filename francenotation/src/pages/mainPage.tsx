@@ -8,6 +8,7 @@ import { AddressObject } from "../apiResponseType/apiResponse";
 import CustomLoadingIndicator from "../components/loading/loadingBar";
 import AddressSearchBar from "../components/BanField/banfield";
 import Button from "@mui/material/Button";
+import CardRates from "../components/cardRates/cardRates";
 
 const MainPage = () => {
   const [valueAddressSearchBar, setValueAddressSearchBar] =

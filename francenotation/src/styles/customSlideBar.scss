@@ -1,0 +1,56 @@
+// Sidebar Variables
+$sidebar-background-color: #49454f;
+$sidebar-text-color: #333333;
+
+// Slider Variables
+$slider-track-color: #79b669;
+$slider-thumb-color: #ffffff;
+$slider-mark-color: #daedd5;
+
+.sidebar {
+  width: 90%;
+  color: $sidebar-text-color;
+  box-sizing: border-box;
+
+  // Custom Slider styles
+  .CustomSlider {
+    .MuiSlider-root {
+      color: $slider-track-color;
+      height: 1rem;
+      .MuiSlider-thumb {
+        background-color: $slider-thumb-color;
+        width: 0.125rem;
+        height: 2.75rem;
+        border-radius: 1rem;
+        background-color: var(--Primary---70, #daedd5);
+        flex-shrink: 0;
+        border: 2px solid $slider-thumb-color;
+        box-shadow: 0 0 0 0.4rem $sidebar-background-color;
+
+        &:hover {
+          box-shadow: 0 0 0 0.6rem $sidebar-background-color;
+        }
+      }
+
+      .MuiSlider-mark {
+        background-color: $slider-mark-color;
+      }
+
+      .MuiSlider-markLabel {
+        color: $sidebar-text-color;
+      }
+
+      .MuiSlider-valueLabel {
+        background-color: var(--Primary---80, #fff);
+        color: #49454f;
+        border-radius: 16.25rem;
+        display: flex;
+        width: 3rem;
+        padding: 0.75rem 0.75rem;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+      }
+    }
+  }
+}
