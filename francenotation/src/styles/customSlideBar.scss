@@ -11,21 +11,23 @@ $slider-mark-color: #daedd5;
   width: 90%;
   color: $sidebar-text-color;
   box-sizing: border-box;
+  padding-top: 1rem; // Augmentez cette valeur selon vos besoins
 
   // Custom Slider styles
   .CustomSlider {
     .MuiSlider-root {
       color: $slider-track-color;
-      height: 1rem;
+      height: 0.9rem;
       .MuiSlider-thumb {
         background-color: $slider-thumb-color;
         width: 0.125rem;
-        height: 2.75rem;
+        height: 2rem;
         border-radius: 1rem;
         background-color: var(--Primary---70, #daedd5);
         flex-shrink: 0;
         border: 2px solid $slider-thumb-color;
         box-shadow: 0 0 0 0.4rem $sidebar-background-color;
+        transition: all 0.5s ease; // Customize this value as needed
 
         &:hover {
           box-shadow: 0 0 0 0.6rem $sidebar-background-color;
@@ -38,18 +40,32 @@ $slider-mark-color: #daedd5;
 
       .MuiSlider-markLabel {
         color: $sidebar-text-color;
+        font-size: 2.9rem; // Adjust font size to fit better if necessary
+        text-align: center; // Ensure text is centered
+        width: 150%; // Ensure label uses full width available
+        display: block; // Display block to take up the full width
+        // padding: 0; // Adjust padding to ensure text has more room
+        // margin: 0 auto; // Center label if necessary
+        // white-space: nowrap; // Prevent text from wrapping
+        // overflow: hidden; // Hide overflow
+        // text-overflow: ellipsis; // Add ellipsis if text is too long
       }
 
       .MuiSlider-valueLabel {
         background-color: var(--Primary---80, #fff);
         color: #49454f;
-        border-radius: 16.25rem;
-        display: flex;
+        border-radius: 8.25rem;
+        // display: flex;
         width: 3rem;
-        padding: 0.75rem 0.75rem;
-        justify-content: center;
-        align-items: center;
-        gap: 0.5rem;
+        padding: 0.3rem 0.01em;
+        // justify-content: center;
+        // align-items: center;
+        // gap: 0.5rem;
+        transition: all 0.3s ease; // Customize this value as needed
+
+        &:hover {
+          padding: 0.5rem 0.1rem;
+        }
       }
     }
   }

@@ -1,10 +1,13 @@
 import axios from "axios";
 import { AddressObject } from "../../apiResponseType/apiResponse";
+import { FrontGroupDataValue } from "../../pages/typeResultJson/ResultRespons";
+import { DPEAllData } from "../../pages/typeResultJson/api-DPE";
+import { frontDPEBatiment } from "../../pages/typeResultJson/jsonInterface";
 
 const URL = "http://localhost:3001";
 
 export const initiateCycle = async (
-  address: string,
+  address: string
 ): Promise<AddressObject> => {
   const jsonData = { address };
   // Initiate the DB request, associate user with addresse ID, return address object
@@ -31,7 +34,6 @@ export const fetchData = async (
       `${URL}/ratingcontroller${enpoint}/${addressObject.properties.id}`,
       { withCredentials: true }
     );
-    console.log(fetchGeorisqueResponse.data);
 
     // If it's a new addresse fetch the data to this specific address
     if (!fetchGeorisqueResponse.data) {
@@ -48,9 +50,40 @@ export const fetchData = async (
   }
 };
 
-export const testAPI = async (): Promise<AddressObject> => {
-  const responseGetrate = await axios.get(`${URL}/ratingcontroller/testnewapi`);
-  const addressObject: AddressObject = responseGetrate.data;
-  return addressObject;
+export const fetchGroupNotation = async (
+  addressObject: AddressObject
+): Promise<FrontGroupDataValue> => {
+  try {
+    console.log(
+      "URL :",
+      `${URL}/frontdata/getrates/${addressObject.properties.id}`
+    );
+    const response = await axios.get(
+      `${URL}/frontdata/getrates/${addressObject.properties.id}`,
+
+      { withCredentials: true }
+    );
+    console.log("response.data", response.data);
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
 };
 
+export const fetchGroupJson = async (
+  addressObject: AddressObject,
+  endpoint: string
+) => {
+  try {
+    const response = await axios.get(
+      `${URL}/frontdata/${endpoint}/${addressObject.properties.id}`,
+
+      { withCredentials: true }
+    );
+    return response.data;
+  } catch (err) {
+    console.log(err);
+    throw err;
+  }
+};
