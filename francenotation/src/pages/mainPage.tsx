@@ -3,12 +3,12 @@ import CustomInputField from "../components/fieldsMainPage/fieldsMainPage";
 import "../styles/mainPage.scss";
 import { useNavigate } from 'react-router-dom';
 import CustomButton from "../components/button/button";
-import { initiateCycle, fetchData } from "../services/api/api.service";
 import { AddressObject } from "../apiResponseType/apiResponse";
 import CustomLoadingIndicator from "../components/loading/loadingBar";
 import AddressSearchBar from "../components/BanField/banfield";
 import Button from "@mui/material/Button";
 import CardRates from "../components/cardRates/cardRates";
+import { ServiceAPI } from "../services/api/api.service";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -21,7 +21,7 @@ const MainPage = () => {
  
   const handleButtonClick = async () => {
     try {
-      const addressObject = await initiateCycle(valueAddressSearchBar.trim());
+      const addressObject = await ServiceAPI.initiateCycle(valueAddressSearchBar.trim());
       navigate('/resultpage', {state:{ addressObject: addressObject}});
     } catch (err) {
       console.error("Error in one or more requests: ", err);

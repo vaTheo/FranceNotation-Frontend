@@ -10,7 +10,18 @@ import {
   ZonageSismiqueData,
 } from "./api-georisque";
 
-interface frontzoneInnondable {
+export interface JsonData {
+  dataZoneInnondable?: frontzoneInnondable;
+  dataCatastropheNaturelle?: frontCatastropheNaturelle;
+  dataInstallationClassees?: frontInstallationClassees;
+  dataRisqueLocaux?: frontrisqueLocaux;
+  dataEau?: frontEau;
+  dataDPEBatiment?: frontDPEBatiment;
+  dataZoneNaturelle?: frontzoneNaturelle;
+  dataParcNaturelle?: frontParcNaturelle;
+  dataPollutionSol?: frontpollutionSol;
+}
+export interface frontzoneInnondable {
   zoneInnondable: AZIData[];
 }
 
