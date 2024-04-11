@@ -1,45 +1,46 @@
-.cardRate{
-    // width: calc(50% - (0.625rem * 10)); // For two cards per row, adjust as needed
-    // flex-shrink: 0; // Prevents the cards from shrinking
-    
-.CardContent {
+.cardRate {
+  // width: calc(50% - (0.625rem * 10)); // For two cards per row, adjust as needed
+  // flex-shrink: 0; // Prevents the cards from shrinking
+
+
+  .CardContent {
     width: 16rem;
-    height: 12rem;  
+    height: 12rem;
     flex-shrink: 0;
     background-color: #49454f;
-    display: flex;
     padding: 1.2rem;
-    flex-direction: column;
-    align-items: center;
     gap: 0.75rem;
     border-radius: 20px;
-    justify-content: flex-start;
     margin: 1.5rem;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    align-items: center;
+
     .title-card {
-        color: var(--Primary--60, #b8d6b0);
-        font-size: 1.375rem;
-        font-style: normal;
-        align-self: flex-start;
-        font-weight: 400;
-        line-height: 1.75rem;
-        text-decoration-line: underline;
-      }
-      
-      .text-card {
-        color: var(--Primary---80, #fff);
-        align-self: flex-start;
-        font-size: 0.75rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 1rem;
-        flex-grow: 1; /* Added to make this element grow */
-      }
-      
-      .CustomSlider {
-        /* Add your custom slider styles here */
-        align-self: stretch; /* If you want the slider to stretch to the container's width */
-      }
-    
+      cursor: pointer;
+      color: var(--Primary--60, #b8d6b0);
+      font-size: 1.375rem;
+      font-style: normal;
+      align-self: flex-start;
+      font-weight: 400;
+      line-height: 1.75rem;
+      text-decoration-line: underline;
+    }
+
+    .text-card {
+      color: var(--Primary---80, #fff);
+      align-self: flex-start;
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1rem;
+      flex-grow: 1; /* Added to make this element grow */
+    }
+
+    .CustomSlider {
+      /* Add your custom slider styles here */
+      align-self: stretch; /* If you want the slider to stretch to the container's width */
+    }
   }
-  
 }

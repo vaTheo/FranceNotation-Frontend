@@ -67,9 +67,11 @@ export class ServiceAPI {
     }
   }
 
-  static async fetchGroupJson(addressObject: AddressObject, endpoint: string){
+  static async fetchGroupJson(addressObject: AddressObject, endpoint: string) {
     try {
-      console.log(`${URL}/frontdata/${endpoint}/${addressObject.properties.id}`)
+      console.log(
+        `${URL}/frontdata/${endpoint}/${addressObject.properties.id}`
+      );
       const response = await axios.get(
         `${URL}/frontdata/${endpoint}/${addressObject.properties.id}`,
 
@@ -80,5 +82,5 @@ export class ServiceAPI {
       console.log(err);
       throw err;
     }
-  };
+  }
 }

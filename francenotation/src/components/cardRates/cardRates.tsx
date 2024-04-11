@@ -4,26 +4,30 @@ import CustomSlider from "./slider";
 import "../../styles/cardRate.scss";
 // Component definition: AddressSearch
 
-export type Props = {
+type Props = {
   titleCard?: string;
   textCard: string;
   valueCard: number;
   dataTypeJson: string;
-  onTitleClick?: (dataTypeJson: string) => void; // Callback prop
+  onTitleClick?: (data: string) => void;
 };
 export default function CardRates(props: Props) {
   const titleCard = props.titleCard;
   const textCard = props.textCard;
   const valueCard = props.valueCard;
   const dataTypeJson = props.dataTypeJson;
+  const onTitleClick = props.onTitleClick;
+
   const handleTitleClick = () => {
-    if (props.onTitleClick && dataTypeJson) {
-      props.onTitleClick(dataTypeJson);
+    if (onTitleClick) {
+      onTitleClick(dataTypeJson);
+    } else {
+      // Default behavior or no-op
+      console.error("Title clicked - no parent handler");
     }
   };
-
   return (
-    <div className="cardRate" onClick={handleTitleClick}>
+    <div className="cardRate">
       <div className="CardContent">
         <div className="title-card" onClick={handleTitleClick}>
           {titleCard}

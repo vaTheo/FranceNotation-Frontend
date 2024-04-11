@@ -1,60 +1,61 @@
-@use './_global';
+@use "./_global";
 
 .resultPage {
-    display: inline-flex;
-    // padding: 0.1rem;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+
+  .globalResult {
+    text-align: center;
+    display: flex;
     flex-direction: column;
     align-items: center;
-  
-    .globalResult {
-      text-align: center;
-//   custom backround to mactch global background
-      .sidebar {     
-        .CustomSlider {
-          .MuiSlider-root {
-            .MuiSlider-thumb {
-              box-shadow: 0 0 0 0.5rem global.$globalBackground;
+    .sidebar {
+      padding:1.5rem 0rem 0.5rem 0rem;
+      .CustomSlider {
+        .MuiSlider-root {
+          .MuiSlider-thumb {
+            box-shadow: 0 0 0 0.5rem global.$globalBackground;
             &:hover {
-                box-shadow: 0 0 0 0.7rem global.$globalBackground;
-
-              }
+              box-shadow: 0 0 0 0.7rem global.$globalBackground;
             }
           }
         }
       }
-      .explication1
-      {
-        color: var(--Primary--60, #B8D6B0);
-        text-align: center;
-        
-        /* Body Large */
-        font-size: 1rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 1.5rem; /* 150% */
-        letter-spacing: 0.03125rem;
-      }
-      .explication2 {
-        color: var(--Primary--60, #B8D6B0);
-
-        /* Body Small */
-        font-size: 0.75rem;
-        font-style: normal;
-        font-weight: 400;
-        line-height: 1rem; /* 133.333% */
-      }
     }
-  
-    .resultsCards {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        flex-wrap: wrap;
-        justify-content: center;
-        align-items: flex-start;
-        padding: 2.25rem 0rem;
-       
+    max-width: 45rem;
+    .explication1 {
+      color: var(--Primary--60, #b8d6b0);
+      text-align: center;
+      /* Body Large */
+      font-size: 1rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1.5rem; /* 150% */
+      letter-spacing: 0.03125rem;
+
+      overflow-wrap: break-word; /* Standard property */
+      width: 100%; /* Adjust the width as needed */
+      word-wrap: break-word; /* Older browsers */
+    }
+    .explication2 {
+      color: var(--Primary--60, #b8d6b0);
+
+      /* Body Small */
+      font-size: 0.75rem;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 1rem; /* 133.333% */
+    }
+  }
+
+  .resultsCards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 0.25rem 0rem;
   }
 }
-  
-  
