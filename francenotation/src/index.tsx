@@ -1,15 +1,18 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './styles/index.scss';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./styles/index.scss";
+import App from "./App";
+import reportWebVitals from "./reportWebVitals";
+import { ErrorProvider } from "./components/errorContext/errorContext";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <App />
+    <ErrorProvider>
+      <App />
+    </ErrorProvider>
   </React.StrictMode>
 );
 

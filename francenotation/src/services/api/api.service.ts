@@ -3,13 +3,14 @@ import { AddressObject } from "../../apiResponseType/apiResponse";
 import { FrontGroupDataValue } from "../../pages/typeResultJson/ResultRespons";
 import { DPEAllData } from "../../pages/typeResultJson/api-DPE";
 import { frontDPEBatiment } from "../../pages/typeResultJson/jsonInterface";
+import axiosInstance from "../../utils/axiosInstance";
 
 const URL = "http://localhost:3001";
 export class ServiceAPI {
   static async initiateCycle(address: string): Promise<AddressObject> {
     const jsonData = { address };
     // Initiate the DB request, associate user with addresse ID, return address object
-    const responseGetrate = await axios.post(
+    const responseGetrate = await axiosInstance.post(
       `${URL}/ratingcontroller/getrate`,
       jsonData,
       {

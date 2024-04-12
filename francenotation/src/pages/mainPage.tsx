@@ -1,16 +1,11 @@
-import React, { useState } from "react";
-import CustomInputField from "../components/fieldsMainPage/fieldsMainPage";
+import { useState } from "react";
 import "../styles/mainPage.scss";
 import { useNavigate } from "react-router-dom";
-import CustomButton from "../components/button/button";
-import { AddressObject } from "../apiResponseType/apiResponse";
-import CustomLoadingIndicator from "../components/loading/loadingBar";
 import AddressSearchBar from "../components/BanField/banfield";
 import Button from "@mui/material/Button";
-import CardRates from "../components/cardRates/cardRates";
 import { ServiceAPI } from "../services/api/api.service";
 import { CircularProgress } from "@mui/material";
-import { set } from "lodash";
+
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -28,8 +23,8 @@ const MainPage = () => {
         valueAddressSearchBar.trim()
       );
       navigate("/resultpage", { state: { addressObject: addressObject } });
-    } catch (err) {
-      console.error("Error in one or more requests: ", err);
+    } catch (e) {
+      console.error("Error in one or more requests: ", e);
       setIsLoading(false);
     }
   };
@@ -57,7 +52,11 @@ const MainPage = () => {
             onClick={handleButtonClick}
             disabled={areAllFieldsFilled}
           >
-            {isLoading ? <CircularProgress color="inherit" size={24} /> : "RECHERCHER"}
+            {isLoading ? (
+              <CircularProgress color="inherit" size={24} />
+            ) : (
+              "RECHERCHER"
+            )}
           </Button>
         </div>
         <p>
