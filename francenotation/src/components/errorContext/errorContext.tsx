@@ -41,17 +41,16 @@ export const ErrorProvider: React.FC<{ children: ReactNode }> = ({
           {/* Add the required children prop */}
           <div
             style={{
-                position: "absolute",
-                top: "40px",  
-                right: "40px",  
-                backgroundColor: "dimgray",
-                padding: "20px",
-                borderRadius: "10px",  
-                color: "white",  
-                boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)",  
-                width: "300px",  
-                border: "2px solid #ffffff", 
-
+              position: "absolute",
+              top: "40px",
+              right: "40px",
+              backgroundColor: "dimgray",
+              padding: "20px",
+              borderRadius: "10px",
+              color: "white",
+              boxShadow: "0 4px 8px rgba(0, 0, 0, 0.5)",
+              width: "300px",
+              border: "2px solid #ffffff",
             }}
           >
             ERROR: {message}
