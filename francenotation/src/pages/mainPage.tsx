@@ -1,76 +1,37 @@
-import React, { useState } from "react";
-import CustomInputField from "../components/fieldsMainPage/fieldsMainPage";
+import { useState } from "react";
 import "../styles/mainPage.scss";
-
-import CustomButton from "../components/button/button";
-import { initiateCycle, fetchData, testAPI } from "../services/api/api.service";
-import { AddressObject } from "../apiResponseType/apiResponse";
-import CustomLoadingIndicator from "../components/loading/loadingBar";
+import { useNavigate } from "react-router-dom";
 import AddressSearchBar from "../components/BanField/banfield";
 import Button from "@mui/material/Button";
-import CardRates from "../components/cardRates/cardRates";
+import { ServiceAPI } from "../services/api/api.service";
+import { CircularProgress } from "@mui/material";
+
 
 const MainPage = () => {
+  const navigate = useNavigate();
   const [valueAddressSearchBar, setValueAddressSearchBar] =
     useState<string>("");
+  const [isLoading, setIsLoading] = useState(false); // Loading state
+
   // All fields filled
   const areAllFieldsFilled = !valueAddressSearchBar;
-  const [loadingStatus, setLoadingStatus] = useState({
-    fetchGeorisque: false,
-    fetcheau: false,
-    fethParcCarto: false,
-    fethDPE: false,
-  });
 
-  const handleRequest = async (
-    endpoint: string,
-    addressObject: AddressObject
-  ) => {
-    // Determine the key for updating the correct loading status
-    const key = endpoint.slice(1); // Assuming all endpoints follow the format '/endpointName'
-    setLoadingStatus((prev) => ({ ...prev, [key]: true })); // Start loading for this endpoint
-
-    try {
-      return await fetchData(addressObject, endpoint);
-    } catch (err) {
-      console.error(`Error fetching data from ${endpoint}: `, err);
-      throw err; // Re-throw to allow Promise.all to catch it
-    } finally {
-      setLoadingStatus((prev) => ({ ...prev, [key]: false })); // Stop loading for this endpoint
-    }
-  };
   const handleButtonClick = async () => {
-    console.log("Button clicked!");
-    console.log(valueAddressSearchBar);
     try {
-      const addressObject = await initiateCycle(valueAddressSearchBar.trim());
-      const endpoints = [
-        "/fetchGeorisque",
-        "/Fetcheau",
-        "/fethParcCarto",
-        "/fethDPE",
-      ];
-      const promises = endpoints.map((endpoint) =>
-        handleRequest(endpoint, addressObject)
+      setIsLoading(true);
+      const addressObject = await ServiceAPI.initiateCycle(
+        valueAddressSearchBar.trim()
       );
-
-      // Await all promises, handling errors individually
-      const [rateGeorisque, rateEau, rateParcCarto, rateDPE] =
-        await Promise.all(promises.map((p) => p.catch((e) => e)));
-
-      console.log("Rate Georisque: ", rateGeorisque);
-      console.log("Rate Eau: ", rateEau);
-      console.log("Rate ParcCarto: ", rateParcCarto); // Log the result of fetchPolice
-      console.log("Rates DPE ", rateDPE);
-    } catch (err) {
-      console.error("Error in one or more requests: ", err);
+      navigate("/resultpage", { state: { addressObject: addressObject } });
+    } catch (e) {
+      console.error("Error in one or more requests: ", e);
+      setIsLoading(false);
     }
   };
 
   // Callback management
   const handleValueAddressSearchBar = (newValue: string) => {
     setValueAddressSearchBar(newValue);
-    console.log(">>>>>", valueAddressSearchBar);
   };
 
   return (
@@ -82,7 +43,6 @@ const MainPage = () => {
 
       <section className="mainPage-content">
         <div className="inputs-field">
-          {/* Include AddressSearch component here */}
           <AddressSearchBar
             valueAddressSearchBarProps={handleValueAddressSearchBar}
           />
@@ -92,13 +52,19 @@ const MainPage = () => {
             onClick={handleButtonClick}
             disabled={areAllFieldsFilled}
           >
-            RECHERCHER
+            {isLoading ? (
+              <CircularProgress color="inherit" size={24} />
+            ) : (
+              "RECHERCHER"
+            )}
           </Button>
         </div>
         <p>
           Nous avons croisées les données disponible en libre service
-          d’écologie, de risques de catastrophe naturelle (et bien plus) pour
-          que chaque français puisse voir les informations sur l’indice
+          d’écologie, de risques de catastrophe naturelle (et bien plus) pourque
+          chaque français puisse voir les informations sur l’indice. Ce sont
+          donc des données accesssible à tous mais nous essayon de les rendre
+          accessible le plus facilement poissible
         </p>
       </section>
     </div>

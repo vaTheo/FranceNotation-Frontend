@@ -1,59 +1,42 @@
-@use './_global';
+@use "./_global";
 
 .mainPage {
-  // font-size: 3.5625rem;
-  // font-style: normal;
-  font-weight: 400;
   line-height: 4rem; /* 112.281% */
-  letter-spacing: -0.01563rem;
   display: flex;
   max-width: 58.5rem;
   flex-direction: column;
   align-items: center;
-  gap: 2.625rem;
-  flex-shrink: 0;
 
   .mainPage-header {
-    text-align: center;
   }
 
   .mainPage-content {
+    // border: 2px solid chartreuse;
+
     display: flex;
-    max-width: 35.0625rem;
-    height: 5.3125rem;
+    max-width: 35rem;
     flex-direction: column;
     justify-content: center;
+    gap: 5px;
 
     .inputs-field {
       display: flex;
-      flex-direction: row;
-      align-items: center;
-      gap: 5px;
+      // align-items: center;
 
       .AddressSearch {
-        flex-grow: 1; /* Allows the AddressSearch component to grow and take available space */
-      
+        flex-grow: 1;
       }
 
       .button {
-        /* Visual properties */
-        background-color: #69b66d; /* Green background */
-        border: none; /* No border */
-        color: BLACK; /* White text */
-        padding: 0px 10px 0px 10px; /* Top/bottom padding and left/right padding */
-        text-align: center; /* Center the text inside the button */
-        text-decoration: none; /* No underline on text */
+        background-color: #69b66d;
+        border: #5a9c5d;
+        margin: 11px 5px 18px 5px;
+        color: BLACK;
         font-weight: bold;
-        display: inline-block; /* Allows the button to resize based on content */
         font-size: 16px; /* Set the initial font size */
-        margin: 0px; /* Margin around the button */
         cursor: pointer; /* Cursor changes to pointer when hovering over the button */
         border-radius: global.$radius; /* Rounded corners for the button */
         transition-duration: 0.6s; /* Makes the hover effect smooth */
-
-        /* Size properties - adjust as needed */
-        width: fit-content; /* Fixed width for the button, change as necessary */
-        height: 60%; /* Height is automatic, adjusts to padding and font size */
       }
 
       /* Button hover effect */

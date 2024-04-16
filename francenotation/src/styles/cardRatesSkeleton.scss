@@ -1,0 +1,39 @@
+.cardRateSkeleton {
+  // width: calc(50% - (0.625rem * 10)); // For two cards per row, adjust as needed
+  // flex-shrink: 0; // Prevents the cards from shrinking
+  width: 16rem;
+  height: 12rem;
+  background-color: #49454f;
+  padding: 1.2rem;
+  gap: 0.75rem;
+  border-radius: 20px;
+  margin: 1.5rem;
+  display: flex;
+  justify-content: flex-start;
+  flex-direction: column;
+  align-items: left;
+
+  .title-skeleton {
+    .MuiSkeleton-root {
+      background-color: #7a8a78;
+      width: 10rem;
+      height: 2rem;
+    }
+}
+    .text-skeleton {
+      .MuiSkeleton-root {
+        background-color: #787f8a;
+        width: 16rem;
+        height: 1rem;
+      }
+    }
+    .slider-skeleton {
+      .MuiSkeleton-root {
+        background-color: #6b716b;
+        margin-top: 1rem;
+        width: 16rem;
+        height: 2.5rem;
+      }
+    }
+  }
+
