@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../styles/mainPage.scss";
 import { useNavigate } from "react-router-dom";
 import AddressSearchBar from "../components/BanField/banfield";
@@ -28,6 +28,10 @@ const MainPage = () => {
       setIsLoading(false);
     }
   };
+  //wakeup the server at the start of the app
+  useEffect(() => {
+    ServiceAPI.wakeUpServer();
+  }, []);
 
   // Callback management
   const handleValueAddressSearchBar = (newValue: string) => {

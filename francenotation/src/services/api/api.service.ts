@@ -3,20 +3,40 @@ import { AddressObject } from "../../apiResponseType/apiResponse";
 import { FrontGroupDataValue } from "../../pages/typeResultJson/ResultRespons";
 import axiosInstance from "../../utils/axiosInstance";
 
-const URL = "http://localhost:3001";
+const URL = "https://geonote-backend.fly.dev";
 export class ServiceAPI {
-  static async initiateCycle(address: string): Promise<AddressObject> {
-    const jsonData = { address };
-    // Initiate the DB request, associate user with addresse ID, return address object
-    const responseGetrate = await axiosInstance.post(
-      `${URL}/ratingcontroller/getrate`,
-      jsonData,
-      {
+
+  static async wakeUpServer() {
+    try {
+      await axios.get(`${URL}/user/ping`, {
         withCredentials: true,
-      }
-    );
-    const addressObject: AddressObject = responseGetrate.data;
-    return addressObject;
+      });
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
+  }
+  static async initiateCycle(
+    address: string
+  ): Promise<AddressObject> {
+    try {
+      const jsonData = { address };
+      console.log(`${URL}/ratingcontroller/getrate`);
+      // Initiate the DB request, associate user with addresse ID, return address object
+      const responseGetrate = await axiosInstance.post(
+        `${URL}/ratingcontroller/getrate`,
+        jsonData,
+        {
+          withCredentials: true,
+        }
+      );
+      const addressObject: AddressObject = responseGetrate.data;
+
+      return addressObject;
+    } catch (err) {
+      console.error(err);
+      throw err;
+    }
   }
 
   static async initialFetchData(addressObject: AddressObject, enpoint: string) {
