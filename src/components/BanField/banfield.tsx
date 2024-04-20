@@ -22,10 +22,8 @@ export default function AddressSearchBar({
   const [inputValue, setInputValue] = useState<string>("");
   // State for autocomplete options
   const [options, setOptions] = useState<string[]>([]);
-  // State for error handling
-  const [error, setError] = useState<string | null>(null);
   // Destructuring properties from the custom input hook
-  const { value, setValue, onChange } = useInput(exampleValue);
+  const { value, setValue } = useInput(exampleValue);
 
   // Function to fetch addresses based on the query
   const fetchAddresses = async (query: string) => {
@@ -53,8 +51,6 @@ export default function AddressSearchBar({
       setOptions(labels);
     } catch (error) {
       console.error("Error fetching data:", error);
-      // Setting error state in case of an exception
-      setError("Failed to fetch data");
     }
   };
 
@@ -93,13 +89,11 @@ export default function AddressSearchBar({
         options={options}
         onChange={(event, newValue) => {
           setValue(newValue ?? "");
-          sendValueParent(newValue ||"");
-
+          sendValueParent(newValue || "");
         }}
         onInputChange={(event, newInputValue) => {
           setInputValue(newInputValue);
           sendValueParent(newInputValue);
-
         }}
         onFocus={() => {
           if (inputValue === exampleValue) {

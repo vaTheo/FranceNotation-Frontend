@@ -1,6 +1,3 @@
-// Importing necessary React functionalities and components
-import React, { useState, useEffect, useCallback } from "react";
-import CustomSlider from "./slider";
 import "../../styles/cardRatesSkeleton.scss";
 import { Skeleton } from "@mui/material";
 // Component definition: AddressSearch

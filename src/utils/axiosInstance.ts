@@ -1,7 +1,5 @@
 // axiosInstance.ts
 import axios from "axios";
-import { useError } from "../components/errorContext/errorContext";
-
 const axiosInstance = axios.create({
   // You can set common config here, like headers or baseURL
 });

@@ -1,6 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import Drawer from "@mui/material/Drawer";
-import Button from "@mui/material/Button";
 import { JsonData } from "../../pages/typeResultJson/jsonInterface";
 import "../../styles/drawer.scss";
 import { ResultItemDPE } from "../../pages/typeResultJson/api-DPE";

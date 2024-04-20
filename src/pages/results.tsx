@@ -41,7 +41,7 @@ const ResultPage = () => {
       const promises = API_ENDPOINTS_RATES.map((endpoint) =>
         ServiceAPI.initialFetchData(addressObject, endpoint)
       );
-      const results = await Promise.all(promises);
+      await Promise.all(promises);
 
       // Fetch grouped notation and update the state
       const groupedData = await ServiceAPI.fetchGroupNotation(addressObject);

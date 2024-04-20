@@ -1,5 +1,3 @@
-// Importing necessary React functionalities and components
-import React, { useState, useEffect, useCallback } from "react";
 import CustomSlider from "./slider";
 import "../../styles/cardRate.scss";
 // Component definition: AddressSearch
