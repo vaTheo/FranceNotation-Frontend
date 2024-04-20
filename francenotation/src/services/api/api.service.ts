@@ -1,8 +1,6 @@
 import axios from "axios";
 import { AddressObject } from "../../apiResponseType/apiResponse";
 import { FrontGroupDataValue } from "../../pages/typeResultJson/ResultRespons";
-import { DPEAllData } from "../../pages/typeResultJson/api-DPE";
-import { frontDPEBatiment } from "../../pages/typeResultJson/jsonInterface";
 import axiosInstance from "../../utils/axiosInstance";
 
 const URL = "http://localhost:3001";

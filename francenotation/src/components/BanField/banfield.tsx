@@ -46,7 +46,7 @@ export default function AddressSearchBar({
       // Mapping the features to get labels
       let labels = data.features.map((feature) => feature.properties.label);
       console.log(labels);
-      if (labels.length == 0) {
+      if (labels.length === 0) {
         labels = ["Aucune addresse correspondant", exampleValue];
       }
       // Updating options state with the labels
