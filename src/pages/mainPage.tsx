@@ -12,6 +12,7 @@ const MainPage = () => {
   const [valueAddressSearchBar, setValueAddressSearchBar] =
     useState<string>("");
   const [isLoading, setIsLoading] = useState(false); // Loading state
+  
 
   // All fields filled
   const areAllFieldsFilled = !valueAddressSearchBar;

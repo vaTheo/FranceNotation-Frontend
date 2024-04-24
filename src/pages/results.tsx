@@ -30,7 +30,7 @@ const ResultPage = () => {
   const [isLoading, setIsLoading] = useState(false);
   const addressObject: AddressObject = state?.addressObject || {};
   const [groupedNotation, setGroupedNotation] = useState<FrontGroupDataValue>();
-  const [triggerFetch, setTriggerFetch] = useState<boolean>(false);
+  const [triggerFetch, setTriggerFetch] = useState<boolean>(true);
   const [globalJson, setGlobalJson] = useState<JsonData>();
   const [isSliderOpen, setSliderOpen] = useState(false);
   const [sliderValue, setSliderValue] = useState("");
@@ -78,7 +78,7 @@ const ResultPage = () => {
       fetchJson();
       setTriggerFetch(false); // Reset trigger to prevent re-fetching.
     }
-  }, [triggerFetch]);
+  },[] );
 
   const handleTitleClickInParent = (data: string) => {
     setSliderValue(data);
@@ -88,11 +88,7 @@ const ResultPage = () => {
     // Additional logic here
   };
   // Set the fetch trigger to true when the component mounts.
-  useEffect(() => {
-    setTriggerFetch(true);
-    setIsLoading(true);
-  }, []);
-
+  
   return (
     <div className="resultPage">
       {/* <Skeleton variant="rectangular" width={210} height={118} /> */}

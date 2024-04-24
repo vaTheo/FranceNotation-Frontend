@@ -1,12 +1,7 @@
-// Importing necessary React functionalities and components
 import React, { useState, useEffect, useCallback } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
-// Importing lodash's debounce function to limit how often a function can fire
 import debounce from "lodash/debounce";
-// Custom type for address response objects
-import { AddressObject } from "../../apiResponseType/apiResponse";
-// Custom hook for input handling
 import { useInput } from "./useInput.hook";
 import "../../styles/banfield.scss";
 
@@ -26,36 +21,28 @@ export default function AddressSearchBar({
   const { value, setValue } = useInput(exampleValue);
 
   // Function to fetch addresses based on the query
-  const fetchAddresses = async (query: string) => {
-    try {
-      // Fetching data from the API and handling spaces in the query
-      const response = await fetch(
-        `https://api-adresse.data.gouv.fr/search/?q=${query.replace(" ", "+")}`,
-        { mode: "cors", method: "GET" }
-      );
-
-      // Checking if the response is OK (status in the range 200-299)
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-
-      // Parsing the JSON response and destructuring features
-      const data: { features: AddressObject[] } = await response.json();
-      // Mapping the features to get labels
-      let labels = data.features.map((feature) => feature.properties.label);
-      console.log(labels);
-      if (labels.length === 0) {
-        labels = ["Aucune addresse correspondant", exampleValue];
-      }
-      // Updating options state with the labels
-      setOptions(labels);
-    } catch (error) {
-      console.error("Error fetching data:", error);
+const fetchAddresses = useCallback(async (query: string) => {
+  try {
+    const response = await fetch(
+      `https://api-adresse.data.gouv.fr/search/?q=${query.replace(" ", "+")}`,
+      { mode: "cors", method: "GET" }
+    );
+    if (!response.ok) {
+      throw new Error("Network response was not ok");
     }
-  };
+    const data = await response.json();
+    let labels = data.features.map((feature: any) => feature.properties.label);
+    if (labels.length === 0) {
+      labels = ["Aucune adresse correspondante", exampleValue];
+    }
+    setOptions(labels);
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+}, [exampleValue]); // Include necessary dependenc
 
   // Using useCallback to memoize the debounced version of fetchAddresses
-  const debouncedFetch = useCallback(debounce(fetchAddresses, 300), []);
+  const debouncedFetch = useCallback(debounce(fetchAddresses, 300), [fetchAddresses]);
 
   // useEffect hook to handle side effects related to inputValue changes
   useEffect(() => {
@@ -118,3 +105,22 @@ export default function AddressSearchBar({
     </div>
   );
 }
+
+// //
+// Modify CI Environment Settings: If you want to keep the same behavior as your local environment for the build process, you can modify the CI environment variable setting in your GitHub Actions workflow:
+// Update your workflow file to explicitly set CI to false when running the build command:
+// yaml
+// Copy code
+// - name: Build
+//   run: CI=false yarn build
+// This change tells CRA not to treat warnings as errors, aligning the CI environment's behavior with your local development environment. However, be aware that this might allow some potentially important warnings to go unnoticed.
+// Best Practices
+// While you can choose to turn off the CI setting for treating warnings as errors, it's generally best to address the warnings directly. This ensures that your code adheres to best practices and helps avoid issues that might arise from overlooked dependencies in React hooks. Additionally, maintaining consistency between local builds and CI builds reduces the "it works on my machine" problems.
+
+// By addressing these ESLint warnings, you ensure that your React components behave as expected and that any state and side effects are properly managed according to the dependencies they rely on.
+
+
+
+
+
+
