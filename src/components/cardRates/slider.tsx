@@ -46,7 +46,7 @@ export default function CustomSlider(props: PropsSlider) {
     };
 
     animateSliderChange(customValue);
-  }, [customValue,value]);
+  }, [customValue]);
 
   return (
     <Box className="sidebar">

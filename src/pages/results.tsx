@@ -27,7 +27,7 @@ import CardRatesSkeleton from "../components/cardRates/cardRatesSkeleton";
 
 const ResultPage = () => {
   const { state } = useLocation();
-  const [isLoading, setIsLoading] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
   const addressObject: AddressObject = state?.addressObject || {};
   const [groupedNotation, setGroupedNotation] = useState<FrontGroupDataValue>();
   const [triggerFetch, setTriggerFetch] = useState<boolean>(true);
