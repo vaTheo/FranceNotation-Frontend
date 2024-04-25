@@ -1,10 +1,9 @@
-@use './_global';
+@use "./_global";
 
 .AddressSearch {
   position: relative;
-  padding: 10px;
+  padding: 0.625rem;
   border-radius: global.$radius;
-  margin: 0px;
 
   .Autocomplete {
     width: 100%;
@@ -13,7 +12,7 @@
 
     .MuiOutlinedInput-root {
       transition: border-color 0.3s ease; /* Smooth transition for border color */
-      
+
       &.Mui-focused .MuiOutlinedInput-notchedOutline {
         border-color: #daedd5; /* Or any color you prefer */
         transition: border-color 0.3s ease; /* Ensure the transition is also applied when focused */
@@ -22,12 +21,8 @@
 
     .MuiInputLabel-outlined {
       color: var(--Primary---70, #daedd5);
-
-      /* M3/body/small */
-      font-size: 0.75rem;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 1rem; /* 133.333% */
+      font-size: 1rem;
+      line-height: 1.5rem; /* 133.333% */
 
       &.Mui-focused {
         color: #daedd5; // Or any color you prefer
@@ -36,12 +31,8 @@
 
     .MuiInputBase-input {
       color: var(--Primary--40, #79b669);
-
-      /* M3/body/large */
-      font-size: 16px;
-      font-style: normal;
-      font-weight: 400;
-      line-height: 24px; /* 150% */
+      font-size: 1rem;
+      line-height: 1.5rem; /* 150% */
       letter-spacing: 0.5px;
 
       &::placeholder {
@@ -68,13 +59,8 @@
         border-color: #daedd5;
       }
       &.Mui-focused fieldset {
-        border-color: #79b669; // Or any color you prefer
+        border-color: #79b669;
       }
     }
-  }
-
-  .listAddress {
-    color: black; // Text color for the options in the dropdown
-    // Add more styles for dropdown items here
   }
 }

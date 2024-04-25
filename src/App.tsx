@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import "./styles/App.scss";
 import MainPage from "./pages/mainPage";
 import ResultPage from "./pages/results";
 import { useError } from "./components/errorContext/errorContext";
