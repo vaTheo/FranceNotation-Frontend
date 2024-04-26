@@ -3,12 +3,11 @@ import { AddressObject } from "../../apiResponseType/apiResponse";
 import { FrontGroupDataValue } from "../../pages/typeResultJson/ResultRespons";
 import axiosInstance from "../../utils/axiosInstance";
 
-const URL = "https://geonote-backend.fly.dev";
+const URL = process.env.REACT_APP_API_URL;
 export class ServiceAPI {
-
   static async wakeUpServer() {
     try {
-      await axios.get(`${URL}/user/ping`, {
+      await axios.get(`${URL}/frontdata/ping`, {
         withCredentials: true,
       });
     } catch (err) {
@@ -16,9 +15,7 @@ export class ServiceAPI {
       throw err;
     }
   }
-  static async initiateCycle(
-    address: string
-  ): Promise<AddressObject> {
+  static async initiateCycle(address: string): Promise<AddressObject> {
     try {
       const jsonData = { address };
       console.log(`${URL}/ratingcontroller/getrate`);
