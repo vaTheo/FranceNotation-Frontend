@@ -109,7 +109,7 @@ const ResultPage = () => {
           par des sites specialisés en open data
         </div>
         <div className="explication2">
-          La bar d'indication permet d'avoir une idée de la qualité de vie de
+          La bar d'indication permet de donner un indication de la qualité de vie de
           l'adresse recherchée
         </div>
       </div>
