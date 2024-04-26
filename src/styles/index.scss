@@ -1,20 +1,19 @@
-@use './_global';
+@use "./_global";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
-
+html {
+  font-size: 16px; /* Typically set as the baseline font-size */
+}
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
-  // font-family: Roboto;
-
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background: var(--Neutral---0, global.$globalBackground);
   display: flex;
   padding: 5rem 0rem 0rem 0rem;
   justify-content: center;
-  align-items: center;
 }
 
 code {
@@ -23,36 +22,30 @@ code {
 }
 
 h1 {
-  display: flexbox;
   /* Display Large */
   color: var(--Neutral---99, #fffbfe);
-  text-align: center;
   font-family: Roboto;
   font-size: 3.5625rem;
-  font-style: normal;
   font-weight: 400;
-  line-height: 2rem; /* 112.281% */
+  line-height: 3rem; /* 122.222% */
   letter-spacing: -0.01563rem;
+  margin: 0.2rem;
 }
 h2 {
-  /* Display Small */
   color: var(--Primary---70, #daedd5);
-  text-align: center;
   font-family: Roboto;
   font-size: 2.25rem;
-  font-style: normal;
   font-weight: 400;
   line-height: 2.75rem; /* 122.222% */
+  margin: 0.2rem;
 }
 h3 {
   color: #fff;
-  text-align: center;
-  /* Title Large */
   font-family: Roboto;
   font-size: 1.375rem;
-  font-style: normal;
   font-weight: 400;
   line-height: 1.75rem; /* 127.273% */
+  margin: 0.2rem;
 }
 
 p {
@@ -62,8 +55,28 @@ p {
   /* Body Large */
   font-family: Roboto;
   font-size: 1rem;
-  font-style: normal;
   font-weight: 400;
   line-height: 1.5rem; /* 150% */
   letter-spacing: 0.03125rem;
+  margin: 0.2rem;
+}
+
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 14px;
+  }
+  body{
+    padding: 2rem 0rem 0rem 0rem;
+
+  }
+}
+
+@media screen and (max-width: 640px) {
+  html {
+    font-size: 10px;
+  }
+  body{
+    padding: 1rem 0rem 0rem 0rem;
+
+  }
 }

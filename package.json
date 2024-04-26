@@ -29,7 +29,7 @@
     "@flydotio/dockerfile": "^0.5.5",
     "@types/lodash": "^4.17.0",
     "gulp-sass": "^5.1.0",
-    "sass": "^1.70.0"
+    "sass": "^1.75.0"
   },
   "scripts": {
     "start": "react-scripts start",

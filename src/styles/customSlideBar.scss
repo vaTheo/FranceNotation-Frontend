@@ -11,9 +11,6 @@ $slider-mark-color: #daedd5;
   width: 90%;
   color: $sidebar-text-color;
   box-sizing: border-box;
-  padding-top: 1rem; // Augmentez cette valeur selon vos besoins
-
-  // Custom Slider styles
   .CustomSlider {
     .MuiSlider-root {
       color: $slider-track-color;
@@ -27,8 +24,7 @@ $slider-mark-color: #daedd5;
         flex-shrink: 0;
         border: 2px solid $slider-thumb-color;
         box-shadow: 0 0 0 0.4rem $sidebar-background-color;
-        transition: all 0.5s ease; // Customize this value as needed
-
+        transition: all 0.5s ease;
         &:hover {
           box-shadow: 0 0 0 0.6rem $sidebar-background-color;
         }
@@ -40,27 +36,19 @@ $slider-mark-color: #daedd5;
 
       .MuiSlider-markLabel {
         color: $sidebar-text-color;
-        font-size: 2.9rem; // Adjust font size to fit better if necessary
-        text-align: center; // Ensure text is centered
-        width: 150%; // Ensure label uses full width available
-        display: block; // Display block to take up the full width
-        // padding: 0; // Adjust padding to ensure text has more room
-        // margin: 0 auto; // Center label if necessary
-        // white-space: nowrap; // Prevent text from wrapping
-        // overflow: hidden; // Hide overflow
-        // text-overflow: ellipsis; // Add ellipsis if text is too long
+        font-size: 2.9rem;
+        text-align: center;
+        width: 150%;
+        display: block;
       }
 
       .MuiSlider-valueLabel {
         background-color: var(--Primary---80, #fff);
         color: #49454f;
         border-radius: 8.25rem;
-        // display: flex;
         width: 3rem;
         padding: 0.3rem 0.01em;
-        // justify-content: center;
-        // align-items: center;
-        // gap: 0.5rem;
+
         transition: all 0.3s ease; // Customize this value as needed
 
         &:hover {
