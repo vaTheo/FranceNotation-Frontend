@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import { JsonData } from "../../pages/typeResultJson/jsonInterface";
 import "../../styles/drawer.scss";
@@ -15,19 +15,29 @@ type props = {
 
 export default function SlideInModal(prop: props) {
   const { isOpen, toggleDrawer, data, type } = prop;
-  if (!data) {
-    //No data has been received yet
-    return <></>;
-  }
-  let dpeHabitaExistant: Array<ResultItemDPE> = [];
-  if (type === "DPEBatiment") {
-    if (data.dataDPEBatiment?.DPEBatiment) {
-      dpeHabitaExistant =
-        data.dataDPEBatiment?.DPEBatiment.DPEHabitatNeuf.map((dpe) => {
-          return dpe;
-        });
+  const [dpe, setDpe] = useState<Array<ResultItemDPE>>([]);
+  const [num, setNum] = useState<number>(0);
+  
+
+  const testFunction = () => {
+    let dpeHabitaExistant: Array<ResultItemDPE> = [];
+    console.error(type );
+    if (type === "getdpebatiment") {
+      if (data?.dataDPEBatiment?.DPEBatiment) {
+        setDpe(
+          (dpeHabitaExistant =
+            data.dataDPEBatiment?.DPEBatiment.DPEHabitatExistant.map((dpe) => {
+              return dpe;
+            }))
+        );
+      }
     }
-  }
+  };
+
+  useEffect(() => {
+    testFunction();
+    
+  }, [isOpen]);
 
   return (
     <Drawer anchor="left" open={isOpen} onClose={toggleDrawer(false)}>
@@ -39,14 +49,16 @@ export default function SlideInModal(prop: props) {
         <p>Donnée complementaire de {type}</p>
         {type}
         <p>This is your modal content!</p>
-        {dpeHabitaExistant.map((dpe) => {
+        {dpe.map((dpe) => {
           return (
-            <p>Addresse : {dpe.Adresse_brute}
-            Etiquette DPE : {dpe.Adresse_brute}
-            </p>
-
-            );
+            <h1>
+              Addresse : {dpe._geopoint}
+              Etiquette DPE : {dpe.Etiquette_DPE}
+              Etiquette GES : {dpe.Etiquette_GES}
+            </h1>
+          );
         })}
+        <p>This is the end your modal content!</p>
       </div>
     </Drawer>
   );
