@@ -58,7 +58,7 @@ const ResultPage = () => {
       ServiceAPI.fetchGroupJson(addressObject, endpoint)
     );
     const results = await Promise.all(promises);
-    setGlobalJson({
+    const newGlobalJson = {
       dataDPEBatiment: results[0] as frontDPEBatiment,
       dataEau: results[1] as frontEau,
       dataZoneInnondable: results[2] as frontzoneInnondable,
@@ -68,27 +68,26 @@ const ResultPage = () => {
       dataZoneNaturelle: results[6] as frontzoneNaturelle,
       dataParcNaturelle: results[7] as frontParcNaturelle,
       dataPollutionSol: results[8] as frontpollutionSol,
-    });
+    };
+    setGlobalJson(newGlobalJson);
   };
-
+  useEffect(() => {
+    console.error("Updated globalJson:", globalJson);
+  }, [globalJson]);
   // Trigger data fetching once when the component mounts.
   useEffect(() => {
     if (triggerFetch) {
       fetchAllNotations();
       fetchJson();
-      setTriggerFetch(false); // Reset trigger to prevent re-fetching.
+      setTriggerFetch(false);
     }
-  },[] );
+  }, []);
 
   const handleTitleClickInParent = (data: string) => {
     setSliderValue(data);
     setSliderOpen(true);
-    console.error(isSliderOpen, sliderValue);
-
-    // Additional logic here
   };
-  // Set the fetch trigger to true when the component mounts.
-  
+
   return (
     <div className="resultPage">
       {/* <Skeleton variant="rectangular" width={210} height={118} /> */}
@@ -109,8 +108,10 @@ const ResultPage = () => {
           par des sites specialisés en open data
         </div>
         <div className="explication2">
-          La bar d'indication permet de donner un indication de la qualité de vie de
-          l'adresse recherchée
+          La bar d'indication permet de donner un indication de la qualité de
+          vie de l'adresse recherchée. Plus la bar d'indication se trouve proche
+          de 100 plus la qualité de vie est bonne selon les données que nous
+          avons récupéré
         </div>
       </div>
       <div className="resultsCards">
@@ -140,7 +141,7 @@ const ResultPage = () => {
           <CardRatesSkeleton />
         ) : (
           <CardRates
-            titleCard="dataDPEBatiment"
+            titleCard="Classe énergétique du bâtiment"
             textCard="Indique la qualité du bâtiment selon les diagnostics de performance énergétique récupérés pour cette adresse depuis 10 ans."
             valueCard={groupedNotation?.DPEBatiment || 0}
             dataTypeJson="getdpebatiment"
