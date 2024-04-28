@@ -1,13 +1,12 @@
+import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CustomSlider from "../components/cardRates/slider";
 import "../styles/results.scss";
 import CardRates from "../components/cardRates/cardRates";
 import { AddressObject } from "../apiResponseType/apiResponse";
-import { useLocation } from "react-router-dom";
 import { FrontGroupDataValue } from "./typeResultJson/ResultRespons";
 import { ServiceAPI } from "../services/api/api.service";
 import {
-  JsonData,
   frontCatastropheNaturelle,
   frontDPEBatiment,
   frontEau,
@@ -17,6 +16,7 @@ import {
   frontrisqueLocaux,
   frontzoneInnondable,
   frontzoneNaturelle,
+  JsonData,
 } from "./typeResultJson/jsonInterface";
 import SlideInModal from "../components/drawer/drawer";
 import {
@@ -24,6 +24,7 @@ import {
   API_ENDPOINTS_RATES,
 } from "../utils/endpointConst";
 import CardRatesSkeleton from "../components/cardRates/cardRatesSkeleton";
+import { TypeCards } from "../utils/enum";
 
 const ResultPage = () => {
   const { state } = useLocation();
@@ -33,7 +34,7 @@ const ResultPage = () => {
   const [triggerFetch, setTriggerFetch] = useState<boolean>(true);
   const [globalJson, setGlobalJson] = useState<JsonData>();
   const [isSliderOpen, setSliderOpen] = useState(false);
-  const [sliderValue, setSliderValue] = useState("");
+  const [sliderValue, setSliderValue] = useState<TypeCards>(TypeCards.null);
 
   // Fetch all notations from the APIs.
   const fetchAllNotations = async () => {
@@ -83,7 +84,7 @@ const ResultPage = () => {
     }
   }, []);
 
-  const handleTitleClickInParent = (data: string) => {
+  const handleTitleClickInParent = (data: TypeCards) => {
     setSliderValue(data);
     setSliderOpen(true);
   };
@@ -122,7 +123,7 @@ const ResultPage = () => {
             titleCard="Qualité de l'eau potable"
             textCard="Indique la qualité de l'eau potable de l'adresse recherchée ainsi que les cours d'eau à proximité."
             valueCard={groupedNotation?.eau || 0}
-            dataTypeJson="dataEau"
+            dataTypeJson={TypeCards.Eau}
             onTitleClick={handleTitleClickInParent}
           ></CardRates>
         )}
@@ -133,7 +134,7 @@ const ResultPage = () => {
             titleCard="Catastrophes naturelles"
             textCard="Indique si des catastrophes naturelles se sont déroulées fréquemment ces 10 dernières années. Comme par exemple des inondations ou des sécheresse."
             valueCard={groupedNotation?.CatastropheNaturelle || 0}
-            dataTypeJson="dataCatastropheNaturelle"
+            dataTypeJson={TypeCards.CatastropheNaturelle}
             onTitleClick={handleTitleClickInParent}
           ></CardRates>
         )}
@@ -144,7 +145,7 @@ const ResultPage = () => {
             titleCard="Classe énergétique du bâtiment"
             textCard="Indique la qualité du bâtiment selon les diagnostics de performance énergétique récupérés pour cette adresse depuis 10 ans."
             valueCard={groupedNotation?.DPEBatiment || 0}
-            dataTypeJson="getdpebatiment"
+            dataTypeJson={TypeCards.DPE}
             onTitleClick={handleTitleClickInParent}
           ></CardRates>
         )}
@@ -155,7 +156,7 @@ const ResultPage = () => {
             titleCard="Installations dangereuses"
             textCard="Donne une indication sur le nombre d'installations dangereuses trouvées autour de cette adresse dans un rayon de 5 km."
             valueCard={groupedNotation?.InstallationClassees || 0}
-            dataTypeJson="dataInstallationClassees"
+            dataTypeJson={TypeCards.InstallationClasse}
             onTitleClick={handleTitleClickInParent}
           ></CardRates>
         )}
@@ -166,7 +167,7 @@ const ResultPage = () => {
             titleCard="Parcs naturels"
             textCard="Indique la présence de parcs naturels à proximité de l'adresse dans un rayon de 5 km, ces zones ont des restrictions incitatives sur l'urbanisme."
             valueCard={groupedNotation?.parcNaturelle || 0}
-            dataTypeJson="dataParcNaturelle"
+            dataTypeJson={TypeCards.ParcNaturelle}
             onTitleClick={handleTitleClickInParent}
           ></CardRates>
         )}
@@ -177,7 +178,7 @@ const ResultPage = () => {
             titleCard="Risques classés"
             textCard="Indique les risques liés à l'adresse recensés par le ministère de la Transition écologique et de la Cohésion des territoires."
             valueCard={groupedNotation?.risqueGeneraux || 0}
-            dataTypeJson=""
+            dataTypeJson={TypeCards.Eau}
             onTitleClick={handleTitleClickInParent}
           ></CardRates>
         )}
@@ -188,7 +189,7 @@ const ResultPage = () => {
             titleCard="Dangers naturels"
             textCard="Indique les risques liés à l'environnement de l'adresse tels que la sismicité, les dangers liés au radon ou les mouvements de terrain."
             valueCard={groupedNotation?.risqueLocaux || 0}
-            dataTypeJson="dataRisqueLocaux"
+            dataTypeJson={TypeCards.RisqueLocaux}
             onTitleClick={handleTitleClickInParent}
           ></CardRates>
         )}
@@ -199,7 +200,7 @@ const ResultPage = () => {
             titleCard="Zone inondable"
             textCard="Indique si l'adresse se trouve dans une zone inondable à risque plus ou moins élevé."
             valueCard={groupedNotation?.zoneInnondable || 0}
-            dataTypeJson="dataZoneInnondable"
+            dataTypeJson={TypeCards.ZoneInnondable}
             onTitleClick={handleTitleClickInParent}
           ></CardRates>
         )}
@@ -210,7 +211,7 @@ const ResultPage = () => {
             titleCard="Zone naturelle"
             textCard="Indique la présence de zones naturelles proches de l'adresse, ces zones sont classées comme étant des réserves naturelles pour les animaux et la végétation mais n'imposent que très peu de restrictions sur l'urbanisme."
             valueCard={groupedNotation?.zoneNaturelle || 0}
-            dataTypeJson="dataZoneNaturelle"
+            dataTypeJson={TypeCards.ZoneNaturelle}
             onTitleClick={handleTitleClickInParent}
           ></CardRates>
         )}
@@ -221,7 +222,7 @@ const ResultPage = () => {
             titleCard="Pollution des sols"
             textCard="Indique la présence de zones où les sols sont polué à proximité de l'addresse"
             valueCard={groupedNotation?.polutionSol || 0}
-            dataTypeJson="dataPollutionSol"
+            dataTypeJson={TypeCards.PollutionSol}
             onTitleClick={handleTitleClickInParent}
           ></CardRates>
         )}

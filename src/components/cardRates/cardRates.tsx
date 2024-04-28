@@ -1,13 +1,13 @@
 import CustomSlider from "./slider";
 import "../../styles/cardRate.scss";
-// Component definition: AddressSearch
+import { TypeCards } from "../../utils/enum";
 
 type Props = {
   titleCard?: string;
   textCard: string;
   valueCard: number;
-  dataTypeJson: string;
-  onTitleClick?: (data: string) => void;
+  dataTypeJson: TypeCards;
+  onTitleClick?: (data: TypeCards) => void;
 };
 export default function CardRates(props: Props) {
   const titleCard = props.titleCard;

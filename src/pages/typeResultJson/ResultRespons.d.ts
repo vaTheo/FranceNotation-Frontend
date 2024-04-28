@@ -1,5 +1,5 @@
 export interface FrontGroupDataValue {
-  globalRate: number
+  globalRate: number;
   eau: number;
   zoneInnondable: number;
   CatastropheNaturelle: number;
