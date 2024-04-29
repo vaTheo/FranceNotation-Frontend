@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import { ResultItemDPE } from "../../pages/typeResultJson/api-DPE";
-import { frontDPEBatiment } from "../../pages/typeResultJson/jsonInterface";
+import { ResultItemDPE } from "../../../pages/typeResultJson/api-DPE";
+import { FrontDPEBatiment } from "../../../pages/typeResultJson/jsonInterface";
 
 type prop = {
-  allDPE: frontDPEBatiment;
+  allDPE: FrontDPEBatiment;
 };
 export default function DPEDrawer(p: prop) {
   const { allDPE } = p;

@@ -7,15 +7,15 @@ import { AddressObject } from "../apiResponseType/apiResponse";
 import { FrontGroupDataValue } from "./typeResultJson/ResultRespons";
 import { ServiceAPI } from "../services/api/api.service";
 import {
-  frontCatastropheNaturelle,
-  frontDPEBatiment,
-  frontEau,
-  frontInstallationClassees,
-  frontParcNaturelle,
-  frontpollutionSol,
-  frontrisqueLocaux,
-  frontzoneInnondable,
-  frontzoneNaturelle,
+  FrontCatastropheNaturelle,
+  FrontDPEBatiment,
+  FrontEau,
+  FrontInstallationClassees,
+  FrontParcNaturelle,
+  FrontpollutionSol,
+  FrontrisqueLocaux,
+  FrontzoneInnondable,
+  FrontzoneNaturelle,
   JsonData,
 } from "./typeResultJson/jsonInterface";
 import SlideInModal from "../components/drawer/drawer";
@@ -60,15 +60,15 @@ const ResultPage = () => {
     );
     const results = await Promise.all(promises);
     const newGlobalJson = {
-      dataDPEBatiment: results[0] as frontDPEBatiment,
-      dataEau: results[1] as frontEau,
-      dataZoneInnondable: results[2] as frontzoneInnondable,
-      dataCatastropheNaturelle: results[3] as frontCatastropheNaturelle,
-      dataInstallationClassees: results[4] as frontInstallationClassees,
-      dataRisqueLocaux: results[5] as frontrisqueLocaux,
-      dataZoneNaturelle: results[6] as frontzoneNaturelle,
-      dataParcNaturelle: results[7] as frontParcNaturelle,
-      dataPollutionSol: results[8] as frontpollutionSol,
+      dataDPEBatiment: results[0] as FrontDPEBatiment,
+      dataEau: results[1] as FrontEau,
+      dataZoneInnondable: results[2] as FrontzoneInnondable,
+      dataCatastropheNaturelle: results[3] as FrontCatastropheNaturelle,
+      dataInstallationClassees: results[4] as FrontInstallationClassees,
+      dataRisqueLocaux: results[5] as FrontrisqueLocaux,
+      dataZoneNaturelle: results[6] as FrontzoneNaturelle,
+      dataParcNaturelle: results[7] as FrontParcNaturelle,
+      dataPollutionSol: results[8] as FrontpollutionSol,
     };
     setGlobalJson(newGlobalJson);
   };
