@@ -8,9 +8,9 @@ type prop = {
 };
 
 /**
- * 
+ *
  * @deprecated
- * 
+ *
  */
 export default function InstallationClasseDrawer(p: prop) {
   const { data } = p;
@@ -37,7 +37,21 @@ export default function InstallationClasseDrawer(p: prop) {
       </p>
       <p> </p>
       {installationsClasses.map((d) => {
-        return <p>{d.codeNaf}</p>;
+        return (
+          <div>
+            <p>Nom de la société : {d.raisonSociale}</p>
+            {d?.inspections[0]?.fichierInspection?.urlFichier && (
+              <a href={d.inspections[0].fichierInspection.urlFichier}>
+                Document d'inspection
+              </a>
+            )}
+            {d?.documentsHorsInspection[0]?.urlFichier && (
+              <a href={d.documentsHorsInspection[0].urlFichier}>
+                Document hors inspection
+              </a>
+            )}
+          </div>
+        );
       })}
       <p>This is the end your modal content!</p>
     </>

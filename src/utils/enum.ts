@@ -8,5 +8,6 @@ export enum TypeCards {
     ZoneInnondable = "ZoneInnondable",
     ZoneNaturelle = "ZoneNaturelle",
     PollutionSol = "PollutionSol",
+    RisqueInforamtion = "RisqueInforamtion",
     null = "",
   }

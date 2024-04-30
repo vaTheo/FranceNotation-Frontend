@@ -13,6 +13,7 @@ import {
   FrontInstallationClassees,
   FrontParcNaturelle,
   FrontpollutionSol,
+  FrontRisqueInformation,
   FrontrisqueLocaux,
   FrontzoneInnondable,
   FrontzoneNaturelle,
@@ -69,6 +70,7 @@ const ResultPage = () => {
       dataZoneNaturelle: results[6] as FrontzoneNaturelle,
       dataParcNaturelle: results[7] as FrontParcNaturelle,
       dataPollutionSol: results[8] as FrontpollutionSol,
+      dataRisqueInformation: results[9] as FrontRisqueInformation,
     };
     setGlobalJson(newGlobalJson);
   };
@@ -91,8 +93,6 @@ const ResultPage = () => {
 
   return (
     <div className="resultPage">
-      {/* <Skeleton variant="rectangular" width={210} height={118} /> */}
-
       {isLoading ? (
         <h1>Nous sommes entrain de rechercher les données</h1>
       ) : (
@@ -178,7 +178,7 @@ const ResultPage = () => {
             titleCard="Risques classés"
             textCard="Indique les risques liés à l'adresse recensés par le ministère de la Transition écologique et de la Cohésion des territoires."
             valueCard={groupedNotation?.risqueGeneraux || 0}
-            dataTypeJson={TypeCards.Eau}
+            dataTypeJson={TypeCards.RisqueInforamtion}
             onTitleClick={handleTitleClickInParent}
           ></CardRates>
         )}

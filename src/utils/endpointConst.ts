@@ -14,4 +14,5 @@ export const API_ENDPOINTS_JSON = [
   "getzonenaturelle",
   "getparcnaturelle",
   "getpollutionsol",
+  "getrisqueinformation",
 ];

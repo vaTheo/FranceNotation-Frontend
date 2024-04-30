@@ -12,6 +12,7 @@ import ZoneInnondableDrawer from "./zoneInondableDrawer/zoneInondableDrawer";
 import ZoneNaturelleDrawer from "./zoneNaturelleDrawer.tsx/zoneNaturelleDrawer";
 import PollutionSolDrawer from "./pollutionSolsDrawer/pollutionSolsDrawer";
 import DangerNaturelleDrawer from "./dangerNaturel/dangerNaturel";
+import RisqueInformationDrawer from "./risqueInformation/risqueInformation";
 
 type props = {
   isOpen: boolean;
@@ -71,6 +72,12 @@ export default function SlideInModal(prop: props) {
             data={data.dataRisqueLocaux}
           ></DangerNaturelleDrawer>
         )}
+        {type === TypeCards.RisqueInforamtion &&
+          data?.dataRisqueInformation && (
+            <RisqueInformationDrawer
+              data={data.dataRisqueInformation}
+            ></RisqueInformationDrawer>
+          )}
       </div>
     </Drawer>
   );

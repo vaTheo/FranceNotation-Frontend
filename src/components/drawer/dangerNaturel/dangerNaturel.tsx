@@ -1,9 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  FrontParcNaturelle,
-  FrontrisqueLocaux,
-} from "../../../pages/typeResultJson/jsonInterface";
-import { FeatureCarto } from "../../../pages/typeResultJson/api-cartoParc";
+import { FrontrisqueLocaux } from "../../../pages/typeResultJson/jsonInterface";
 import {
   MVTData,
   RadonData,
@@ -25,8 +21,8 @@ export default function DangerNaturelleDrawer(p: prop) {
         return d;
       }) ?? []
     );
-    setMvt(
-      data.risqueLocaux.MVTData?.map((d) => {
+    setsismique(
+      data.risqueLocaux.ZonageSismiqueData?.map((d) => {
         return d;
       }) ?? []
     );

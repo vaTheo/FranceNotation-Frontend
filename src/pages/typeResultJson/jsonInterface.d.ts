@@ -7,6 +7,7 @@ import {
   InstallationsClasseesData,
   MVTData,
   RadonData,
+  RisquesData,
   SISData,
   ZonageSismiqueData,
 } from "./api-georisque";
@@ -21,6 +22,7 @@ export interface JsonData {
   dataZoneNaturelle?: FrontzoneNaturelle;
   dataParcNaturelle?: FrontParcNaturelle;
   dataPollutionSol?: FrontpollutionSol;
+  dataRisqueInformation?: FrontRisqueInformation;
 }
 export interface FrontzoneInnondable {
   zoneInnondable: AZIData[];
@@ -67,4 +69,10 @@ export interface FrontParcNaturelle {
 }
 export interface FrontpollutionSol {
   pollutionSol: { sis?: SISData[] };
+}
+
+export interface FrontRisqueInformation {
+  risqueInformation: {
+    risqueInformation: RisquesData[];
+  };
 }
