@@ -761,10 +761,5 @@ export interface RatesEau {
   eauPotable?: number;
   coursEau?: number;
 }
-export interface eauAllData {
-  eauPotable?: EauPotableData[];
-  coursEau?: CoursEauData[];
-}
-
 
 
