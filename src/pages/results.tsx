@@ -19,13 +19,14 @@ import {
   FrontzoneNaturelle,
   JsonData,
 } from "./typeResultJson/jsonInterface";
-import SlideInModal from "../components/drawer/drawer";
 import {
   API_ENDPOINTS_JSON,
   API_ENDPOINTS_RATES,
 } from "../utils/endpointConst";
 import CardRatesSkeleton from "../components/cardRates/cardRatesSkeleton";
 import { TypeCards } from "../utils/enum";
+import DrawerInfos from "../components/drawer/drawer";
+import Grid from '@mui/material/Grid';
 
 const ResultPage = () => {
   const { state } = useLocation();
@@ -115,7 +116,7 @@ const ResultPage = () => {
           avons récupéré
         </div>
       </div>
-      <div className="resultsCards">
+      <Grid className="resultsCards">
         {isLoading ? (
           <CardRatesSkeleton />
         ) : (
@@ -226,8 +227,8 @@ const ResultPage = () => {
             onTitleClick={handleTitleClickInParent}
           ></CardRates>
         )}
-      </div>
-      <SlideInModal
+      </Grid>
+      <DrawerInfos
         data={globalJson}
         type={sliderValue}
         isOpen={isSliderOpen}

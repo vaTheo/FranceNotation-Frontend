@@ -1,17 +1,11 @@
 import { useEffect, useState } from "react";
 import { FrontInstallationClassees } from "../../../pages/typeResultJson/jsonInterface";
-
 import { InstallationsClasseesData } from "../../../pages/typeResultJson/api-georisque";
 
 type prop = {
   data: FrontInstallationClassees;
 };
 
-/**
- *
- * @deprecated
- *
- */
 export default function InstallationClasseDrawer(p: prop) {
   const { data } = p;
   const [installationsClasses, setInstallationsClasses] = useState<
