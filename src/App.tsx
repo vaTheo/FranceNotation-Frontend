@@ -5,6 +5,7 @@ import { useError } from "./components/errorContext/errorContext";
 import { useEffect } from "react";
 import { attachInterceptors } from "./utils/axiosInstance";
 
+
 function App() {
   const { showError } = useError();
   useEffect(() => {
