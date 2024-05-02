@@ -40,7 +40,7 @@ export class ServiceAPI {
     try {
       // Try to get the information about the addresse if it as allready been searched
       console.log(
-        `${URL}/ratingcontroller${enpoint}/${addressObject.properties.id}`
+        `ratings : ${URL}/ratingcontroller${enpoint}/${addressObject.properties.id}`
       );
       let fetchGeorisqueResponse = await axios.get(
         `${URL}/ratingcontroller${enpoint}/${addressObject.properties.id}`,
@@ -86,7 +86,7 @@ export class ServiceAPI {
   static async fetchGroupJson(addressObject: AddressObject, endpoint: string) {
     try {
       console.log(
-        `${URL}/frontdata/${endpoint}/${addressObject.properties.id}`
+        `JSON : ${URL}/frontdata/${endpoint}/${addressObject.properties.id}`
       );
       const response = await axios.get(
         `${URL}/frontdata/${endpoint}/${addressObject.properties.id}`,

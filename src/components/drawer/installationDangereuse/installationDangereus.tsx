@@ -13,7 +13,7 @@ export default function InstallationClasseDrawer(p: prop) {
   >([]);
   const mapping = () => {
     setInstallationsClasses(
-      data.InstallationClassees.map((d) => {
+      data.InstallationClassees?.map((d) => {
         return d;
       })
     );
@@ -30,17 +30,17 @@ export default function InstallationClasseDrawer(p: prop) {
         de 5km de l'adresse, comrpenant des batiments SEVSO ou non
       </p>
       <p> </p>
-      {installationsClasses.map((d) => {
+      {installationsClasses?.map((d) => {
         return (
           <div>
             <p>Nom de la société : {d.raisonSociale}</p>
             {d?.inspections[0]?.fichierInspection?.urlFichier && (
-              <a href={d.inspections[0].fichierInspection.urlFichier}>
+              <a href={d?.inspections[0].fichierInspection.urlFichier}>
                 Document d'inspection
               </a>
             )}
             {d?.documentsHorsInspection[0]?.urlFichier && (
-              <a href={d.documentsHorsInspection[0].urlFichier}>
+              <a href={d?.documentsHorsInspection[0].urlFichier}>
                 Document hors inspection
               </a>
             )}
