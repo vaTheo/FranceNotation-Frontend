@@ -42,11 +42,9 @@ export default function DrawerInfos(prop: props) {
   }, [type]);
   return (
     <Drawer anchor="left" open={isOpen} onClose={toggleDrawer(false)}>
+      <button onClick={nextCycleType}>Next</button>{" "}
       <button onClick={nextCycleType}>Next</button>
-      <div
-        onClick={toggleDrawer(false)}
-        className="drawer"
-      >
+      <div onClick={toggleDrawer(false)} className="drawer">
         {currentType === TypeCards.DPE && data?.dataDPEBatiment && (
           <DPEDrawer allDPE={data.dataDPEBatiment}></DPEDrawer>
         )}
