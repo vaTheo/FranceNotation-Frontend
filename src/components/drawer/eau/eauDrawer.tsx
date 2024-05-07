@@ -30,12 +30,19 @@ export default function EAUDrawer(p: prop) {
 
   return (
     <>
-      <h2>Donnée complementaire sur la qualité de l'eau potable </h2>
-      <p>
-        LEs informations sur l'eau potable sont des donnée publics, en general
-        les points d'eau mesuré correspondent à des ensembles de quartier ou des
-        villes
-      </p>
+      <h2>Donnée complementaires sur la qualité de l'eau potable </h2>
+      <h3>
+        Les informations sur l'eau potable sont des donnée publics, en general
+        les points d'eau mesuré correspondent à des ensembles de quartier ou de
+        villes. Plus d'information sur{" "}
+        <a
+          href="https://hubeau.eaufrance.fr/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Hubeau
+        </a>
+      </h3>
       <p> </p>
       <p>
         Les données disponibles ici sont correspond au cours d'eau environant

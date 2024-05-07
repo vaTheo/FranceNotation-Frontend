@@ -25,10 +25,10 @@ export default function InstallationClasseDrawer(p: prop) {
   return (
     <>
       <h2>Donnée complementaire sur les installations classés</h2>
-      <p>
+      <h3>
         Les données suivantes repertorie les installations classés dans un rayon
         de 5km de l'adresse, comrpenant des batiments SEVSO ou non
-      </p>
+      </h3>
       <p> </p>
       {installationsClasses?.map((d) => {
         return (

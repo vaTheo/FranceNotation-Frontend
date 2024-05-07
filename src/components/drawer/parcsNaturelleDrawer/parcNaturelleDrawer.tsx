@@ -47,10 +47,10 @@ export default function ParcNaturelleDrawer(p: prop) {
   return (
     <>
       <h2>Donnée complementaire sur les parcrs naturelle</h2>
-      <p>
+      <h3>
         Les données suivantes repertorie les parcs naturelle se trouvant dans un
         rayon de 10km de l'ddresse seletionné
-      </p>
+      </h3>
       <p> </p>
       {rnc.map((d) => {
         return (

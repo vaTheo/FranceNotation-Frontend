@@ -1,11 +1,42 @@
-@use './_global';
+@use "./_global";
 
 .drawer {
-//   border : 2px solid chartreuse;
-    background-color: #070707;
-    height: 100%;
-    text-wrap: wrap;
- 
-  transition: transform 0.3s ease-in-out;
-  
+  border-radius: global.$radius;
+
+  display: flex;
+  flex-direction: column;
+  height: 100%; 
+  .drawer-content {
+    flex-grow: 1;
+    overflow-y: auto;
+    padding: 20px;
+    h2{
+      text-align: center;
+    };
+    p{
+      text-align:justify;
+    }
+  }
+
+  .drawer-footer {
+    padding: 0.5rem;
+    border-radius: global.$radius/4;
+    background: #49454f;
+    display: flex;
+    justify-content: end;
+    .MuiButton-root{
+      color : #69b66d;
+      background-color: chart;
+    }
+    
+  }
+}
+
+.MuiDrawer-root {
+      
+  .MuiPaper-root {
+    // transition: 6s; 
+    background-color: #49454f;
+    max-width: 40%;
+  }
 }

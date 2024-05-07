@@ -13,6 +13,7 @@ import ZoneNaturelleDrawer from "./zoneNaturelleDrawer.tsx/zoneNaturelleDrawer";
 import PollutionSolDrawer from "./pollutionSolsDrawer/pollutionSolsDrawer";
 import DangerNaturelleDrawer from "./dangerNaturel/dangerNaturel";
 import RisqueInformationDrawer from "./risqueInformation/risqueInformation";
+import { Button } from "@mui/material";
 
 type props = {
   isOpen: boolean;
@@ -42,55 +43,63 @@ export default function DrawerInfos(prop: props) {
   }, [type]);
   return (
     <Drawer anchor="left" open={isOpen} onClose={toggleDrawer(false)}>
-      <button onClick={nextCycleType}>Next</button>{" "}
-      <button onClick={nextCycleType}>Next</button>
-      <div onClick={toggleDrawer(false)} className="drawer">
-        {currentType === TypeCards.DPE && data?.dataDPEBatiment && (
-          <DPEDrawer allDPE={data.dataDPEBatiment}></DPEDrawer>
-        )}
-        {currentType === TypeCards.Eau && data?.dataEau && (
-          <EAUDrawer data={data.dataEau}></EAUDrawer>
-        )}
-        {currentType === TypeCards.CatastropheNaturelle &&
-          data?.dataCatastropheNaturelle && (
-            <CatnatDrawer data={data.dataCatastropheNaturelle}></CatnatDrawer>
+      <div className="drawer">
+        <div className="drawer-content">
+          {currentType === TypeCards.DPE && data?.dataDPEBatiment && (
+            <DPEDrawer allDPE={data.dataDPEBatiment}></DPEDrawer>
           )}
-        {currentType === TypeCards.InstallationClasse &&
-          data?.dataInstallationClassees && (
-            <InstallationClasseDrawer
-              data={data.dataInstallationClassees}
-            ></InstallationClasseDrawer>
+          {currentType === TypeCards.Eau && data?.dataEau && (
+            <EAUDrawer data={data.dataEau}></EAUDrawer>
           )}
-        {currentType === TypeCards.ParcNaturelle && data?.dataParcNaturelle && (
-          <ParcNaturelleDrawer
-            data={data.dataParcNaturelle}
-          ></ParcNaturelleDrawer>
-        )}
-        {currentType === TypeCards.ZoneInnondable &&
-          data?.dataZoneInnondable && (
-            <ZoneInnondableDrawer
-              data={data.dataZoneInnondable}
-            ></ZoneInnondableDrawer>
+          {currentType === TypeCards.CatastropheNaturelle &&
+            data?.dataCatastropheNaturelle && (
+              <CatnatDrawer data={data.dataCatastropheNaturelle}></CatnatDrawer>
+            )}
+          {currentType === TypeCards.InstallationClasse &&
+            data?.dataInstallationClassees && (
+              <InstallationClasseDrawer
+                data={data.dataInstallationClassees}
+              ></InstallationClasseDrawer>
+            )}
+          {currentType === TypeCards.ParcNaturelle &&
+            data?.dataParcNaturelle && (
+              <ParcNaturelleDrawer
+                data={data.dataParcNaturelle}
+              ></ParcNaturelleDrawer>
+            )}
+          {currentType === TypeCards.ZoneInnondable &&
+            data?.dataZoneInnondable && (
+              <ZoneInnondableDrawer
+                data={data.dataZoneInnondable}
+              ></ZoneInnondableDrawer>
+            )}
+          {currentType === TypeCards.ZoneNaturelle &&
+            data?.dataZoneNaturelle && (
+              <ZoneNaturelleDrawer
+                data={data.dataZoneNaturelle}
+              ></ZoneNaturelleDrawer>
+            )}
+          {currentType === TypeCards.PollutionSol && data?.dataPollutionSol && (
+            <PollutionSolDrawer
+              data={data.dataPollutionSol}
+            ></PollutionSolDrawer>
+          )}{" "}
+          {currentType === TypeCards.RisqueLocaux && data?.dataRisqueLocaux && (
+            <DangerNaturelleDrawer
+              data={data.dataRisqueLocaux}
+            ></DangerNaturelleDrawer>
           )}
-        {currentType === TypeCards.ZoneNaturelle && data?.dataZoneNaturelle && (
-          <ZoneNaturelleDrawer
-            data={data.dataZoneNaturelle}
-          ></ZoneNaturelleDrawer>
-        )}
-        {currentType === TypeCards.PollutionSol && data?.dataPollutionSol && (
-          <PollutionSolDrawer data={data.dataPollutionSol}></PollutionSolDrawer>
-        )}{" "}
-        {currentType === TypeCards.RisqueLocaux && data?.dataRisqueLocaux && (
-          <DangerNaturelleDrawer
-            data={data.dataRisqueLocaux}
-          ></DangerNaturelleDrawer>
-        )}
-        {currentType === TypeCards.RisqueInforamtion &&
-          data?.dataRisqueInformation && (
-            <RisqueInformationDrawer
-              data={data.dataRisqueInformation}
-            ></RisqueInformationDrawer>
-          )}
+          {currentType === TypeCards.RisqueInforamtion &&
+            data?.dataRisqueInformation && (
+              <RisqueInformationDrawer
+                data={data.dataRisqueInformation}
+              ></RisqueInformationDrawer>
+            )}
+        </div>
+        <div className="drawer-footer">
+          <Button onClick={PreviousCycleType}>Precedent</Button>{" "}
+          <Button onClick={nextCycleType}>Suivant</Button>
+        </div>
       </div>
     </Drawer>
   );

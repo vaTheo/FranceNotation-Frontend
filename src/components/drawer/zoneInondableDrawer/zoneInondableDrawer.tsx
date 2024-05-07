@@ -25,7 +25,7 @@ export default function ZoneInnondableDrawer(p: prop) {
   return (
     <>
       <h2>Donnée complementaire sur les risque d'inondations</h2>
-      <p>Les données suivantes repertorie risque d'inondation</p>
+      <h3>Les données suivantes repertorie risque d'inondation</h3>
       <p> </p>
       {AZI.map((d) => {
         return (

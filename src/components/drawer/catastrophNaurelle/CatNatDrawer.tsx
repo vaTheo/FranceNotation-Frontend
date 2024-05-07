@@ -23,11 +23,11 @@ export default function CatnatDrawer(p: prop) {
   return (
     <>
       <h2>Donnée complementaire les catastrophe naturelle </h2>
-      <p>
+      <h3>
         Les informations suivantes correspondent aux catastrophes naturelles qui
         ont eu lieu dans un rayon de 5km de l'adresse et sur les 10 dernieres
         années
-      </p>
+      </h3>
       <p> </p>
       {catNat.map((d) => {
         return (

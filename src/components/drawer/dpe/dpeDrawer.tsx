@@ -55,7 +55,7 @@ export default function DPEDrawer(p: prop) {
   return (
     <>
       <h2>Donnée complementaire de Class énergétique du bâtiment</h2>
-      <p>Les calsses énérgitique des apartements et maison sont des données</p>
+      <h3>Les calsses énérgitique des apartements et maison sont des données</h3>
       <p>
         {" "}
         publics, les données avant 2021 ont une fiabilité plus faible du fait{" "}
