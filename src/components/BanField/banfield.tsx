@@ -7,10 +7,11 @@ import "../../styles/banfield.scss";
 
 interface AddressSearchBarProps {
   valueAddressSearchBarProps: (ValueAddressSearchBar: string) => void;
+  enterPressed: () => void;
 }
 // Component definition: AddressSearch
 export default function AddressSearchBar({
-  valueAddressSearchBarProps,
+  valueAddressSearchBarProps,enterPressed
 }: AddressSearchBarProps) {
   const exampleValue = "Exemple : 50 quai Rambaud 69002 Lyon";
   // State for the input value
@@ -69,7 +70,6 @@ export default function AddressSearchBar({
       setOptions(value ? [value] : []);
     }
   }, [inputValue, value, debouncedFetch]);
-
   const sendValueParent = (ValueAddressSearchBar: string) => {
     valueAddressSearchBarProps(ValueAddressSearchBar);
   };
@@ -106,13 +106,14 @@ export default function AddressSearchBar({
             {...params}
             label="Écrivez l’adresse recherchée"
             variant="outlined"
+            onKeyDown={(event) => {
+              if (event.key === "Enter") {
+                enterPressed();
+              }
+            }}
           />
         )}
-        renderOption={(props, option) => (
-          <li {...props}>
-            {option}
-          </li>
-        )}
+        renderOption={(props, option) => <li {...props}>{option}</li>}
       />
     </div>
   );

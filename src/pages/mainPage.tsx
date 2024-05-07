@@ -50,6 +50,7 @@ const MainPage = () => {
         <div className="inputs-field">
           <AddressSearchBar
             valueAddressSearchBarProps={handleValueAddressSearchBar}
+            enterPressed={handleButtonClick}
           />
           <Button
             className="button"

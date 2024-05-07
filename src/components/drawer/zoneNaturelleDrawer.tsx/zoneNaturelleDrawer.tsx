@@ -42,11 +42,11 @@ export default function ZoneNaturelleDrawer(p: prop) {
   return (
     <>
       <h2>Donnée complementaire sur zone naturelles</h2>
-      <p>
+      <h3>
         Les zone naturelles sont des zone connue où de la faunes et de la
         flaures interessantes sont connue. Ces zone n'ont cependant pas vraiment
-        'impact sur l'hurbanisme{" "}
-      </p>
+        'impact sur l'hurbanisme
+      </h3>
       <p> </p>
       {naturaHabitat.map((d) => {
         return (
@@ -57,7 +57,7 @@ export default function ZoneNaturelleDrawer(p: prop) {
             <p> Superficie : {d.area} m²</p>
           </div>
         );
-      })}{" "}
+      })}
       {naturaOiseaux.map((d) => {
         return (
           <div>
@@ -67,7 +67,7 @@ export default function ZoneNaturelleDrawer(p: prop) {
             <p> Superficie : {d.area} m²</p>
           </div>
         );
-      })}{" "}
+      })}
       {znieff1.map((d) => {
         return (
           <div>
@@ -77,7 +77,7 @@ export default function ZoneNaturelleDrawer(p: prop) {
             <p> Superficie : {d.area} m²</p>
           </div>
         );
-      })}{" "}
+      })}
       {znieff2.map((d) => {
         return (
           <div>
@@ -88,7 +88,6 @@ export default function ZoneNaturelleDrawer(p: prop) {
           </div>
         );
       })}
-      <p>This is the end your modal content!</p>
     </>
   );
 }

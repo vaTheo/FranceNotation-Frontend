@@ -23,8 +23,20 @@ export default function RisqueInformationDrawer(p: prop) {
   return (
     <>
       <h2>Donnée complementaire des risques classés</h2>
-      <p>Cette liste de risques represente sont donnée pour une addresse </p>
-      <h3>Risques associé à l'adresse </h3>
+      <p>
+        Voici la liste des risque défnie par l'application georisque du
+        gouvernement francais, un risque est une robabilité qu'un effet
+        spécifique se produise dans une période donnée ou dans des circonstances
+        déterminées. Plus dinformation sur{" "}
+        <a
+          href="https://www.georisques.gouv.fr/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Georisuqe
+        </a>
+      </p>
+      <p>Risques associé à l'adresse </p>
       {risques.map((d) => {
         return <p> {d.libelle_risque_long}</p>;
       })}

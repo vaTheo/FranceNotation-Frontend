@@ -1,13 +1,6 @@
 import { useEffect, useState } from "react";
-import {
-  FrontInstallationClassees,
-  FrontpollutionSol,
-} from "../../../pages/typeResultJson/jsonInterface";
-
-import {
-  InstallationsClasseesData,
-  SISData,
-} from "../../../pages/typeResultJson/api-georisque";
+import { FrontpollutionSol } from "../../../pages/typeResultJson/jsonInterface";
+import { SISData } from "../../../pages/typeResultJson/api-georisque";
 
 type prop = {
   data: FrontpollutionSol;
@@ -31,20 +24,30 @@ export default function PollutionSolDrawer(p: prop) {
     <>
       <h2>Donnée complementaire sur la pulltuon des sols</h2>
       <p>
-        Les données suivantes repertorie zone ou les sols ont été polué dans un
-        rayon de 10km
+        Les données suivantes liste les sites et sols pollués dans un rayon de
+        2km trouvé autour de l'adresse. Vous pouvez clicker sur le nom pour
+        ouvrir la fiche de risque stoqué sur{" "}
+        <a href="https:/brgm.fr" target="_blank" rel="noopener noreferrer">
+          {" "}
+          brgm.fr
+        </a>
+        , le Bureau de recherches géologiques et minières. Dans le lien vous
+        trouverez des informations sur l'état du sol et pour quelle raison il a
+        été polué. Les lieu sont classé du plus proche au plus loin de
+        l'adresse.
       </p>
       <p> </p>
       {sol.map((d) => {
         return (
           <p>
-            Addresse : {d.adresse}
-            Nom : {d.nom}
-            superficie : {d.superficie?.toFixed()} m²
+            Nom du lieu:{" "}
+            <a href={d?.fiche_risque} target="_blank" rel="noopener noreferrer">
+              {d.nom ? d.nom : "lien vers la documentation"}
+            </a>{" "}
+            Superficie: {d.superficie?.toFixed()} m²
           </p>
         );
       })}
-      <p>This is the end your modal content!</p>
     </>
   );
 }

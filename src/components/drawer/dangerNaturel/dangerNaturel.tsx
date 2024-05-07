@@ -39,10 +39,10 @@ export default function DangerNaturelleDrawer(p: prop) {
   return (
     <>
       <h2>Donnée complementaire sur les dangers naturelles</h2>
-      <p>
+      <h3>
         Les données suivantes correspondent aux dangers naturelles qui sont
         présent dans la zone concerné
-      </p>
+      </h3>
       <h3> Inofrmation sur la zone sysmique </h3>
       {sismique.map((d) => {
         return <p> Indice de sismisité : {d.zone_sismicite} </p>;
