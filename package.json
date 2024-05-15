@@ -34,7 +34,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && yarn postbuild",
+    "postbuild": "cp fly.toml Dockerfile .dockerignore build/",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
