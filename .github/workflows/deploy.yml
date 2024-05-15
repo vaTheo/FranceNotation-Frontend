@@ -44,6 +44,6 @@ jobs:
           path: build
 
       - uses: superfly/flyctl-actions/setup-flyctl@master
-      - run: flyctl deploy --remote-only --config fly.toml --build-arg "source=build"
+      - run: flyctl deploy --remote-only --config fly.toml --build-target build
         env:
           FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
