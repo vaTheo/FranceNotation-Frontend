@@ -37,17 +37,25 @@ export default function PollutionSolDrawer(p: prop) {
         l'adresse.
       </p>
       <p> </p>
-      {sol.map((d) => {
-        return (
-          <p>
-            Nom du lieu:{" "}
-            <a href={d?.fiche_risque} target="_blank" rel="noopener noreferrer">
-              {d.nom ? d.nom : "lien vers la documentation"}
-            </a>{" "}
-            Superficie: {d.superficie?.toFixed()} m²
-          </p>
-        );
-      })}
+      {sol.length === 0 ? (
+        <p>Aucune sol pollué n'a été détécté autour de cette addresse</p>
+      ) : (
+        sol.map((d) => {
+          return (
+            <p>
+              Nom du lieu:{" "}
+              <a
+                href={d?.fiche_risque}
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {d.nom ? d.nom : "lien vers la documentation"}
+              </a>{" "}
+              Superficie: {d.superficie?.toFixed()} m²
+            </p>
+          );
+        })
+      )}
     </>
   );
 }

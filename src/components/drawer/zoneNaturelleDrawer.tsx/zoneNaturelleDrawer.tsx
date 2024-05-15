@@ -48,46 +48,55 @@ export default function ZoneNaturelleDrawer(p: prop) {
         'impact sur l'hurbanisme
       </h3>
       <p> </p>
-      {naturaHabitat.map((d) => {
-        return (
-          <div>
-            <a href={d.properties?.url}>
-              Nom du parc : {d.properties?.sitename}
-            </a>
-            <p> Superficie : {d.area} m²</p>
-          </div>
-        );
-      })}
-      {naturaOiseaux.map((d) => {
-        return (
-          <div>
-            <a href={d.properties?.url}>
-              Nom du parc : {d.properties?.sitename}
-            </a>
-            <p> Superficie : {d.area} m²</p>
-          </div>
-        );
-      })}
-      {znieff1.map((d) => {
-        return (
-          <div>
-            <a href={d.properties?.url}>
-              Nom du parc : {d.properties?.sitename}
-            </a>
-            <p> Superficie : {d.area} m²</p>
-          </div>
-        );
-      })}
-      {znieff2.map((d) => {
-        return (
-          <div>
-            <a href={d.properties?.url}>
-              Nom du parc : {d.properties?.sitename}
-            </a>
-            <p> Superficie : {d.area} m²</p>
-          </div>
-        );
-      })}
+      {naturaHabitat.length === 0 &&
+      naturaOiseaux.length === 0 &&
+      znieff1.length === 0 &&
+      znieff2.length === 0 ? (
+        <p>Aucune zone naturelle n'a été trouvé proche de cette adresse</p>
+      ) : (
+        <>
+          {naturaHabitat.map((d) => {
+            return (
+              <div>
+                <a href={d.properties?.url}>
+                  Nom du parc : {d.properties?.sitename}
+                </a>
+                <p> Superficie : {d.area} m²</p>
+              </div>
+            );
+          })}
+          {naturaOiseaux.map((d) => {
+            return (
+              <div>
+                <a href={d.properties?.url}>
+                  Nom du parc : {d.properties?.sitename}
+                </a>
+                <p> Superficie : {d.area} m²</p>
+              </div>
+            );
+          })}
+          {znieff1.map((d) => {
+            return (
+              <div>
+                <a href={d.properties?.url}>
+                  Nom du parc : {d.properties?.sitename}
+                </a>
+                <p> Superficie : {d.area} m²</p>
+              </div>
+            );
+          })}
+          {znieff2.map((d) => {
+            return (
+              <div>
+                <a href={d.properties?.url}>
+                  Nom du parc : {d.properties?.sitename}
+                </a>
+                <p> Superficie : {d.area} m²</p>
+              </div>
+            );
+          })}
+        </>
+      )}
     </>
   );
 }

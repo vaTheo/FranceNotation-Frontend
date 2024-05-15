@@ -55,7 +55,9 @@ export default function DPEDrawer(p: prop) {
   return (
     <>
       <h2>Donnée complementaire de Class énergétique du bâtiment</h2>
-      <h3>Les calsses énérgitique des apartements et maison sont des données</h3>
+      <h3>
+        Les calsses énérgitique des apartements et maison sont des données
+      </h3>
       <p>
         {" "}
         publics, les données avant 2021 ont une fiabilité plus faible du fait{" "}
@@ -65,8 +67,16 @@ export default function DPEDrawer(p: prop) {
         d'un changement de norme, pour vous permettre d'analyser les données 5{" "}
       </p>
       <p> categories se presentent à vous</p>
-
-      <p>Données après 2021 : </p>
+      {DPEHabitatExistant.length === 0 &&
+      DPEHabitatNeuf.length === 0 &&
+      DPETertiaire.length === 0 ? (
+        <p>
+          Aucune donnée DPE n'a été trouvée pour votre adresse dans les DPE
+          après 2021.
+        </p>
+      ) : (
+        <p>Données après 2021 : </p>
+      )}
       {DPEHabitatExistant.map((dpe) => {
         return (
           <p>
@@ -100,7 +110,15 @@ export default function DPEDrawer(p: prop) {
           </p>
         );
       })}
-      <p>Données avant 2021 : </p>
+      {DPEHabitatExistantAvant2021.length === 0 &&
+      DPETertiaireAvant2021.length === 0 ? (
+        <p>
+          Aucune donnée DPE n'a été trouvée pour votre adresse dans les DPE
+          avant 2021.
+        </p>
+      ) : (
+        <p>Données avant 2021 : </p>
+      )}
 
       {DPEHabitatExistantAvant2021.map((dpe) => {
         return (

@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  FrontzoneInnondable,
-} from "../../../pages/typeResultJson/jsonInterface";
+import { FrontzoneInnondable } from "../../../pages/typeResultJson/jsonInterface";
 import { AZIData } from "../../../pages/typeResultJson/api-georisque";
 
 type prop = {
@@ -27,19 +25,23 @@ export default function ZoneInnondableDrawer(p: prop) {
       <h2>Donnée complementaire sur les risque d'inondations</h2>
       <h3>Les données suivantes repertorie risque d'inondation</h3>
       <p> </p>
-      {AZI.map((d) => {
-        return (
-          <div>
-            <p>
-              Commune : {d.libelle_commune}
-              Risques :{" "}
-              {d.liste_libelle_risque.map((r) => {
-                return r.libelle_risque_long + " ";
-              })}
-            </p>
-          </div>
-        );
-      })}
+      {AZI.length === 0 ? (
+        <p>Aucune zone innondable a été trouvé à cette addresse</p>
+      ) : (
+        AZI.map((d) => {
+          return (
+            <div>
+              <p>
+                Commune : {d.libelle_commune}
+                Risques :{" "}
+                {d.liste_libelle_risque.map((r) => {
+                  return r.libelle_risque_long + " ";
+                })}
+              </p>
+            </div>
+          );
+        })
+      )}
 
       <p>This is the end your modal content!</p>
     </>

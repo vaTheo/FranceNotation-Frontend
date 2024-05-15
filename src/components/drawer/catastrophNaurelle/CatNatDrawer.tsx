@@ -29,15 +29,19 @@ export default function CatnatDrawer(p: prop) {
         années
       </h3>
       <p> </p>
-      {catNat.map((d) => {
-        return (
-          <p>
-            Date début catastrophe : {d.date_debut_evt}
-            Date fin catastrophe : {d.date_fin_evt}
-            Nom de la catastrophe : {d.libelle_risque_jo}
-          </p>
-        );
-      })}
+      {catNat.length === 0 ? (
+        <p>Aucune catastrophe naturelle n'a été trouvée à proximité de cette adresse.</p>
+      ) : (
+        catNat.map((d) => {
+          return (
+            <p>
+              Date début catastrophe : {d.date_debut_evt}
+              Date fin catastrophe : {d.date_fin_evt}
+              Nom de la catastrophe : {d.libelle_risque_jo}
+            </p>
+          );
+        })
+      )}
       <p>This is the end your modal content!</p>
     </>
   );

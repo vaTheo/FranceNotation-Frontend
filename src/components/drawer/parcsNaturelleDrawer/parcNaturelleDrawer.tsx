@@ -52,56 +52,66 @@ export default function ParcNaturelleDrawer(p: prop) {
         rayon de 10km de l'ddresse seletionné
       </h3>
       <p> </p>
-      {rnc.map((d) => {
-        return (
-          <div>
-            <a href={d.properties?.url}>
-              Nom du parc : {d.properties?.sitename}
-            </a>
-            <p> Superficie : {d.area} m²</p>
-          </div>
-        );
-      })}
-      {rnn.map((d) => {
-        return (
-          <div>
-            <a href={d.properties?.url}>
-              Nom du parc : {d.properties?.sitename}
-            </a>
-            <p> Superficie : {d.area} m²</p>
-          </div>
-        );
-      })}{" "}
-      {pn.map((d) => {
-        return (
-          <div>
-            <a href={d.properties?.url}>
-              Nom du parc : {d.properties?.sitename}
-            </a>
-            <p> Superficie : {d.area} m²</p>
-          </div>
-        );
-      })}{" "}
-      {pnr.map((d) => {
-        return (
-          <div>
-            <a href={d.properties?.url}>
-              Nom du parc : {d.properties?.sitename}
-            </a>
-            <p> Superficie : {d.area} m²</p>
-          </div>
-        );
-      })}{" "}
-      {rncf.map((d) => {
-        return (
-          <div>
-            <a href={d.properties?.url}>
-              Nom du parc : {d.properties?.sitename}
-            </a>
-            <p> Superficie : {d.area} m²</p>
-          </div>
-        );
-      })}
+      {rnc.length === 0 &&
+      rnn.length === 0 &&
+      pn.length === 0 &&
+      pnr.length === 0 &&
+      rncf.length === 0 ? (
+        <p>Aucun parc naturel n'a été trouvé proche de cette adresse</p>
+      ) : (
+        <>
+          {rnc.map((d) => {
+            return (
+              <div>
+                <a href={d.properties?.url}>
+                  Nom du parc : {d.properties?.sitename}
+                </a>
+                <p> Superficie : {d.area} m²</p>
+              </div>
+            );
+          })}
+          {rnn.map((d) => {
+            return (
+              <div>
+                <a href={d.properties?.url}>
+                  Nom du parc : {d.properties?.sitename}
+                </a>
+                <p> Superficie : {d.area} m²</p>
+              </div>
+            );
+          })}
+          {pn.map((d) => {
+            return (
+              <div>
+                <a href={d.properties?.url}>
+                  Nom du parc : {d.properties?.sitename}
+                </a>
+                <p> Superficie : {d.area} m²</p>
+              </div>
+            );
+          })}
+          {pnr.map((d) => {
+            return (
+              <div>
+                <a href={d.properties?.url}>
+                  Nom du parc : {d.properties?.sitename}
+                </a>
+                <p> Superficie : {d.area} m²</p>
+              </div>
+            );
+          })}
+          {rncf.map((d) => {
+            return (
+              <div>
+                <a href={d.properties?.url}>
+                  Nom du parc : {d.properties?.sitename}
+                </a>
+                <p> Superficie : {d.area} m²</p>
+              </div>
+            );
+          })}
+        </>
+      )}
       <p>This is the end your modal content!</p>
     </>
   );
