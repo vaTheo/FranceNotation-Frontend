@@ -5,16 +5,16 @@
 
   display: flex;
   flex-direction: column;
-  height: 100%; 
+  height: 100%;
   .drawer-content {
     flex-grow: 1;
     overflow-y: auto;
     padding: 20px;
-    h2{
+    h2 {
       text-align: center;
-    };
-    p{
-      text-align:justify;
+    }
+    p {
+      text-align: justify;
     }
   }
 
@@ -24,19 +24,30 @@
     background: #49454f;
     display: flex;
     justify-content: end;
-    .MuiButton-root{
-      color : #69b66d;
-      background-color: chart;
+    .MuiButton-root {
+      color: #69b66d;
+      background: #605b68;
+      margin: 0rem 0rem 0rem 1rem;
     }
-    
   }
 }
 
 .MuiDrawer-root {
-      
   .MuiPaper-root {
-    // transition: 6s; 
+    // transition: 6s;
     background-color: #49454f;
     max-width: 40%;
+    .MuiAccordion-root {
+      max-width: 100%;
+      background-color: #4f7851;
+      color: white;
+      font-size: 1.25rem;
+      font-weight: 400;
+    }
+    .MuiAccordion-region {
+      .MuiAccordionDetails-root {
+        background-color: #49454f;
+      }
+    }
   }
 }

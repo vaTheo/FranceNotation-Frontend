@@ -124,7 +124,7 @@ const ResultPage = () => {
           <CardRatesSkeleton />
         ) : (
           <CardRates
-            titleCard="Catastrophes naturelles"
+            titleCard="Absence de catastrophes naturelles"
             textCard="Indique si des catastrophes naturelles se sont déroulées fréquemment ces 10 dernières années. Comme par exemple des inondations ou des sécheresse."
             valueCard={groupedNotation?.CatastropheNaturelle || 0}
             dataTypeJson={TypeCards.CatastropheNaturelle}
@@ -146,7 +146,7 @@ const ResultPage = () => {
           <CardRatesSkeleton />
         ) : (
           <CardRates
-            titleCard="Installations dangereuses"
+            titleCard="Absence d'installations dangereuses"
             textCard="Donne une indication sur le nombre d'installations dangereuses trouvées autour de cette adresse dans un rayon de 5 km."
             valueCard={groupedNotation?.InstallationClassees || 0}
             dataTypeJson={TypeCards.InstallationClasse}
@@ -168,7 +168,7 @@ const ResultPage = () => {
           <CardRatesSkeleton />
         ) : (
           <CardRates
-            titleCard="Risques classés"
+            titleCard="Absence de Risques classés"
             textCard="Indique les risques liés à l'adresse recensés par le ministère de la Transition écologique et de la Cohésion des territoires."
             valueCard={groupedNotation?.risqueGeneraux || 0}
             dataTypeJson={TypeCards.RisqueInforamtion}
@@ -179,7 +179,7 @@ const ResultPage = () => {
           <CardRatesSkeleton />
         ) : (
           <CardRates
-            titleCard="Dangers naturels"
+            titleCard="Absence de dangers naturels"
             textCard="Indique les risques liés à l'environnement de l'adresse tels que la sismicité, les dangers liés au radon ou les mouvements de terrain."
             valueCard={groupedNotation?.risqueLocaux || 0}
             dataTypeJson={TypeCards.RisqueLocaux}
@@ -190,7 +190,7 @@ const ResultPage = () => {
           <CardRatesSkeleton />
         ) : (
           <CardRates
-            titleCard="Zone inondable"
+            titleCard="Zone protégée contre les inondations"
             textCard="Indique si l'adresse se trouve dans une zone inondable à risque plus ou moins élevé."
             valueCard={groupedNotation?.zoneInnondable || 0}
             dataTypeJson={TypeCards.ZoneInnondable}
@@ -212,7 +212,7 @@ const ResultPage = () => {
           <CardRatesSkeleton />
         ) : (
           <CardRates
-            titleCard="Pollution des sols"
+            titleCard="Qualité des sols"
             textCard="Indique la présence de zones où les sols sont polué à proximité de l'addresse"
             valueCard={groupedNotation?.polutionSol || 0}
             dataTypeJson={TypeCards.PollutionSol}
