@@ -30,6 +30,7 @@ export interface CartoParcResponse {
     sitename: string;
     url: string;
     bbox: number[];
+    nom:string;
   }
   
   interface CRSCarto {

@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { ResultItemDPE } from "../../../pages/typeResultJson/api-DPE";
 import { FrontDPEBatiment } from "../../../pages/typeResultJson/jsonInterface";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type prop = {
   allDPE: FrontDPEBatiment;
@@ -54,78 +56,110 @@ export default function DPEDrawer(p: prop) {
 
   return (
     <>
-      <h2>Donnée complementaire de Class énergétique du bâtiment</h2>
-      <h3>Les calsses énérgitique des apartements et maison sont des données</h3>
-      <p>
-        {" "}
-        publics, les données avant 2021 ont une fiabilité plus faible du fait{" "}
-      </p>
-      <p>
-        {" "}
-        d'un changement de norme, pour vous permettre d'analyser les données 5{" "}
-      </p>
-      <p> categories se presentent à vous</p>
-
-      <p>Données après 2021 : </p>
-      {DPEHabitatExistant.map((dpe) => {
-        return (
-          <p>
-            Date DPE :{" "}
-            {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}
-            {""}
-            Surface : {dpe.Surface_habitable_logement} m² Etiquette DPE :{" "}
-            {dpe.Etiquette_DPE} Etiquette GES : {dpe.Etiquette_GES}
-          </p>
-        );
-      })}
-      {DPEHabitatNeuf.map((dpe) => {
-        return (
-          <p>
-            Date DPE :{" "}
-            {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}
-            {""}
-            Surface : {dpe.Surface_habitable_logement} m² Etiquette DPE :{" "}
-            {dpe.Etiquette_DPE} Etiquette GES : {dpe.Etiquette_GES}
-          </p>
-        );
-      })}
-      {DPETertiaire.map((dpe) => {
-        return (
-          <p>
-            Date DPE :{" "}
-            {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}
-            {""}
-            Surface : {dpe.Surface_habitable_logement} m² Etiquette DPE :{" "}
-            {dpe.Etiquette_DPE} Etiquette GES : {dpe.Etiquette_GES}
-          </p>
-        );
-      })}
-      <p>Données avant 2021 : </p>
-
-      {DPEHabitatExistantAvant2021.map((dpe) => {
-        return (
-          <p>
-            Date DPE :{" "}
-            {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}
-            {""}
-            Surface : {dpe.Surface_habitable_logement} m² Etiquette DPE :{" "}
-            {dpe.classe_consommation_energie} Etiquette GES :{" "}
-            {dpe.classe_estimation_ges}
-          </p>
-        );
-      })}
-      {DPETertiaireAvant2021.map((dpe) => {
-        return (
-          <p>
-            Date DPE :{" "}
-            {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}
-            {""}
-            Surface : {dpe.Surface_habitable_logement} m² Etiquette DPE :{" "}
-            {dpe.Etiquette_DPE} Etiquette GES : {dpe.Etiquette_GES}
-          </p>
-        );
-      })}
-      <p>This is the end your modal content!</p>
+      <div className="drawerHeader">
+        <h2>Données complémentaires de classe énergétique du bâtiment</h2>
+        <p>
+          Les classes énergétiques des appartements et maisons sont des données
+          publiques. Les données avant 2021 ont une fiabilité plus faible en
+          raison d'un changement de norme. Pour vous permettre d'analyser les
+          données, 5 catégories se présentent à vous.
+        </p>
+      </div>
+      <div className="drawerContent">
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1-content"
+            id="panel1-header"
+          >
+            DPE post 2021 batiment existant
+          </AccordionSummary>
+          <AccordionDetails>
+            {DPEHabitatExistant.map((dpe) => {
+              return (
+                <p>
+                  Date DPE :{" "}
+                  {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}
+                  {""}
+                  Surface : {Math.floor(dpe.Surface_habitable_logement)} m²
+                  Etiquette DPE : {dpe.Etiquette_DPE} Etiquette GES :{" "}
+                  {dpe.Etiquette_GES}
+                </p>
+              );
+            })}
+            {DPETertiaire.map((dpe) => {
+              return (
+                <p>
+                  Date DPE :{" "}
+                  {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}
+                  {""}
+                  Surface : {Math.floor(dpe.Surface_habitable_logement)} m²
+                  Etiquette DPE : {dpe.Etiquette_DPE} Etiquette GES :{" "}
+                  {dpe.Etiquette_GES}
+                </p>
+              );
+            })}
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1-content"
+            id="panel1-header"
+          >
+            DPE post 2021 batiment neuf
+          </AccordionSummary>
+          <AccordionDetails>
+            {DPEHabitatNeuf.map((dpe) => {
+              return (
+                <p>
+                  Date DPE :{" "}
+                  {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}
+                  {""}
+                  Surface : {Math.floor(dpe.Surface_habitable_logement)} m²
+                  Etiquette DPE : {dpe.Etiquette_DPE} Etiquette GES :{" "}
+                  {dpe.Etiquette_GES}
+                </p>
+              );
+            })}
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1-content"
+            id="panel1-header"
+          >
+            DPE prè 2021
+          </AccordionSummary>
+          <AccordionDetails>
+            {DPEHabitatExistantAvant2021.map((dpe) => {
+              return (
+                <p>
+                  Date DPE :{" "}
+                  {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}
+                  {""}
+                  Surface : {Math.floor(dpe.Surface_habitable_logement)} m²
+                  Etiquette DPE : {dpe.classe_consommation_energie} Etiquette
+                  GES : {dpe.classe_estimation_ges}
+                </p>
+              );
+            })}
+            {DPETertiaireAvant2021.map((dpe) => {
+              return (
+                <p>
+                  Date DPE :{" "}
+                  {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}
+                  {""}
+                  Surface : {Math.floor(dpe.Surface_habitable_logement)} m²
+                  Etiquette DPE : {dpe.Etiquette_DPE} Etiquette GES :{" "}
+                  {dpe.Etiquette_GES}
+                </p>
+              );
+            })}
+          </AccordionDetails>
+        </Accordion>
+      </div>
     </>
   );
 }
