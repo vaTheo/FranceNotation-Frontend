@@ -57,27 +57,32 @@ const ResultPage = () => {
       }
     };
     fetchAllNotations();
-    const fetchJson = async () => {
-      const promises = API_ENDPOINTS_JSON.map((endpoint) =>
-        ServiceAPI.fetchGroupJson(addressObject, endpoint)
-      );
-      const results = await Promise.all(promises);
-      const newGlobalJson = {
-        dataDPEBatiment: results[0] as FrontDPEBatiment,
-        dataEau: results[1] as FrontEau,
-        dataZoneInnondable: results[2] as FrontzoneInnondable,
-        dataCatastropheNaturelle: results[3] as FrontCatastropheNaturelle,
-        dataInstallationClassees: results[4] as FrontInstallationClassees,
-        dataRisqueLocaux: results[5] as FrontrisqueLocaux,
-        dataZoneNaturelle: results[6] as FrontzoneNaturelle,
-        dataParcNaturelle: results[7] as FrontParcNaturelle,
-        dataPollutionSol: results[8] as FrontpollutionSol,
-        dataRisqueInformation: results[9] as FrontRisqueInformation,
-      };
-      setGlobalJson(newGlobalJson);
-    };
-    fetchJson();
+
   }, []);
+
+  const fetchJson = async () => {
+    const promises = API_ENDPOINTS_JSON.map((endpoint) =>
+      ServiceAPI.fetchGroupJson(addressObject, endpoint)
+    );
+    const results = await Promise.all(promises);
+    const newGlobalJson = {
+      dataDPEBatiment: results[0] as FrontDPEBatiment,
+      dataEau: results[1] as FrontEau,
+      dataZoneInnondable: results[2] as FrontzoneInnondable,
+      dataCatastropheNaturelle: results[3] as FrontCatastropheNaturelle,
+      dataInstallationClassees: results[4] as FrontInstallationClassees,
+      dataRisqueLocaux: results[5] as FrontrisqueLocaux,
+      dataZoneNaturelle: results[6] as FrontzoneNaturelle,
+      dataParcNaturelle: results[7] as FrontParcNaturelle,
+      dataPollutionSol: results[8] as FrontpollutionSol,
+      dataRisqueInformation: results[9] as FrontRisqueInformation,
+    };
+    setGlobalJson(newGlobalJson);
+  };
+  useEffect(()=>{
+    fetchJson();
+  },[groupedNotation])
+
 
   const handleTitleClickInParent = (data: TypeCards) => {
     setSliderValue(data);
