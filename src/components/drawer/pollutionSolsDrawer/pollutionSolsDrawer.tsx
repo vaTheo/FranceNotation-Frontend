@@ -55,13 +55,12 @@ export default function PollutionSolDrawer(p: prop) {
               sol.map((d) => {
                 return (
                   <p>
-                    Nom du lieu:{" "}
                     <a
                       href={d?.fiche_risque}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
-                      {d.nom ? d.nom : "lien vers la documentation"}
+                      {d.nom ? d.nom : "sol pollué"}
                     </a>{" "}
                     Superficie: {Math.floor(d.superficie ?? 0)} m²
                   </p>

@@ -45,12 +45,11 @@ export default function InstallationClasseDrawer(p: prop) {
   return (
     <>
       <div className="drawerHeader">
-        Voici le texte corrigé avec les balises HTML : html Copy code
         <h2>Données complémentaires sur les installations classées</h2>
         <p>
           Les données suivantes répertorient les installations classées dans un
           rayon de 2 km autour de l'adresse. Cela correspond aux installations
-          classées
+          classées{" "}
           <a
             href="https://entreprendre.service-public.fr/vosdroits/F33414"
             target="_blank"
@@ -58,7 +57,7 @@ export default function InstallationClasseDrawer(p: prop) {
           >
             ICPE
           </a>
-          et
+          {" "}et{" "}
           <a
             href="https://www.ecologie.gouv.fr/iota"
             target="_blank"
