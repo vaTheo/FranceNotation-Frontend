@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { FrontParcNaturelle } from "../../../pages/typeResultJson/jsonInterface";
 import { FeatureCarto } from "../../../pages/typeResultJson/api-cartoParc";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type prop = {
   data: FrontParcNaturelle;
@@ -46,73 +48,137 @@ export default function ParcNaturelleDrawer(p: prop) {
 
   return (
     <>
-      <h2>Donnée complementaire sur les parcrs naturelle</h2>
-      <h3>
-        Les données suivantes repertorie les parcs naturelle se trouvant dans un
-        rayon de 10km de l'ddresse seletionné
-      </h3>
-      <p> </p>
-      {rnc.length === 0 &&
-      rnn.length === 0 &&
-      pn.length === 0 &&
-      pnr.length === 0 &&
-      rncf.length === 0 ? (
-        <p>Aucun parc naturel n'a été trouvé proche de cette adresse</p>
-      ) : (
-        <>
-          {rnc.map((d) => {
-            return (
-              <div>
-                <a href={d.properties?.url}>
-                  Nom du parc : {d.properties?.sitename}
-                </a>
-                <p> Superficie : {d.area} m²</p>
-              </div>
-            );
-          })}
-          {rnn.map((d) => {
-            return (
-              <div>
-                <a href={d.properties?.url}>
-                  Nom du parc : {d.properties?.sitename}
-                </a>
-                <p> Superficie : {d.area} m²</p>
-              </div>
-            );
-          })}
-          {pn.map((d) => {
-            return (
-              <div>
-                <a href={d.properties?.url}>
-                  Nom du parc : {d.properties?.sitename}
-                </a>
-                <p> Superficie : {d.area} m²</p>
-              </div>
-            );
-          })}
-          {pnr.map((d) => {
-            return (
-              <div>
-                <a href={d.properties?.url}>
-                  Nom du parc : {d.properties?.sitename}
-                </a>
-                <p> Superficie : {d.area} m²</p>
-              </div>
-            );
-          })}
-          {rncf.map((d) => {
-            return (
-              <div>
-                <a href={d.properties?.url}>
-                  Nom du parc : {d.properties?.sitename}
-                </a>
-                <p> Superficie : {d.area} m²</p>
-              </div>
-            );
-          })}
-        </>
-      )}
-      <p>This is the end your modal content!</p>
+      <div className="drawerHeader">
+        <h2>Données complémentaires sur les parcs naturels</h2>
+        <p>
+          Les données suivantes répertorient les parcs et réserves naturelles se
+          trouvant dans un rayon de 10 km de l'adresse sélectionnée. Plus
+          d'informations sur les
+          <a
+            href="https://reserves-naturelles.org/fonctionnement-reserves-naturelles-france/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Réserves Naturelles de France
+          </a>
+          et
+          <a
+            href="https://geoconfluences.ens-lyon.fr/glossaire/parcs-nationaux-et-parcs-naturels-regionaux-pnr"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            les Parcs
+          </a>
+          .
+        </p>
+      </div>
+      <div className="drawerContent">
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1-content"
+            id="panel1-header"
+          >
+            Réserves Naturelles Nationales (RNN){" "}
+          </AccordionSummary>
+          <AccordionDetails>
+            {rnn.map((d) => {
+              return (
+                <p>
+                  <a href={d.properties?.url}>
+                    {d.properties?.nom} target="_blank" rel="noopener
+                    noreferrer"
+                  </a>
+                  {" - "} Superficie : {Math.floor(d.area ?? 0)} m²
+                </p>
+              );
+            })}
+            {rnc.map((d) => {
+              return (
+                <p>
+                  <a href={d.properties?.url}>
+                    {d.properties?.nom} target="_blank" rel="noopener
+                    noreferrer"
+                  </a>
+                  {" - "} Superficie : {Math.floor(d.area ?? 0)} m²
+                </p>
+              );
+            })}
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1-content"
+            id="panel1-header"
+          >
+            Reserve Naturelle Regional (RNR)
+          </AccordionSummary>
+          <AccordionDetails>
+            {rncf.map((d) => {
+              return (
+                <p>
+                  <a href={d.properties?.url}>
+                    {d.properties?.nom} target="_blank" rel="noopener
+                    noreferrer"
+                  </a>
+                  {" - "} Superficie : {Math.floor(d.area ?? 0)} m²
+                </p>
+              );
+            })}
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1-content"
+            id="panel1-header"
+          >
+            Parc National (PN)
+          </AccordionSummary>
+          <AccordionDetails>
+            {pn.map((d) => {
+              return (
+                <p>
+                  <a
+                    href={d.properties?.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {d.properties?.nom} t
+                  </a>
+                  {" - "}Superficie : {Math.floor(d.area ?? 0)} m²
+                </p>
+              );
+            })}
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1-content"
+            id="panel1-header"
+          >
+            Parc Naturelle Regional (PNR)
+          </AccordionSummary>
+          <AccordionDetails>
+            {pnr.map((d) => {
+              return (
+                <p>
+                  <a
+                    href={d.properties?.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {d.properties?.nom}
+                  </a>
+                  {" - "} Superficie : {Math.floor(d.area ?? 0)} m²
+                </p>
+              );
+            })}
+          </AccordionDetails>
+        </Accordion>
+      </div>
     </>
   );
 }

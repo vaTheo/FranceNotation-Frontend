@@ -98,14 +98,14 @@ const ResultPage = () => {
           customValue={groupedNotation?.globalRate || 0}
         ></CustomSlider>
         <div className="explication1">
-          Les données suivantes sont calculé sur la base des resulats données
-          par des sites specialisés en open data
+          Les données suivantes sont calculées sur la base des résultats donnés
+          par des sites spécialisés en open data.
         </div>
         <div className="explication2">
-          La bar d'indication permet de donner un indication de la qualité de
-          vie de l'adresse recherchée. Plus la bar d'indication se trouve proche
-          de 100 plus la qualité de vie est bonne selon les données que nous
-          avons récupéré
+          La barre d'indication permet de donner une indication de la qualité de
+          vie de l'adresse recherchée. Plus la barre d'indication se trouve
+          proche de 100, plus la qualité de vie est bonne selon les données que
+          nous avons récupérées.
         </div>
       </div>
       <Grid className="resultsCards">
