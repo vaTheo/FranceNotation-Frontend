@@ -79,11 +79,13 @@ export default function DPEDrawer(p: prop) {
               return (
                 <p>
                   Date DPE :{" "}
-                  {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}
-                  {""}
-                  Surface : {Math.floor(dpe.Surface_habitable_logement)} m²
-                  Etiquette DPE : {dpe.Etiquette_DPE} Etiquette GES :{" "}
+                  {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}{" "}
+                  Etiquette DPE : {dpe.Etiquette_DPE} Etiquette GES :
                   {dpe.Etiquette_GES}
+                  {" - "}
+                  Surface : {Math.floor(dpe.Surface_habitable_logement)} m²
+                  {" - "}
+                  n° du DPE : {dpe["N°DPE"]}
                 </p>
               );
             })}
@@ -91,11 +93,13 @@ export default function DPEDrawer(p: prop) {
               return (
                 <p>
                   Date DPE :{" "}
-                  {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}
-                  {""}
-                  Surface : {Math.floor(dpe.Surface_habitable_logement)} m²
-                  Etiquette DPE : {dpe.Etiquette_DPE} Etiquette GES :{" "}
+                  {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}{" "}
+                  Etiquette DPE : {dpe.Etiquette_DPE} Etiquette GES :
                   {dpe.Etiquette_GES}
+                  {" - "}
+                  Surface : {Math.floor(dpe.Surface_habitable_logement)} m²
+                  {" - "}
+                  n° du DPE : {dpe["N°DPE"]}
                 </p>
               );
             })}
@@ -114,11 +118,13 @@ export default function DPEDrawer(p: prop) {
               return (
                 <p>
                   Date DPE :{" "}
-                  {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}
-                  {""}
-                  Surface : {Math.floor(dpe.Surface_habitable_logement)} m²
-                  Etiquette DPE : {dpe.Etiquette_DPE} Etiquette GES :{" "}
+                  {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}{" "}
+                  Etiquette DPE : {dpe.Etiquette_DPE} Etiquette GES :
                   {dpe.Etiquette_GES}
+                  {" - "}
+                  Surface : {Math.floor(dpe.Surface_habitable_logement)} m²
+                  {" - "}
+                  n° du DPE : {dpe["N°DPE"]}
                 </p>
               );
             })}
@@ -137,11 +143,13 @@ export default function DPEDrawer(p: prop) {
               return (
                 <p>
                   Date DPE :{" "}
-                  {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}
-                  {""}
+                  {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}{" "}
+                  Etiquette DPE : {dpe.Etiquette_DPE} Etiquette GES :
+                  {dpe.Etiquette_GES}
+                  {" - "}
                   Surface : {Math.floor(dpe.Surface_habitable_logement)} m²
-                  Etiquette DPE : {dpe.classe_consommation_energie} Etiquette
-                  GES : {dpe.classe_estimation_ges}
+                  {" - "}
+                  n° du DPE : {dpe["N°DPE"]}
                 </p>
               );
             })}
@@ -149,11 +157,13 @@ export default function DPEDrawer(p: prop) {
               return (
                 <p>
                   Date DPE :{" "}
-                  {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}
-                  {""}
-                  Surface : {Math.floor(dpe.Surface_habitable_logement)} m²
-                  Etiquette DPE : {dpe.Etiquette_DPE} Etiquette GES :{" "}
+                  {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}{" "}
+                  Etiquette DPE : {dpe.Etiquette_DPE} Etiquette GES :
                   {dpe.Etiquette_GES}
+                  {" - "}
+                  Surface : {Math.floor(dpe.Surface_habitable_logement)} m²
+                  {" - "}
+                  n° du DPE : {dpe["N°DPE"]}
                 </p>
               );
             })}

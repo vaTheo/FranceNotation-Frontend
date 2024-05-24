@@ -16,17 +16,17 @@ type BoundingBox = number[][];
 type Results = ResultItemDPE[];
 
 interface ResultItemDPE {
-  "N°_étage_appartement":number;
-  Date_établissement_DPE:string;
-  "N°DPE":string;
-  Surface_habitable_logement:number;
-  Type_bâtiment:string;
-  _geopoint:string;
-  date_etablissement_dpe:string;
-  Etiquette_GES:string;
-  Etiquette_DPE:string;
-  classe_consommation_energie:string;
-  classe_estimation_ges:string;
+  "N°_étage_appartement": number;
+  Date_établissement_DPE: string;
+  "N°DPE": string;
+  Surface_habitable_logement: number;
+  Type_bâtiment: string;
+  _geopoint: string;
+  date_etablissement_dpe: string;
+  Etiquette_GES: string;
+  Etiquette_DPE: string;
+  classe_consommation_energie: string;
+  classe_estimation_ges: string;
 }
 
 // Define the type for each aggregation object
