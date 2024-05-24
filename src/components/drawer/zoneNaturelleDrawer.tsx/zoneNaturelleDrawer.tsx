@@ -49,7 +49,7 @@ export default function ZoneNaturelleDrawer(p: prop) {
           Les zones naturelles sont des zones où de la faune et de la flore
           intéressantes sont connues. Ces zones n'ont cependant pas vraiment
           d'impact sur l'urbanisme. Cela comprend les zones reconnues à
-          l'échelle européenne
+          l'échelle européenne{" "}
           <a
             href="https://www.natura2000.fr/natura-2000/qu-est-ce-que-natura-2000"
             target="_blank"
@@ -57,6 +57,7 @@ export default function ZoneNaturelleDrawer(p: prop) {
           >
             Natura 2000
           </a>
+          {" "}
           <a
             href="https://fr.wikipedia.org/wiki/Zone_naturelle_d%27int%C3%A9r%C3%AAt_%C3%A9cologique,_faunistique_et_floristique"
             target="_blank"
@@ -85,7 +86,7 @@ export default function ZoneNaturelleDrawer(p: prop) {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Nom du parc : {d.properties?.nom}
+                   {d.properties?.nom ?? d.id}
                   </a>
                   <p> Superficie : {Math.floor(d.area ?? 0)} m²</p>
                 </div>
@@ -99,7 +100,7 @@ export default function ZoneNaturelleDrawer(p: prop) {
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    Nom du parc : {d.properties?.nom}
+                  {d.properties?.nom}
                   </a>
                   <p> Superficie : {Math.floor(d.area ?? 0)} m²</p>
                 </div>

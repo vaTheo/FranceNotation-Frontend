@@ -1,19 +1,50 @@
 @use "./_global";
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap");
 
-html {
-  font-size: 16px; /* Typically set as the baseline font-size */
-}
+html,
 body {
+  height: 100%;
+  margin: 0; /* Ensure there is no default margin */
+  font-size: 16px; /* Typically set as the baseline font-size */
   font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Segoe UI", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: var(--Neutral---0, global.$globalBackground);
+}
+
+body {
+  background: radial-gradient(
+    circle,
+    global.$globalBackground,
+
+    #0e140e
+  );
+  background-size: 170% 170%;
+  animation: gradientAnimation 10s ease infinite;
+  
+  padding: 3rem 0rem 0rem 0rem;
   display: flex;
-  padding: 5rem 0rem 0rem 0rem;
   justify-content: center;
+
+}
+
+@keyframes gradientAnimation {
+  0% {
+    background-position: -100% 50%;
+  }
+  25% {
+    background-position: -125% 75%;
+  }
+  50% {
+    background-position: -150% 80%;
+  }
+  75% {
+    background-position: -125% 60%;
+  }
+  100% {
+    background-position: -100% 50%;
+  }
 }
 
 code {
@@ -70,9 +101,8 @@ a {
   html {
     font-size: 14px;
   }
-  body{
+  body {
     padding: 2rem 0rem 0rem 0rem;
-
   }
 }
 
@@ -80,8 +110,7 @@ a {
   html {
     font-size: 10px;
   }
-  body{
+  body {
     padding: 1rem 0rem 0rem 0rem;
-
   }
 }

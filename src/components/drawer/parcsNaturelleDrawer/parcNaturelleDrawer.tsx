@@ -53,7 +53,7 @@ export default function ParcNaturelleDrawer(p: prop) {
         <p>
           Les données suivantes répertorient les parcs et réserves naturelles se
           trouvant dans un rayon de 10 km de l'adresse sélectionnée. Plus
-          d'informations sur les
+          d'informations sur les{" "}
           <a
             href="https://reserves-naturelles.org/fonctionnement-reserves-naturelles-france/"
             target="_blank"
@@ -61,7 +61,7 @@ export default function ParcNaturelleDrawer(p: prop) {
           >
             Réserves Naturelles de France
           </a>
-          et
+          {" "}et{" "}
           <a
             href="https://geoconfluences.ens-lyon.fr/glossaire/parcs-nationaux-et-parcs-naturels-regionaux-pnr"
             target="_blank"

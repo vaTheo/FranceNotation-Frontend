@@ -37,13 +37,13 @@ export default function EAUDrawer(p: prop) {
         <p>
           Les informations sur l'eau potable sont des données publiques. En
           général, les points d'eau mesurés correspondent à des ensembles de
-          quartiers ou de villes. Plus d'informations sur
+          quartiers ou de villes. Plus d'informations sur{" "}
           <a
             href="https://hubeau.eaufrance.fr/"
             target="_blank"
             rel="noopener noreferrer"
           >
-            Hubeau
+            Hubeau{" "}
           </a>
           . Les données disponibles ici correspondent aux cours d'eau
           environnants ainsi qu'à l'eau potable arrivant dans les robinets. Les

@@ -114,7 +114,7 @@ const ResultPage = () => {
         </div>
       </div>
       <Grid className="resultsCards">
-        {isLoading ? (
+        {/* {isLoading ? (
           <CardRatesSkeleton />
         ) : (
           <CardRates
@@ -122,6 +122,17 @@ const ResultPage = () => {
             textCard="Indique la qualité de l'eau potable de l'adresse recherchée ainsi que les cours d'eau à proximité."
             valueCard={groupedNotation?.eau || 0}
             dataTypeJson={TypeCards.Eau}
+            onTitleClick={handleTitleClickInParent}
+          ></CardRates>
+        )} */}
+        {isLoading ? (
+          <CardRatesSkeleton />
+        ) : (
+          <CardRates
+            titleCard="Qualité des sols"
+            textCard="Indique la présence de zones où les sols sont polué à proximité de l'addresse"
+            valueCard={groupedNotation?.polutionSol || 0}
+            dataTypeJson={TypeCards.PollutionSol}
             onTitleClick={handleTitleClickInParent}
           ></CardRates>
         )}
@@ -210,17 +221,6 @@ const ResultPage = () => {
             textCard="Indique la présence de zones naturelles proches de l'adresse, ces zones sont classées comme étant des réserves naturelles pour les animaux et la végétation mais n'imposent que très peu de restrictions sur l'urbanisme."
             valueCard={groupedNotation?.zoneNaturelle || 0}
             dataTypeJson={TypeCards.ZoneNaturelle}
-            onTitleClick={handleTitleClickInParent}
-          ></CardRates>
-        )}
-        {isLoading ? (
-          <CardRatesSkeleton />
-        ) : (
-          <CardRates
-            titleCard="Qualité des sols"
-            textCard="Indique la présence de zones où les sols sont polué à proximité de l'addresse"
-            valueCard={groupedNotation?.polutionSol || 0}
-            dataTypeJson={TypeCards.PollutionSol}
             onTitleClick={handleTitleClickInParent}
           ></CardRates>
         )}

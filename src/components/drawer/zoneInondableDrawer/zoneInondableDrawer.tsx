@@ -30,7 +30,7 @@ export default function ZoneInnondableDrawer(p: prop) {
         <h2>Données complémentaires sur les risques d'inondations</h2>
         <p>
           Les données suivantes répertorient les risques d'inondation. Plus
-          d'informations sur
+          d'informations sur{" "}
           <a
             href="https://www.georisques.gouv.fr/minformer-sur-un-risque/inondation"
             target="_blank"
