@@ -6,13 +6,11 @@ import Button from "@mui/material/Button";
 import { ServiceAPI } from "../services/api/api.service";
 import { CircularProgress } from "@mui/material";
 
-
 const MainPage = () => {
   const navigate = useNavigate();
   const [valueAddressSearchBar, setValueAddressSearchBar] =
     useState<string>("");
   const [isLoading, setIsLoading] = useState(false); // Loading state
-  
 
   // All fields filled
   const areAllFieldsFilled = !valueAddressSearchBar;
@@ -43,7 +41,10 @@ const MainPage = () => {
     <div className="mainPage">
       <header className="mainPage-header">
         <h1>Est-ce qu’il fait bon vivre chez vous ?</h1>
-        <h2>Renseignez l’adresse de votre choix et découvrez sa note</h2>
+        <h2>
+          Renseignez l'adresse de votre choix et découvrez sa note ainsi que des
+          informations essentielles
+        </h2>
       </header>
 
       <section className="mainPage-content">

@@ -1,8 +1,19 @@
 import { useEffect, useState } from "react";
 import { ResultItemDPE } from "../../../pages/typeResultJson/api-DPE";
 import { FrontDPEBatiment } from "../../../pages/typeResultJson/jsonInterface";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import Paper from "@mui/material/Paper";
 
 type prop = {
   allDPE: FrontDPEBatiment;
@@ -61,8 +72,14 @@ export default function DPEDrawer(p: prop) {
         <p>
           Les classes énergétiques des appartements et maisons sont des données
           publiques. Les données avant 2021 ont une fiabilité plus faible en
-          raison d'un changement de norme. Pour vous permettre d'analyser les
-          données, 5 catégories se présentent à vous.
+          raison d'un changement de norme. Plus d'info sur{" "}
+          <a
+            href="https://www.economie.gouv.fr/particuliers/immobilier-diagnostic-performance-energetique-dpe"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            le site du gouvernement
+          </a>
         </p>
       </div>
       <div className="drawerContent">
@@ -75,34 +92,55 @@ export default function DPEDrawer(p: prop) {
             DPE post 2021 batiment existant
           </AccordionSummary>
           <AccordionDetails>
-            {DPEHabitatExistant.map((dpe) => {
-              return (
-                <p>
-                  Date DPE :{" "}
-                  {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}{" "}
-                  Etiquette DPE : {dpe.Etiquette_DPE} Etiquette GES :
-                  {dpe.Etiquette_GES}
-                  {" - "}
-                  Surface : {Math.floor(dpe.Surface_habitable_logement)} m²
-                  {" - "}
-                  n° du DPE : {dpe["N°DPE"]}
-                </p>
-              );
-            })}
-            {DPETertiaire.map((dpe) => {
-              return (
-                <p>
-                  Date DPE :{" "}
-                  {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}{" "}
-                  Etiquette DPE : {dpe.Etiquette_DPE} Etiquette GES :
-                  {dpe.Etiquette_GES}
-                  {" - "}
-                  Surface : {Math.floor(dpe.Surface_habitable_logement)} m²
-                  {" - "}
-                  n° du DPE : {dpe["N°DPE"]}
-                </p>
-              );
-            })}
+            <TableContainer>
+              <Table size="small" aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Date DPE</TableCell>
+                    <TableCell>DPE</TableCell>
+                    <TableCell>GES</TableCell>
+                    <TableCell>Surface</TableCell>
+                    <TableCell>N° DPE</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {DPEHabitatExistant.map((dpe) => (
+                    <TableRow
+                      key={
+                        dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe
+                      }
+                      // sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {dpe.Date_établissement_DPE ??
+                          dpe.date_etablissement_dpe}
+                      </TableCell>
+                      <TableCell>{dpe.Etiquette_DPE}</TableCell>
+                      <TableCell>{dpe.Etiquette_GES}</TableCell>
+                      <TableCell>{dpe.Surface_habitable_logement} m²</TableCell>
+                      <TableCell>{dpe["N°DPE"]}</TableCell>
+                    </TableRow>
+                  ))}
+                  {DPETertiaire.map((dpe) => (
+                    <TableRow
+                      key={
+                        dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe
+                      }
+                      // sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {dpe.Date_établissement_DPE ??
+                          dpe.date_etablissement_dpe}
+                      </TableCell>
+                      <TableCell>{dpe.Etiquette_DPE}</TableCell>
+                      <TableCell>{dpe.Etiquette_GES}</TableCell>
+                      <TableCell>{dpe.Surface_habitable_logement} m²</TableCell>
+                      <TableCell>{dpe["N°DPE"]}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </AccordionDetails>
         </Accordion>
         <Accordion>
@@ -114,20 +152,40 @@ export default function DPEDrawer(p: prop) {
             DPE post 2021 batiment neuf
           </AccordionSummary>
           <AccordionDetails>
-            {DPEHabitatNeuf.map((dpe) => {
-              return (
-                <p>
-                  Date DPE :{" "}
-                  {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}{" "}
-                  Etiquette DPE : {dpe.Etiquette_DPE} Etiquette GES :
-                  {dpe.Etiquette_GES}
-                  {" - "}
-                  Surface : {Math.floor(dpe.Surface_habitable_logement)} m²
-                  {" - "}
-                  n° du DPE : {dpe["N°DPE"]}
-                </p>
-              );
-            })}
+            <TableContainer>
+              <Table size="small" aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Date DPE</TableCell>
+                    <TableCell>DPE</TableCell>
+                    <TableCell>GES</TableCell>
+                    <TableCell>Surface</TableCell>
+                    <TableCell>N° DPE</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {DPEHabitatNeuf.map((dpe) => (
+                    <TableRow
+                      key={
+                        dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe
+                      }
+                      // sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {dpe.Date_établissement_DPE ??
+                          dpe.date_etablissement_dpe}
+                      </TableCell>
+                      <TableCell>{dpe.Etiquette_DPE}</TableCell>
+                      <TableCell align="center">{dpe.Etiquette_GES}</TableCell>
+                      <TableCell align="center">
+                        {dpe.Surface_habitable_logement} m²
+                      </TableCell>
+                      <TableCell>{dpe["N°DPE"]}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </AccordionDetails>
         </Accordion>
         <Accordion>
@@ -139,34 +197,59 @@ export default function DPEDrawer(p: prop) {
             DPE prè 2021
           </AccordionSummary>
           <AccordionDetails>
-            {DPEHabitatExistantAvant2021.map((dpe) => {
-              return (
-                <p>
-                  Date DPE :{" "}
-                  {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}{" "}
-                  Etiquette DPE : {dpe.Etiquette_DPE} Etiquette GES :
-                  {dpe.Etiquette_GES}
-                  {" - "}
-                  Surface : {Math.floor(dpe.Surface_habitable_logement)} m²
-                  {" - "}
-                  n° du DPE : {dpe["N°DPE"]}
-                </p>
-              );
-            })}
-            {DPETertiaireAvant2021.map((dpe) => {
-              return (
-                <p>
-                  Date DPE :{" "}
-                  {dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe}{" "}
-                  Etiquette DPE : {dpe.Etiquette_DPE} Etiquette GES :
-                  {dpe.Etiquette_GES}
-                  {" - "}
-                  Surface : {Math.floor(dpe.Surface_habitable_logement)} m²
-                  {" - "}
-                  n° du DPE : {dpe["N°DPE"]}
-                </p>
-              );
-            })}
+            <TableContainer>
+              <Table size="small" aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Date DPE</TableCell>
+                    <TableCell>DPE</TableCell>
+                    <TableCell>GES</TableCell>
+                    <TableCell>Surface</TableCell>
+                    <TableCell>N° DPE</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {DPEHabitatExistantAvant2021.map((dpe) => (
+                    <TableRow
+                      key={
+                        dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe
+                      }
+                      // sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {dpe.Date_établissement_DPE ??
+                          dpe.date_etablissement_dpe}
+                      </TableCell>
+                      <TableCell>{dpe.Etiquette_DPE}</TableCell>
+                      <TableCell>{dpe.Etiquette_GES}</TableCell>
+                      <TableCell>{dpe.Surface_habitable_logement} m²</TableCell>
+                      <TableCell>{dpe["N°DPE"]}</TableCell>
+                    </TableRow>
+                  ))}
+                  {DPETertiaireAvant2021.map((dpe) => (
+                    <TableRow
+                      key={
+                        dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe
+                      }
+                      // sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
+                    >
+                      <TableCell component="th" scope="row">
+                        {dpe.Date_établissement_DPE ??
+                          dpe.date_etablissement_dpe}
+                      </TableCell>
+                      <TableCell>
+                        {dpe.classe_consommation_energie ?? "NULL"}
+                      </TableCell>
+                      <TableCell>
+                        {dpe.classe_estimation_ges ?? "NULL"}
+                      </TableCell>
+                      <TableCell>{dpe.Surface_habitable_logement} m²</TableCell>
+                      <TableCell>{dpe["N°DPE"]}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </AccordionDetails>
         </Accordion>
       </div>

@@ -29,7 +29,7 @@ export default function PollutionSolDrawer(p: prop) {
         <p>
           Les données suivantes listent les sites et sols pollués dans un rayon
           de 2 km autour de l'adresse. Vous pouvez cliquer sur le nom pour
-          ouvrir la fiche de risque stockée sur
+          ouvrir la fiche de risque stockée sur{" "}
           <a href="https://brgm.fr" target="_blank" rel="noopener noreferrer">
             brgm.fr
           </a>

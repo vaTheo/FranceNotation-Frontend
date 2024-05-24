@@ -21,8 +21,12 @@ body {
     #0e140e
   );
   background-size: 170% 170%;
-
   animation: gradientAnimation 10s ease infinite;
+  
+  padding: 3rem 0rem 0rem 0rem;
+  display: flex;
+  justify-content: center;
+
 }
 
 @keyframes gradientAnimation {
@@ -41,13 +45,6 @@ body {
   100% {
     background-position: -100% 50%;
   }
-}
-body {
-  // background: linear-gradient(180deg, global.$globalBackground, #0c0c12);;
-
-  display: flex;
-  padding: 5rem 0rem 0rem 0rem;
-  justify-content: center;
 }
 
 code {
