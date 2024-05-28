@@ -4,7 +4,17 @@ import {
   CoursEauData,
   EauPotableData,
 } from "../../../pages/typeResultJson/api-eau";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type prop = {
@@ -43,11 +53,19 @@ export default function EAUDrawer(p: prop) {
             target="_blank"
             rel="noopener noreferrer"
           >
-            Hubeau{" "}
+            Hubeau
           </a>
-          . Les données disponibles ici correspondent aux cours d'eau
-          environnants ainsi qu'à l'eau potable arrivant dans les robinets. Les
-          valeurs suivantes sont des moyennes sur les 5 dernières années.
+          . Les données disponibles ici correspondent à l'eau potable arrivant
+          dans les robinets. Les valeurs suivantes sont des moyennes sur les 10
+          dernières années. Pour comprendre les valeurs affichées suivre ce lien{" "}
+          <a
+            href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000465574/2020-10-22/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            suivre ce lien
+          </a>
+          .
         </p>
       </div>
       <div className="drawerContent">
@@ -60,17 +78,39 @@ export default function EAUDrawer(p: prop) {
             Eau potable
           </AccordionSummary>
           <AccordionDetails>
-            {eauPotable.map((d) => {
-              return (
-                <p>
-                  Paramètre : {d.libelle_parametre}
-                  {""}
-                  Limite minimum : {d.min}
-                  Limite maximum : {d.max}
-                  Moyenne des valeurs {d.totalAverage}
-                </p>
-              );
-            })}
+            <TableContainer>
+              <Table size="small" aria-label="a dense table">
+                <TableHead>
+                  <TableRow>
+                    <TableCell>Paramètre</TableCell>
+                    <TableCell>min</TableCell>
+                    <TableCell>max</TableCell>
+                    <TableCell align="right">Moyenne total</TableCell>
+                    <TableCell align="right">Unité</TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {eauPotable.map((eau) => (
+                    <TableRow key={eau.name}>
+                      <TableCell component="th" scope="row">
+                        {eau.name}
+                      </TableCell>
+                      <TableCell>{eau.min === 0 ? "/" : eau.min}</TableCell>
+                      <TableCell>{eau.max}</TableCell>
+                      <TableCell
+                        style={{
+                          color: eau.good ? "green" : "red",
+                        }}
+                        align="right"
+                      >
+                        {eau.totalAverage.toFixed(2)}
+                      </TableCell>
+                      <TableCell align="right">{eau.unite}</TableCell>
+                    </TableRow>
+                  ))}
+                </TableBody>
+              </Table>
+            </TableContainer>
           </AccordionDetails>
         </Accordion>
       </div>
