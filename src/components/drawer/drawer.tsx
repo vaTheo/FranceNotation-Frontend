@@ -14,6 +14,7 @@ import PollutionSolDrawer from "./pollutionSolsDrawer/pollutionSolsDrawer";
 import DangerNaturelleDrawer from "./dangerNaturel/dangerNaturel";
 import RisqueInformationDrawer from "./risqueInformation/risqueInformation";
 import { Button } from "@mui/material";
+import { set } from "lodash";
 
 type props = {
   isOpen: boolean;
@@ -26,6 +27,8 @@ type props = {
 
 export default function DrawerInfos(prop: props) {
   const { isOpen, toggleDrawer, data, type } = prop;
+  const [previousType,setPreviousType] = useState<TypeCards>(TypeCards.CatastropheNaturelle);
+  const [nextType,setNextType] = useState<TypeCards>(TypeCards.CatastropheNaturelle);
   const types = Object.keys(TypeCards).filter(
     (k) => isNaN(Number(k)) && k !== "null"
   );
@@ -40,6 +43,8 @@ export default function DrawerInfos(prop: props) {
     TypeCards[types[currentTypeIndex] as keyof typeof TypeCards];
   useEffect(() => {
     setCurrentTypeIndex(types.indexOf(type));
+    setPreviousType(TypeCards[types[currentTypeIndex-1] as keyof typeof TypeCards]);
+    setNextType(TypeCards[types[currentTypeIndex+1] as keyof typeof TypeCards]);
   }, [type]);
   return (
     <Drawer anchor="left" open={isOpen} onClose={toggleDrawer(false)}>
@@ -97,8 +102,8 @@ export default function DrawerInfos(prop: props) {
             )}
         </div>
         <div className="drawer-footer">
-          <Button onClick={PreviousCycleType}>Precedent</Button>{" "}
-          <Button onClick={nextCycleType}>Suivant</Button>
+          <Button onClick={PreviousCycleType}>{nextType}</Button>{" "}
+          <Button onClick={nextCycleType}>{previousType}</Button>
         </div>
       </div>
     </Drawer>

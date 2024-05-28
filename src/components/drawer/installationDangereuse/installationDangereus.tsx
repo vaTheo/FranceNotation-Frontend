@@ -56,8 +56,8 @@ export default function InstallationClasseDrawer(p: prop) {
             rel="noopener noreferrer"
           >
             ICPE
-          </a>
-          {" "}et{" "}
+          </a>{" "}
+          et{" "}
           <a
             href="https://www.ecologie.gouv.fr/iota"
             target="_blank"
@@ -66,6 +66,10 @@ export default function InstallationClasseDrawer(p: prop) {
             IOTA
           </a>
           .
+          <p>
+            Les données sont classées de la plus proche à la plus éloignée de
+            l'adresse recherchée.
+          </p>
         </p>
       </div>
       <div className="drawerContent">

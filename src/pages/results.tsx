@@ -36,7 +36,7 @@ const ResultPage = () => {
   const [triggerFetch, setTriggerFetch] = useState<boolean>(false);
   const [globalJson, setGlobalJson] = useState<JsonData>();
   const [isSliderOpen, setSliderOpen] = useState(false);
-  const [sliderValue, setSliderValue] = useState<TypeCards>(TypeCards.null);
+  const [sliderValue, setSliderValue] = useState<TypeCards>(TypeCards.CatastropheNaturelle);
 
   // Trigger data fetching once when the component mounts.
   useEffect(() => {
