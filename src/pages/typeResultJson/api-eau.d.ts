@@ -743,6 +743,8 @@ export interface eauAllData {
 }
 export interface EauPotableData {
   libelle_parametre: string;
+  name:string;
+  unite: string;
   min: number;
   max: number;
   totalAverage: number;
@@ -751,6 +753,8 @@ export interface EauPotableData {
 }
 export interface CoursEauData {
   libelle_parametre: string;
+  name:string;
+  unite: string;
   min: number;
   max: number;
   totalAverage: number;

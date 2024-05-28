@@ -114,7 +114,7 @@ const ResultPage = () => {
         </div>
       </div>
       <Grid className="resultsCards">
-        {/* {isLoading ? (
+        {isLoading ? (
           <CardRatesSkeleton />
         ) : (
           <CardRates
@@ -124,7 +124,7 @@ const ResultPage = () => {
             dataTypeJson={TypeCards.Eau}
             onTitleClick={handleTitleClickInParent}
           ></CardRates>
-        )} */}
+        )}
         {isLoading ? (
           <CardRatesSkeleton />
         ) : (
