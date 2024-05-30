@@ -1,7 +1,7 @@
 import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import CustomSlider from "../components/cardRates/slider";
-import "../styles/results.scss";
+// import "../styles/results.scss";
 import CardRates from "../components/cardRates/cardRates";
 import { AddressObject } from "../apiResponseType/apiResponse";
 import { FrontGroupDataValue } from "./typeResultJson/ResultRespons";
@@ -27,6 +27,8 @@ import CardRatesSkeleton from "../components/cardRates/cardRatesSkeleton";
 import { TypeCards } from "../utils/enum";
 import DrawerInfos from "../components/drawer/drawer";
 import Grid from "@mui/material/Grid";
+import { Box, Container, Typography } from "@mui/material";
+import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 
 const ResultPage = () => {
   const { state } = useLocation();
@@ -36,7 +38,9 @@ const ResultPage = () => {
   const [triggerFetch, setTriggerFetch] = useState<boolean>(false);
   const [globalJson, setGlobalJson] = useState<JsonData>();
   const [isSliderOpen, setSliderOpen] = useState(false);
-  const [sliderValue, setSliderValue] = useState<TypeCards>(TypeCards.CatastropheNaturelle);
+  const [sliderValue, setSliderValue] = useState<TypeCards>(
+    TypeCards.CatastropheNaturelle
+  );
 
   // Trigger data fetching once when the component mounts.
   useEffect(() => {
@@ -57,7 +61,6 @@ const ResultPage = () => {
       }
     };
     fetchAllNotations();
-
   }, []);
 
   const fetchJson = async () => {
@@ -79,10 +82,9 @@ const ResultPage = () => {
     };
     setGlobalJson(newGlobalJson);
   };
-  useEffect(()=>{
+  useEffect(() => {
     fetchJson();
-  },[groupedNotation])
-
+  }, [groupedNotation]);
 
   const handleTitleClickInParent = (data: TypeCards) => {
     setSliderValue(data);
@@ -90,30 +92,40 @@ const ResultPage = () => {
   };
 
   return (
-    <div className="resultPage">
-      {isLoading ? (
-        <h1>Nous sommes en train de rechercher les données</h1>
-      ) : (
-        <h1>Bonne nouvelle ! Il fait bon vivre</h1>
-      )}
-      <div className="globalResult">
-        <p>au</p>
-        <h3>{addressObject.properties.label}</h3>
-        <CustomSlider
-          customValue={groupedNotation?.globalRate || 0}
-        ></CustomSlider>
-        <div className="explication1">
-          Les données suivantes sont calculées sur la base des résultats donnés
-          par des sites spécialisés en open data.
-        </div>
-        <div className="explication2">
-          La barre d'indication permet de donner une indication de la qualité de
-          vie de l'adresse recherchée. Plus la barre d'indication se trouve
-          proche de 100, plus la qualité de vie est bonne selon les données que
-          nous avons récupérées.
-        </div>
-      </div>
-      <Grid className="resultsCards">
+    <Container maxWidth="lg">
+      <Box my={4} sx={{ textAlign: "center" }}>
+        {isLoading ? (
+          <Typography variant="h1" component="h1" my={2}>
+            Nous sommes en train de rechercher les données
+          </Typography>
+        ) : (
+          <Typography variant="h1" component="h1"my={2}>
+            Bonne nouvelle ! Il fait bon vivre
+          </Typography>
+        )}
+        <Container maxWidth="md">
+          <Typography variant="body1" component="p" my={2}>
+            au
+          </Typography>
+          <Typography variant="h3" component="p" my={2}>
+            {addressObject.properties.label}
+          </Typography>
+          <CustomSlider
+            customValue={groupedNotation?.globalRate || 0}
+          ></CustomSlider>
+          <Typography variant="body1" component="p" my={2}>
+            Les données suivantes sont calculées sur la base des résultats
+            donnés par des sites spécialisés en open data.
+          </Typography>
+          <Typography variant="body1" component="p" my={2}>
+            La barre d'indication permet de donner une indication de la qualité
+            de vie de l'adresse recherchée. Plus la barre d'indication se trouve
+            proche de 100, plus la qualité de vie est bonne selon les données
+            que nous avons récupérées.
+          </Typography>
+        </Container>
+      </Box>
+      <Grid2 container spacing={2}>
         {isLoading ? (
           <CardRatesSkeleton />
         ) : (
@@ -224,7 +236,7 @@ const ResultPage = () => {
             onTitleClick={handleTitleClickInParent}
           ></CardRates>
         )}
-      </Grid>
+      </Grid2>
       {triggerFetch ? null : (
         <DrawerInfos
           data={globalJson}
@@ -233,7 +245,7 @@ const ResultPage = () => {
           toggleDrawer={(open) => () => setSliderOpen(open)}
         />
       )}
-    </div>
+    </Container>
   );
 };
 

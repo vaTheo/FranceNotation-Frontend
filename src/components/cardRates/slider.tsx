@@ -42,8 +42,7 @@ export default function CustomSlider(props: PropsSlider) {
   }, [customValue]);
 
   return (
-    <Box className="sidebar">
-      <div className="CustomSlider">
+    <Box>
         <Slider
           aria-label="Custom Thumb"
           value={Math.round(value)}
@@ -54,7 +53,6 @@ export default function CustomSlider(props: PropsSlider) {
           style={{ color: sliderTrackColor }} // Apply the dynamic color here
           disabled={true} // This makes the slider non-interactive
         />
-      </div>
     </Box>
   );
 }
