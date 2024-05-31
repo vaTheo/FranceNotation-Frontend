@@ -4,12 +4,7 @@ import { useNavigate } from "react-router-dom";
 import AddressSearchBar from "../components/BanField/banfield";
 import Button from "@mui/material/Button";
 import { ServiceAPI } from "../services/api/api.service";
-import {
-  Box,
-  CircularProgress,
-  Container,
-  Typography,
-} from "@mui/material";
+import { Box, CircularProgress, Container, Typography } from "@mui/material";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -43,12 +38,17 @@ const MainPage = () => {
   };
 
   return (
-    <Container maxWidth="lg">
-      <Box margin={5} sx={{ textAlign: "center" }}>
-        <Typography margin={2} variant="h1" component="h1">
+    <Container
+      sx={{ maxWidth: { xs: "100%", sm: "80%", md: "lg" } }}
+      maxWidth="lg"
+    >
+      <Box margin={5} sx={{ textAlign: "center" ,
+         margin: { xs: "0", sm: "3", md: "5" }
+      }}>
+        <Typography marginY={2} variant="h1" component="h1">
           Est-ce qu’il fait bon vivre chez vous ?
         </Typography>
-        <Typography mx={6} my={2} variant="h2" component="h2">
+        <Typography  my={3} variant="h2" component="h2">
           Renseignez l'adresse de votre choix et découvrez sa note ainsi que des
           informations essentielles
         </Typography>
