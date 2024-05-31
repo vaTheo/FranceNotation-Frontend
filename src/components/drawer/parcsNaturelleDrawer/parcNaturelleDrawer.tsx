@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FrontParcNaturelle } from "../../../pages/typeResultJson/jsonInterface";
 import { FeatureCarto } from "../../../pages/typeResultJson/api-cartoParc";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Link, Typography } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type prop = {
@@ -48,31 +48,31 @@ export default function ParcNaturelleDrawer(p: prop) {
 
   return (
     <>
-      <div className="drawerHeader">
-        <h2>Données complémentaires sur les parcs naturels</h2>
-        <p>
+      <Box mb={2}>
+      <Typography variant="titleDrawer" component="p">Données complémentaires sur les parcs naturels</Typography>
+      <Typography variant="bodyDrawer" component="p">
           Les données suivantes répertorient les parcs et réserves naturelles se
           trouvant dans un rayon de 10 km de l'adresse sélectionnée. Plus
           d'informations sur les{" "}
-          <a
+          <Link
             href="https://reserves-naturelles.org/fonctionnement-reserves-naturelles-france/"
             target="_blank"
             rel="noopener noreferrer"
           >
             Réserves Naturelles de France
-          </a>
+          </Link>
           {" "}et{" "}
-          <a
+          <Link
             href="https://geoconfluences.ens-lyon.fr/glossaire/parcs-nationaux-et-parcs-naturels-regionaux-pnr"
             target="_blank"
             rel="noopener noreferrer"
           >
             les Parcs
-          </a>
+          </Link>
           .
-        </p>
-      </div>
-      <div className="drawerContent">
+        </Typography>
+      </Box>
+      <Box >
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -84,24 +84,24 @@ export default function ParcNaturelleDrawer(p: prop) {
           <AccordionDetails>
             {rnn.map((d) => {
               return (
-                <p>
+                <Typography variant="contentDrawer" component="p">
                   <a href={d.properties?.url}>
                     {d.properties?.nom} target="_blank" rel="noopener
                     noreferrer"
                   </a>
                   {" - "} Superficie : {Math.floor(d.area ?? 0)} m²
-                </p>
+                </Typography>
               );
             })}
             {rnc.map((d) => {
               return (
-                <p>
+                <Typography variant="contentDrawer" component="p">
                   <a href={d.properties?.url}>
                     {d.properties?.nom} target="_blank" rel="noopener
                     noreferrer"
                   </a>
                   {" - "} Superficie : {Math.floor(d.area ?? 0)} m²
-                </p>
+                </Typography>
               );
             })}
           </AccordionDetails>
@@ -117,13 +117,13 @@ export default function ParcNaturelleDrawer(p: prop) {
           <AccordionDetails>
             {rncf.map((d) => {
               return (
-                <p>
+                <Typography variant="contentDrawer" component="p">
                   <a href={d.properties?.url}>
                     {d.properties?.nom} target="_blank" rel="noopener
                     noreferrer"
                   </a>
                   {" - "} Superficie : {Math.floor(d.area ?? 0)} m²
-                </p>
+                </Typography>
               );
             })}
           </AccordionDetails>
@@ -139,7 +139,7 @@ export default function ParcNaturelleDrawer(p: prop) {
           <AccordionDetails>
             {pn.map((d) => {
               return (
-                <p>
+                <Typography variant="contentDrawer" component="p">
                   <a
                     href={d.properties?.url}
                     target="_blank"
@@ -148,7 +148,7 @@ export default function ParcNaturelleDrawer(p: prop) {
                     {d.properties?.nom} t
                   </a>
                   {" - "}Superficie : {Math.floor(d.area ?? 0)} m²
-                </p>
+                </Typography>
               );
             })}
           </AccordionDetails>
@@ -164,21 +164,21 @@ export default function ParcNaturelleDrawer(p: prop) {
           <AccordionDetails>
             {pnr.map((d) => {
               return (
-                <p>
-                  <a
+                <Typography variant="contentDrawer" component="p">
+                  <Link
                     href={d.properties?.url}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     {d.properties?.nom}
-                  </a>
+                  </Link>
                   {" - "} Superficie : {Math.floor(d.area ?? 0)} m²
-                </p>
+                </Typography>
               );
             })}
           </AccordionDetails>
         </Accordion>
-      </div>
+      </Box>
     </>
   );
 }

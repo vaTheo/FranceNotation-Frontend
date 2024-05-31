@@ -3,7 +3,8 @@ import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import debounce from "lodash/debounce";
 import { useInput } from "./useInput.hook";
-import "../../styles/banfield.scss";
+import { Box, InputAdornment } from "@mui/material";
+// import "../../styles/banfield.scss";
 
 interface AddressSearchBarProps {
   valueAddressSearchBarProps: (ValueAddressSearchBar: string) => void;
@@ -11,7 +12,8 @@ interface AddressSearchBarProps {
 }
 // Component definition: AddressSearch
 export default function AddressSearchBar({
-  valueAddressSearchBarProps,enterPressed
+  valueAddressSearchBarProps,
+  enterPressed,
 }: AddressSearchBarProps) {
   const exampleValue = "Exemple : 50 quai Rambaud 69002 Lyon";
   // State for the input value
@@ -75,8 +77,9 @@ export default function AddressSearchBar({
   };
   // Rendering the Autocomplete component
   return (
-    <div className="AddressSearch">
+    <Box sx={{flexGrow: 1}}>
       <Autocomplete
+      
         className="Autocomplete"
         freeSolo
         value={value}
@@ -115,6 +118,6 @@ export default function AddressSearchBar({
         )}
         renderOption={(props, option) => <li {...props}>{option}</li>}
       />
-    </div>
+    </Box>
   );
 }

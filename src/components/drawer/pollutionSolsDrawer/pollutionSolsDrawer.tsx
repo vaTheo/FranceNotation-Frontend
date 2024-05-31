@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
 import { FrontpollutionSol } from "../../../pages/typeResultJson/jsonInterface";
 import { SISData } from "../../../pages/typeResultJson/api-georisque";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import {
+  Box,
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Link,
+  Typography,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type prop = {
@@ -24,22 +31,29 @@ export default function PollutionSolDrawer(p: prop) {
 
   return (
     <>
-      <div className="drawerHeader">
-        <h2>Données complémentaires sur la pollution des sols</h2>
-        <p>
+      <Box mb={2}>
+        <Typography variant="titleDrawer" component="p">
+          {" "}
+          Données complémentaires sur la pollution des sols
+        </Typography>
+        <Typography variant="bodyDrawer" component="p">
           Les données suivantes listent les sites et sols pollués dans un rayon
           de 2 km autour de l'adresse. Vous pouvez cliquer sur le nom pour
           ouvrir la fiche de risque stockée sur{" "}
-          <a href="https://brgm.fr" target="_blank" rel="noopener noreferrer">
+          <Link
+            href="https://brgm.fr"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             brgm.fr
-          </a>
+          </Link>
           , le Bureau de Recherches Géologiques et Minières. Dans le lien, vous
           trouverez des informations sur l'état du sol et la raison pour
           laquelle il a été pollué. Les lieux sont classés du plus proche au
           plus loin de l'adresse.
-        </p>
-      </div>
-      <div className="drawerContent">
+        </Typography>
+      </Box>
+      <Box>
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -50,26 +64,26 @@ export default function PollutionSolDrawer(p: prop) {
           </AccordionSummary>
           <AccordionDetails>
             {sol.length === 0 ? (
-              <p>Aucune sol pollué n'a été détécté autour de cette addresse</p>
+              <Typography variant="contentDrawer" component="p">Aucune sol pollué n'a été détécté autour de cette addresse</Typography>
             ) : (
               sol.map((d) => {
                 return (
-                  <p>
-                    <a
+                  <Typography variant="contentDrawer" component="p">
+                    <Link
                       href={d?.fiche_risque}
                       target="_blank"
                       rel="noopener noreferrer"
                     >
                       {d.nom ? d.nom : "sol pollué"}
-                    </a>{" "}
+                    </Link>{" "}
                     Superficie: {Math.floor(d.superficie ?? 0)} m²
-                  </p>
+                  </Typography>
                 );
               })
             )}
           </AccordionDetails>
         </Accordion>
-      </div>
+      </Box>
     </>
   );
 }

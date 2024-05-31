@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 import { FrontInstallationClassees } from "../../../pages/typeResultJson/jsonInterface";
 import { InstallationsClasseesData } from "../../../pages/typeResultJson/api-georisque";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Link,
+  Typography,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-
+import FileDownloadSharpIcon from '@mui/icons-material/FileDownloadSharp';
 type prop = {
   data: FrontInstallationClassees;
 };
@@ -34,7 +41,7 @@ export default function InstallationClasseDrawer(p: prop) {
     );
     setInstallationsClassesNoStatus(
       data?.InstallationClassees.filter(
-        (d) => !d.statutSeveso || d.statutSeveso == ""
+        (d) => !d.statutSeveso || d.statutSeveso === ""
       ) || []
     );
   };
@@ -44,35 +51,37 @@ export default function InstallationClasseDrawer(p: prop) {
 
   return (
     <>
-      <div className="drawerHeader">
-        <h2>Données complémentaires sur les installations classées</h2>
-        <p>
+      <Box mb={2}>
+        <Typography variant="titleDrawer" component="p">
+          Données complémentaires sur les installations classées
+        </Typography>
+        <Typography variant="bodyDrawer" component="p">
           Les données suivantes répertorient les installations classées dans un
           rayon de 2 km autour de l'adresse. Cela correspond aux installations
           classées{" "}
-          <a
+          <Link
             href="https://entreprendre.service-public.fr/vosdroits/F33414"
             target="_blank"
             rel="noopener noreferrer"
           >
             ICPE
-          </a>{" "}
+          </Link>{" "}
           et{" "}
-          <a
+          <Link
             href="https://www.ecologie.gouv.fr/iota"
             target="_blank"
             rel="noopener noreferrer"
           >
             IOTA
-          </a>
+          </Link>
           .
-          <p>
+          <Typography variant="contentDrawer" component="p">
             Les données sont classées de la plus proche à la plus éloignée de
             l'adresse recherchée.
-          </p>
-        </p>
-      </div>
-      <div className="drawerContent">
+          </Typography>
+        </Typography>
+      </Box>
+      <Box className="drawerContent">
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -83,37 +92,53 @@ export default function InstallationClasseDrawer(p: prop) {
           </AccordionSummary>
           <AccordionDetails>
             {installationsClassesSeveso.length === 0 ? (
-              <p>
+              <Typography variant="contentDrawer" component="p">
                 Aucune installation classée SEVESO n'a été trouvée à proximité
                 de cette adresse.
-              </p>
+              </Typography>
             ) : (
               installationsClassesSeveso?.map((d) => {
                 return (
-                  <div>
-                    <p>
+                  <Box>
+                    <Typography
+                      variant="contentDrawer"
+                      component="p"
+                      sx={{ display: "inline-flex", alignItems: "center" }}
+                    >
                       {d.raisonSociale} {"  "}
                       {d.statutSeveso}
                       {d?.inspections[0]?.fichierInspection?.urlFichier && (
-                        <a
+                        <Link
                           href={
                             d?.inspections[0]?.fichierInspection?.urlFichier
                           }
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            marginLeft: "4px",
+                          }}
                         >
-                          [ " ]
-                        </a>
+                          <FileDownloadSharpIcon />
+                        </Link>
                       )}
                       {d?.documentsHorsInspection[0]?.urlFichier && (
-                        <a
+                        <Link
                           href={d?.documentsHorsInspection[0]?.urlFichier}
                           target="_blank"
                           rel="noopener noreferrer"
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            marginLeft: "4px",
+                          }}
                         >
-                          [ " ]
-                        </a>
+                          <FileDownloadSharpIcon />
+                        </Link>
                       )}
-                    </p>
-                  </div>
+                    </Typography>
+                  </Box>
                 );
               })
             )}
@@ -129,38 +154,52 @@ export default function InstallationClasseDrawer(p: prop) {
           </AccordionSummary>
           <AccordionDetails>
             {installationsClassesNonSeveso.length === 0 ? (
-              <p>
+              <Typography variant="contentDrawer" component="p">
                 Aucune installation classée Non seveso n'a été trouvée à
                 proximité de cette adresse.
-              </p>
+              </Typography>
             ) : (
               installationsClassesNonSeveso?.map((d) => {
                 return (
-                  <div>
-                    <p>
+                  <Box>
+                    <Typography
+                      variant="contentDrawer"
+                      component="p"
+                      sx={{ display: "inline-flex", alignItems: "center" }}
+                    >
                       {d.raisonSociale} {"  "}
                       {d?.inspections[0]?.fichierInspection?.urlFichier && (
-                        <a
+                        <Link
                           href={
                             d?.inspections[0]?.fichierInspection?.urlFichier
                           }
                           target="_blank"
                           rel="noopener noreferrer"
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            marginLeft: "4px",
+                          }}
                         >
-                          [""]
-                        </a>
+                          <FileDownloadSharpIcon />
+                        </Link>
                       )}
                       {d?.documentsHorsInspection[0]?.urlFichier && (
-                        <a
+                        <Link
                           href={d?.documentsHorsInspection[0]?.urlFichier}
                           target="_blank"
                           rel="noopener noreferrer"
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            marginLeft: "4px",
+                          }}
                         >
-                          [""]
-                        </a>
+                          <FileDownloadSharpIcon />
+                        </Link>
                       )}
-                    </p>
-                  </div>
+                    </Typography>
+                  </Box>
                 );
               })
             )}
@@ -176,45 +215,59 @@ export default function InstallationClasseDrawer(p: prop) {
           </AccordionSummary>
           <AccordionDetails>
             {installationsClassesNoStatus.length === 0 ? (
-              <p>
+              <Typography variant="contentDrawer" component="p">
                 Aucune installation classée n'a été trouvée à proximité de cette
                 adresse.
-              </p>
+              </Typography>
             ) : (
               installationsClassesNoStatus?.map((d) => {
                 return (
-                  <div>
-                    <p>
+                  <Box>
+                    <Typography
+                      variant="contentDrawer"
+                      component="p"
+                      sx={{ display: "inline-flex", alignItems: "center" }}
+                    >
                       {d.raisonSociale} {"  "}
                       {d.statutSeveso}
                       {d?.inspections[0]?.fichierInspection?.urlFichier && (
-                        <a
+                        <Link
                           href={
                             d?.inspections[0]?.fichierInspection?.urlFichier
                           }
                           target="_blank"
                           rel="noopener noreferrer"
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            marginLeft: "4px",
+                          }}
                         >
-                          [""]
-                        </a>
+                          <FileDownloadSharpIcon />
+                        </Link>
                       )}
                       {d?.documentsHorsInspection[0]?.urlFichier && (
-                        <a
+                        <Link
                           href={d?.documentsHorsInspection[0]?.urlFichier}
                           target="_blank"
                           rel="noopener noreferrer"
+                          sx={{
+                            display: "flex",
+                            alignItems: "center",
+                            marginLeft: "4px",
+                          }}
                         >
-                          [""]
-                        </a>
+                          <FileDownloadSharpIcon />
+                        </Link>
                       )}
-                    </p>
-                  </div>
+                    </Typography>
+                  </Box>
                 );
               })
             )}
           </AccordionDetails>
         </Accordion>
-      </div>
+      </Box>
     </>
   );
 }

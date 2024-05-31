@@ -2,7 +2,14 @@ import { useEffect, useState } from "react";
 import { FrontzoneNaturelle } from "../../../pages/typeResultJson/jsonInterface";
 import { FeatureCarto } from "../../../pages/typeResultJson/api-cartoParc";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Link,
+  Typography,
+} from "@mui/material";
 
 type prop = {
   data: FrontzoneNaturelle;
@@ -43,32 +50,33 @@ export default function ZoneNaturelleDrawer(p: prop) {
 
   return (
     <>
-      <div className="drawerHeader">
-        <h2>Données complémentaires sur les zones naturelles</h2>
-        <p>
+      <Box mb={2}>
+        <Typography variant="titleDrawer" component="p">
+          Données complémentaires sur les zones naturelles
+        </Typography>
+        <Typography variant="bodyDrawer" component="p">
           Les zones naturelles sont des zones où de la faune et de la flore
           intéressantes sont connues. Ces zones n'ont cependant pas vraiment
           d'impact sur l'urbanisme. Cela comprend les zones reconnues à
           l'échelle européenne{" "}
-          <a
+          <Link
             href="https://www.natura2000.fr/natura-2000/qu-est-ce-que-natura-2000"
             target="_blank"
             rel="noopener noreferrer"
           >
             Natura 2000
-          </a>
-          {" "}
-          <a
+          </Link>{" "}
+          <Link
             href="https://fr.wikipedia.org/wiki/Zone_naturelle_d%27int%C3%A9r%C3%AAt_%C3%A9cologique,_faunistique_et_floristique"
             target="_blank"
             rel="noopener noreferrer"
           >
             et française
-          </a>
+          </Link>
           .
-        </p>
-      </div>
-      <div className="drawerContent">
+        </Typography>
+      </Box>
+      <Box >
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -80,30 +88,30 @@ export default function ZoneNaturelleDrawer(p: prop) {
           <AccordionDetails>
             {naturaHabitat.map((d) => {
               return (
-                <div>
-                  <a
+                <Box>
+                  <Link
                     href={d.properties?.url}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                   {d.properties?.nom ?? d.id}
-                  </a>
-                  <p> Superficie : {Math.floor(d.area ?? 0)} m²</p>
-                </div>
+                    {d.properties?.nom ?? d.id}
+                  </Link>
+                  <Typography variant="contentDrawer" component="p"> Superficie : {Math.floor(d.area ?? 0)} m²</Typography>
+                </Box>
               );
             })}
             {naturaOiseaux.map((d) => {
               return (
-                <div>
-                  <a
+                <Box>
+                  <Link
                     href={d.properties?.url}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                  {d.properties?.nom}
-                  </a>
-                  <p> Superficie : {Math.floor(d.area ?? 0)} m²</p>
-                </div>
+                    {d.properties?.nom}
+                  </Link>
+                  <Typography variant="contentDrawer" component="p"> Superficie : {Math.floor(d.area ?? 0)} m²</Typography>
+                </Box>
               );
             })}
           </AccordionDetails>
@@ -119,35 +127,35 @@ export default function ZoneNaturelleDrawer(p: prop) {
           <AccordionDetails>
             {znieff1.map((d) => {
               return (
-                <p>
-                  <a
+                <Typography variant="contentDrawer" component="p">
+                  <Link
                     href={d.properties?.url}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     {d.properties?.nom}
-                  </a>
+                  </Link>
                   {" - "} Superficie : {Math.floor(d.area ?? 0)} m²
-                </p>
+                </Typography>
               );
             })}
             {znieff2.map((d) => {
               return (
-                <p>
-                  <a
+                <Typography variant="contentDrawer" component="p">
+                  <Link
                     href={d.properties?.url}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
                     {d.properties?.nom}
-                  </a>
+                  </Link>
                   {" - "}Superficie : {Math.floor(d.area ?? 0)} m²
-                </p>
+                </Typography>
               );
             })}
           </AccordionDetails>
         </Accordion>
-      </div>
+      </Box>
     </>
   );
 }

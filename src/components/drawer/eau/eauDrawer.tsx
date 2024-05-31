@@ -8,12 +8,15 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Box,
+  Link,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
@@ -42,33 +45,33 @@ export default function EAUDrawer(p: prop) {
 
   return (
     <>
-      <div className="drawerHeader">
-        <h2>Données complémentaires sur la qualité de l'eau potable</h2>
-        <p>
+      <Box mb={2}>
+      <Typography variant="titleDrawer" component="p">Données complémentaires sur la qualité de l'eau potable</Typography>
+      <Typography variant="bodyDrawer" component="p">
           Les informations sur l'eau potable sont des données publiques. En
           général, les points d'eau mesurés correspondent à des ensembles de
           quartiers ou de villes. Plus d'informations sur{" "}
-          <a
+          <Link
             href="https://hubeau.eaufrance.fr/"
             target="_blank"
             rel="noopener noreferrer"
           >
             Hubeau
-          </a>
+          </Link>
           . Les données disponibles ici correspondent à l'eau potable arrivant
           dans les robinets. Les valeurs suivantes sont des moyennes sur les 10
           dernières années. Pour comprendre les valeurs affichées suivre ce lien{" "}
-          <a
+          <Link
             href="https://www.legifrance.gouv.fr/loda/id/JORFTEXT000000465574/2020-10-22/"
             target="_blank"
             rel="noopener noreferrer"
           >
             suivre ce lien
-          </a>
+          </Link>
           .
-        </p>
-      </div>
-      <div className="drawerContent">
+        </Typography>
+      </Box>
+      <Box >
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -113,7 +116,7 @@ export default function EAUDrawer(p: prop) {
             </TableContainer>
           </AccordionDetails>
         </Accordion>
-      </div>
+      </Box>
     </>
   );
 }

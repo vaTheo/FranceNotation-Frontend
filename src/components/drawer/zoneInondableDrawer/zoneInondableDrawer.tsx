@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { FrontzoneInnondable } from "../../../pages/typeResultJson/jsonInterface";
 import { AZIData } from "../../../pages/typeResultJson/api-georisque";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Link, Typography } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type prop = {
@@ -26,22 +26,22 @@ export default function ZoneInnondableDrawer(p: prop) {
 
   return (
     <>
-      <div className="drawerHeader">
-        <h2>Données complémentaires sur les risques d'inondations</h2>
-        <p>
+      <Box mb={2}>
+      <Typography variant="titleDrawer" component="p">Données complémentaires sur les risques d'inondations</Typography>
+      <Typography variant="bodyDrawer" component="p">
           Les données suivantes répertorient les risques d'inondation. Plus
           d'informations sur{" "}
-          <a
+          <Link
             href="https://www.georisques.gouv.fr/minformer-sur-un-risque/inondation"
             target="_blank"
             rel="noopener noreferrer"
           >
             les risques d'inondations
-          </a>
+          </Link>
           .
-        </p>
-      </div>
-      <div className="drawerContent">
+        </Typography>
+      </Box>
+      <Box >
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -52,24 +52,24 @@ export default function ZoneInnondableDrawer(p: prop) {
           </AccordionSummary>
           <AccordionDetails>
             {AZI.length === 0 ? (
-              <p>Aucune zone innondable a été trouvé à cette addresse</p>
+              <Typography variant="contentDrawer" component="p">Aucune zone innondable a été trouvé à cette addresse</Typography>
             ) : (
               AZI.map((d) => {
                 return (
-                  <div>
-                    <p>
+                  <Box>
+                    <Typography variant="contentDrawer" component="p">
                       Risque sur la Commune de {d.libelle_commune}:{" "}
                       {d.liste_libelle_risque.map((r) => {
                         return r.libelle_risque_long + " ";
                       })}
-                    </p>
-                  </div>
+                    </Typography>
+                  </Box>
                 );
               })
             )}
           </AccordionDetails>
         </Accordion>
-      </div>
+      </Box>
     </>
   );
 }

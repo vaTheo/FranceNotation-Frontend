@@ -4,7 +4,8 @@ import ResultPage from "./pages/results";
 import { useError } from "./components/errorContext/errorContext";
 import { useEffect } from "react";
 import { attachInterceptors } from "./utils/axiosInstance";
-
+import { ThemeProvider } from "@mui/material";
+import { theme } from "./styles/theme";
 
 function App() {
   const { showError } = useError();
@@ -12,14 +13,14 @@ function App() {
     attachInterceptors(showError);
   }, [showError]);
   return (
-    <Router>
-      <div>
+    <ThemeProvider theme={theme}>
+      <Router>
         <Routes>
           <Route path="/" element={<MainPage />} />
           <Route path="/resultpage" element={<ResultPage />} />
         </Routes>
-      </div>
-    </Router>
+      </Router>
+    </ThemeProvider>
   );
 }
 
