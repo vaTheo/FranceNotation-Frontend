@@ -1,7 +1,36 @@
 import { createTheme } from "@mui/material";
 import { outlinedInputClasses } from "@mui/material/OutlinedInput";
 
-const textField = {
+declare module "@mui/material/styles" {
+  interface TypographyVariants {
+    titleDrawer: React.CSSProperties;
+    bodyDrawer: React.CSSProperties;
+    contentDrawer: React.CSSProperties;
+    titleCards: React.CSSProperties;
+    bodyCards: React.CSSProperties;
+  }
+
+  // allow configuration using `createTheme`
+  interface TypographyVariantsOptions {
+    titleDrawer?: React.CSSProperties;
+    bodyDrawer?: React.CSSProperties;
+    contentDrawer?: React.CSSProperties;
+    titleCards?: React.CSSProperties;
+    bodyCards?: React.CSSProperties;
+  }
+}
+// Update the Typography's variant prop options
+declare module "@mui/material/Typography" {
+  interface TypographyPropsVariantOverrides {
+    titleDrawer: true;
+    bodyDrawer: true;
+    contentDrawer: true;
+    titleCards: true;
+    bodyCards: true;
+  }
+}
+
+const TextField = {
   MuiTextField: {
     styleOverrides: {
       root: {
@@ -75,15 +104,15 @@ const textField = {
   },
 };
 
-const slider = {
+const Slider = {
   MuiSlider: {
     styleOverrides: {
       root: {
-        height: "12px",
+        height: "14px",
       },
       thumb: {
         width: "5px",
-        height: " 30px",
+        height: "24px",
         borderRadius: "16px",
         backgroundColor: "#FaFdF5",
         boxShadow: "0px 0px 0px 5px rgba(0, 0, 0, 0.25)",
@@ -93,6 +122,21 @@ const slider = {
         color: "#49454f",
         borderRadius: "10px",
         padding: "2px 8px",
+        fontSize: "1rem",
+      },
+      valueLabelOpen: {},
+      track: {},
+      rail: {},
+    },
+  },
+};
+
+const Drawer = {
+  MuiDrawer: {
+    styleOverrides: {
+      paper: {
+        backgroundColor: "#141218",
+        borderRadius: "8px",
       },
     },
   },
@@ -113,11 +157,6 @@ export const theme = createTheme({
       dark: "#082502",
       // contrastText: "#",
     },
-    //No change ATM
-    // background: {
-    //   default: "#020203",
-    //   paper: "#020203",
-    // },
   },
   typography: {
     h1: {
@@ -140,75 +179,58 @@ export const theme = createTheme({
       lineHeight: "1.75rem",
       letterSpacing: "-0.01563rem",
     },
-    h5: {
-      color: "var(--Primary--60, #b8d6b0)",
-      fontSize: "1.25rem",
-      fontWeight: "400",
-      textDecorationLine: "underline",
-    },
+
     body1: {
       color: "var(--Neutral---99, #fffbfe)",
-      fontSize: "1rem",
+      fontSize: "1.2rem",
       fontWeight: "400",
       lineHeight: "1.5rem",
       letterSpacing: "0.03125rem",
     },
+    body2: {
+      // fontStyle: normal;
+      fontWeight: "400",
+      fontSize: "1.2rem",
+      lineHeight: "1.1rem",
+      letterSpacing: "-0.03rem",
+    },
+    titleDrawer: {
+      color: "var(--Primary---70, #daedd5)",
+      fontSize: "2.5rem",
+      fontWeight: "400",
+      lineHeight: "2.75rem",
+      marginBottom: "2rem",
+      textAlign: "center",
+    },
+    bodyDrawer: {
+      color: "#fffbfe",
+      fontSize: "1rem",
+      fontWeight: "200",
+      marginBottom: "2rem",
+      // lineHeight: "1.5rem",
+      // letterSpacing: "0.03125rem",
+    },
+    contentDrawer:{
+      color: "#fffbfe",
+      fontSize: "1rem",
+      fontWeight: "200",
+    },
+    titleCards: {
+      color: "var(--Primary--60, #b8d6b0)",
+      fontSize: "1.2rem",
+      fontWeight: "400",
+      textDecorationLine: "underline",
+    },
+    bodyCards: {
+      fontWeight: "200",
+      fontSize: "1.2rem",
+      lineHeight: "1.1rem",
+      letterSpacing: "-0.03rem",
+    },
   },
   components: {
-    ...textField,
-    ...slider,
+    ...TextField,
+    ...Slider,
+    ...Drawer,
   },
-  //   MuiAutocomplete: {
-  //     styleOverrides: {
-  //       root: {
-  //         color: "white",
-  //       },
-  //       inputRoot: {
-  //         "& .MuiOutlinedInput-root": {
-  //           transition: "border-color 0.3s ease",
-  //           "&.Mui-focused .MuiOutlinedInput-notchedOutline": {
-  //             borderColor: "#daedd5",
-  //             transition: "border-color 0.3s ease",
-  //           },
-  //         },
-  //       },
-  //       input: {
-  //         color: "#79b669",
-  //         fontSize: "1rem",
-  //         lineHeight: "1.5rem",
-  //         letterSpacing: "0.5px",
-  //         "&::placeholder": {
-  //           color: "#aaa",
-  //           opacity: 1,
-  //         },
-  //       },
-  //       clearIndicator: {
-  //         color: "rgba(255, 255, 255, 0.75)",
-  //       },
-  //       popupIndicator: {
-  //         color: "rgba(255, 255, 255, 0.75)",
-  //       },
-  //       inputFocused: { //Text in text field
-  //         color: "#daedd5",
-  //         "&.Mui-focused": {
-  //           color: "#daedd5",
-  //         },
-  //       },
-  //     },
-  //   },
-  //   MuiOutlinedInput: {
-  //     styleOverrides: {
-  //       root: {
-  //         "& fieldset": {
-  //           borderColor: "#daedd5",
-  //         },
-  //         "&:hover": {
-  //           borderColor: "#daedd5",
-  //         },
-  //         "&.Mui-focused": {
-  //           borderColor: "#79b669",
-  //         },
-  //       },
-  //     },
-  //   },
 });

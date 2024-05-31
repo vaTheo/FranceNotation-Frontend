@@ -1,7 +1,14 @@
 import { useEffect, useState } from "react";
 import { FrontRisqueInformation } from "../../../pages/typeResultJson/jsonInterface";
 import { RisqueDetail } from "../../../pages/typeResultJson/api-georisque";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Link,
+  Typography,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type prop = {
@@ -24,24 +31,26 @@ export default function RisqueInformationDrawer(p: prop) {
 
   return (
     <>
-      <div className="drawerHeader">
-        <h2>Données complémentaires des risques classés</h2>
-        <p>
+      <Box mb={2}>
+        <Typography variant="titleDrawer" component="p">
+          Données complémentaires des risques classés
+        </Typography>
+        <Typography variant="bodyDrawer" component="p">
           Voici la liste des risques définis par l'application Géorisque du
           gouvernement français. Un risque est une probabilité qu'un effet
           spécifique se produise dans une période donnée ou dans des
           circonstances déterminées. Plus d'informations sur
-          <a
+          <Link
             href="https://www.georisques.gouv.fr/"
             target="_blank"
             rel="noopener noreferrer"
           >
             Géorisque
-          </a>
+          </Link>
           .
-        </p>
-      </div>
-      <div className="drawerContent">
+        </Typography>
+      </Box>
+      <Box>
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -52,11 +61,11 @@ export default function RisqueInformationDrawer(p: prop) {
           </AccordionSummary>
           <AccordionDetails>
             {risques.map((d) => {
-              return <p> {d.libelle_risque_long}</p>;
+              return <Typography variant="contentDrawer" component="p"> {d.libelle_risque_long}</Typography>;
             })}
           </AccordionDetails>
         </Accordion>
-      </div>
+      </Box>
     </>
   );
 }

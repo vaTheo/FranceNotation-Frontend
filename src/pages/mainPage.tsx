@@ -63,7 +63,7 @@ const MainPage = () => {
             />
 
             <Button
-              sx={{ marginLeft: 2, height: "200%" }}
+              sx={{ marginLeft: 2 }}
               size="medium"
               onClick={handleButtonClick}
               disabled={areAllFieldsFilled}
