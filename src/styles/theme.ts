@@ -142,6 +142,40 @@ const Drawer = {
   },
 };
 
+const accordion = {
+  MuiAccordion: {
+    styleOverrides: {
+      root: {
+        background: "#27242b",
+        color: "#fff",
+        fontSize: "1.25rem",
+      },
+    },
+  },
+  MuiAccordionDetails: {
+    styleOverrides: {
+      root: {
+        background: "#423e47",
+      },
+    },
+  },
+};
+
+const tableUi = {
+  MuiTableCell: {
+    styleOverrides: {
+      root: {
+        color: "white",
+        fontWeight: "200",
+      },
+      head: {
+        color: "white",
+        fontWeight: "800",
+      },
+    },
+  },
+};
+
 export const theme = createTheme({
   palette: {
     mode: "dark",
@@ -179,7 +213,6 @@ export const theme = createTheme({
       lineHeight: "1.75rem",
       letterSpacing: "-0.01563rem",
     },
-
     body1: {
       color: "var(--Neutral---99, #fffbfe)",
       fontSize: "1.2rem",
@@ -188,7 +221,6 @@ export const theme = createTheme({
       letterSpacing: "0.03125rem",
     },
     body2: {
-      // fontStyle: normal;
       fontWeight: "400",
       fontSize: "1.2rem",
       lineHeight: "1.1rem",
@@ -207,10 +239,8 @@ export const theme = createTheme({
       fontSize: "1rem",
       fontWeight: "200",
       marginBottom: "2rem",
-      // lineHeight: "1.5rem",
-      // letterSpacing: "0.03125rem",
     },
-    contentDrawer:{
+    contentDrawer: {
       color: "#fffbfe",
       fontSize: "1rem",
       fontWeight: "200",
@@ -232,5 +262,7 @@ export const theme = createTheme({
     ...TextField,
     ...Slider,
     ...Drawer,
+    ...accordion,
+    ...tableUi,
   },
 });

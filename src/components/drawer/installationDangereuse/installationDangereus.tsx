@@ -10,8 +10,6 @@ import {
   Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import LinkIcon from "@mui/icons-material/Link";
-import AttachFileIcon from '@mui/icons-material/AttachFile';
 import FileDownloadSharpIcon from '@mui/icons-material/FileDownloadSharp';
 type prop = {
   data: FrontInstallationClassees;
@@ -43,7 +41,7 @@ export default function InstallationClasseDrawer(p: prop) {
     );
     setInstallationsClassesNoStatus(
       data?.InstallationClassees.filter(
-        (d) => !d.statutSeveso || d.statutSeveso == ""
+        (d) => !d.statutSeveso || d.statutSeveso === ""
       ) || []
     );
   };
