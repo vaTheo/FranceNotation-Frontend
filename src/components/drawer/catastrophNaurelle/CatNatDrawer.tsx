@@ -2,7 +2,13 @@ import { useEffect, useState } from "react";
 import { FrontCatastropheNaturelle } from "../../../pages/typeResultJson/jsonInterface";
 
 import { CatnatData } from "../../../pages/typeResultJson/api-georisque";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Typography,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type prop = {
@@ -24,15 +30,17 @@ export default function CatnatDrawer(p: prop) {
 
   return (
     <>
-      <div className="drawerHeader">
-        <h2>Données complémentaires sur les catastrophes naturelles.</h2>
-        <p>
+      <Box mb={2}>
+        <Typography variant="titleDrawer" component="p">
+          Données complémentaires sur les catastrophes naturelles.
+        </Typography>
+        <Typography variant="bodyDrawer" component="p">
           Les informations suivantes correspondent aux catastrophes naturelles
           qui ont eu lieu dans un rayon de 5 km de l'adresse et au cours des 10
           dernières années.
-        </p>
-      </div>
-      <div className="drawerContent">
+        </Typography>
+      </Box>
+      <Box>
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -43,22 +51,22 @@ export default function CatnatDrawer(p: prop) {
           </AccordionSummary>
           <AccordionDetails>
             {catNat.length === 0 ? (
-              <p>
+              <Typography variant="contentDrawer" component="p">
                 Aucune catastrophe naturelle n'a été trouvée à proximité de
                 cette adresse.
-              </p>
+              </Typography>
             ) : (
               catNat.map((d) => {
                 return (
-                  <p>
+                  <Typography variant="contentDrawer" component="p">
                     {d.date_debut_evt} : {d.libelle_risque_jo}
-                  </p>
+                  </Typography>
                 );
               })
             )}
           </AccordionDetails>
         </Accordion>
-      </div>
+      </Box>
     </>
   );
 }

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Drawer from "@mui/material/Drawer";
 import { JsonData } from "../../pages/typeResultJson/jsonInterface";
-import "../../styles/drawer.scss";
+// import "../../styles/drawer.scss";
 import DPEDrawer from "./dpe/dpeDrawer";
 import { TypeCards } from "../../utils/enum";
 import EAUDrawer from "./eau/eauDrawer";
@@ -13,7 +13,7 @@ import ZoneNaturelleDrawer from "./zoneNaturelleDrawer.tsx/zoneNaturelleDrawer";
 import PollutionSolDrawer from "./pollutionSolsDrawer/pollutionSolsDrawer";
 import DangerNaturelleDrawer from "./dangerNaturel/dangerNaturel";
 import RisqueInformationDrawer from "./risqueInformation/risqueInformation";
-import { Button } from "@mui/material";
+import { Box, Button } from "@mui/material";
 
 type props = {
   isOpen: boolean;
@@ -26,6 +26,12 @@ type props = {
 
 export default function DrawerInfos(prop: props) {
   const { isOpen, toggleDrawer, data, type } = prop;
+  const [previousType, setPreviousType] = useState<TypeCards>(
+    TypeCards.CatastropheNaturelle
+  );
+  const [nextType, setNextType] = useState<TypeCards>(
+    TypeCards.CatastropheNaturelle
+  );
   const types = Object.keys(TypeCards).filter(
     (k) => isNaN(Number(k)) && k !== "null"
   );
@@ -40,11 +46,44 @@ export default function DrawerInfos(prop: props) {
     TypeCards[types[currentTypeIndex] as keyof typeof TypeCards];
   useEffect(() => {
     setCurrentTypeIndex(types.indexOf(type));
+    setPreviousType(
+      TypeCards[types[currentTypeIndex - 1] as keyof typeof TypeCards]
+    );
+    setNextType(
+      TypeCards[types[currentTypeIndex + 1] as keyof typeof TypeCards]
+    );
   }, [type]);
   return (
-    <Drawer anchor="left" open={isOpen} onClose={toggleDrawer(false)}>
-      <div className="drawer">
-        <div className="drawer-content">
+    <Drawer
+      anchor="left"
+      open={isOpen}
+      onClose={toggleDrawer(false)}
+      sx={{
+        "& .MuiDrawer-paper": {
+          width: {
+            xs: "90%",
+            sm: "60%",
+            md: "40%",
+          },
+        },
+      }}
+    >
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          height: "100%",
+          margin: "1rem 1rem 0rem 1rem",
+          overflowY: "clip",
+        }}
+      >
+        <Box
+          sx={{
+            justifyContent: "space-between",
+            overflowY: "auto",
+          }}
+        >
           {currentType === TypeCards.DPE && data?.dataDPEBatiment && (
             <DPEDrawer allDPE={data.dataDPEBatiment}></DPEDrawer>
           )}
@@ -83,7 +122,7 @@ export default function DrawerInfos(prop: props) {
             <PollutionSolDrawer
               data={data.dataPollutionSol}
             ></PollutionSolDrawer>
-          )}{" "}
+          )}
           {currentType === TypeCards.RisqueLocaux && data?.dataRisqueLocaux && (
             <DangerNaturelleDrawer
               data={data.dataRisqueLocaux}
@@ -95,12 +134,28 @@ export default function DrawerInfos(prop: props) {
                 data={data.dataRisqueInformation}
               ></RisqueInformationDrawer>
             )}
-        </div>
-        <div className="drawer-footer">
-          <Button onClick={PreviousCycleType}>Precedent</Button>{" "}
-          <Button onClick={nextCycleType}>Suivant</Button>
-        </div>
-      </div>
+        </Box>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: "end",
+            marginY: "0.25rem",
+            paddingY: "0.25rem",
+            borderTop: "1px solid #0F0F0F",
+          }}
+        >
+          <Button
+            sx={{ marginRight: "0.5rem" }}
+            onClick={PreviousCycleType}
+            variant="contained"
+          >
+            {nextType}
+          </Button>
+          <Button onClick={nextCycleType} variant="contained">
+            {previousType}
+          </Button>
+        </Box>
+      </Box>
     </Drawer>
   );
 }

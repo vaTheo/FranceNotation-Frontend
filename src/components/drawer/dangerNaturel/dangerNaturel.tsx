@@ -5,7 +5,7 @@ import {
   RadonData,
   ZonageSismiqueData,
 } from "../../../pages/typeResultJson/api-georisque";
-import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type prop = {
@@ -40,14 +40,14 @@ export default function DangerNaturelleDrawer(p: prop) {
 
   return (
     <>
-      <div className="drawerHeader">
-        <h2>Données complémentaires sur les dangers naturels</h2>
-        <p>
+      <Box mb={2}>
+      <Typography variant="titleDrawer" component="p">Données complémentaires sur les dangers naturels</Typography>
+      <Typography variant="bodyDrawer" component="p">
           Les données suivantes correspondent aux dangers naturels qui sont
           présents dans la zone concernée.
-        </p>
-      </div>
-      <div className="drawerContent">
+        </Typography>
+      </Box>
+      <Box >
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -58,7 +58,7 @@ export default function DangerNaturelleDrawer(p: prop) {
           </AccordionSummary>
           <AccordionDetails>
             {sismique.map((d) => {
-              return <p> Indice de sismisité : {d.zone_sismicite} </p>;
+              return <Typography variant="contentDrawer" component="p"> Indice de sismisité : {d.zone_sismicite} </Typography>;
             })}
           </AccordionDetails>
         </Accordion>
@@ -72,7 +72,7 @@ export default function DangerNaturelleDrawer(p: prop) {
           </AccordionSummary>
           <AccordionDetails>
             {radon.map((d) => {
-              return <p> Classe de radon de la zone : {d.classe_potentiel} </p>;
+              return <Typography variant="contentDrawer" component="p"> Classe de radon de la zone : {d.classe_potentiel} </Typography>;
             })}
           </AccordionDetails>
         </Accordion>
@@ -87,16 +87,16 @@ export default function DangerNaturelleDrawer(p: prop) {
           <AccordionDetails>
             {mvt.map((d) => {
               return (
-                <p>
+                <Typography variant="contentDrawer" component="p">
                   {" "}
                   Mouvements de terrains recensé date : {d.date_debut}
                   type : {d.type}{" "}
-                </p>
+                </Typography>
               );
             })}
           </AccordionDetails>
         </Accordion>
-      </div>
+      </Box>
     </>
   );
 }

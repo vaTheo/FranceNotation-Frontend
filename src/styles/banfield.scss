@@ -6,8 +6,7 @@
   border-radius: global.$radius;
 
   .Autocomplete {
-    width: 100%;
-    height: 100%;
+    
     color: white;
 
     .MuiOutlinedInput-root {
@@ -21,8 +20,6 @@
 
     .MuiInputLabel-outlined {
       color: var(--Primary---70, #daedd5);
-      font-size: 1rem;
-      line-height: 1.5rem; /* 133.333% */
 
       &.Mui-focused {
         color: #daedd5; // Or any color you prefer

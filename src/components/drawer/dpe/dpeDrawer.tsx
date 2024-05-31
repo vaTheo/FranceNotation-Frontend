@@ -5,15 +5,17 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Box,
+  Link,
   Table,
   TableBody,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
+  Typography,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import Paper from "@mui/material/Paper";
 
 type prop = {
   allDPE: FrontDPEBatiment;
@@ -67,22 +69,24 @@ export default function DPEDrawer(p: prop) {
 
   return (
     <>
-      <div className="drawerHeader">
-        <h2>Données complémentaires de classe énergétique du bâtiment</h2>
-        <p>
+      <Box mb={2}>
+        <Typography variant="titleDrawer" component="p">
+          Données complémentaires de classe énergétique du bâtiment
+        </Typography>
+        <Typography variant="bodyDrawer" component="p">
           Les classes énergétiques des appartements et maisons sont des données
           publiques. Les données avant 2021 ont une fiabilité plus faible en
           raison d'un changement de norme. Plus d'info sur{" "}
-          <a
+          <Link
             href="https://www.economie.gouv.fr/particuliers/immobilier-diagnostic-performance-energetique-dpe"
             target="_blank"
             rel="noopener noreferrer"
           >
             le site du gouvernement
-          </a>
-        </p>
-      </div>
-      <div className="drawerContent">
+          </Link>
+        </Typography>
+      </Box>
+      <Box>
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -126,7 +130,6 @@ export default function DPEDrawer(p: prop) {
                       key={
                         dpe.Date_établissement_DPE ?? dpe.date_etablissement_dpe
                       }
-                      // sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                     >
                       <TableCell component="th" scope="row">
                         {dpe.Date_établissement_DPE ??
@@ -252,7 +255,7 @@ export default function DPEDrawer(p: prop) {
             </TableContainer>
           </AccordionDetails>
         </Accordion>
-      </div>
+      </Box>
     </>
   );
 }
