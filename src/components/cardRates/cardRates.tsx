@@ -1,5 +1,4 @@
 import CustomSlider from "./slider";
-import "../../styles/cardRate.scss";
 import { TypeCards } from "../../utils/enum";
 import Grid2 from "@mui/material/Unstable_Grid2/Grid2";
 import { Box, Paper, Skeleton, Typography } from "@mui/material";
