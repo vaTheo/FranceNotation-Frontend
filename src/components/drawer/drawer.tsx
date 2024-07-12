@@ -14,6 +14,7 @@ import PollutionSolDrawer from "./pollutionSolsDrawer/pollutionSolsDrawer";
 import DangerNaturelleDrawer from "./dangerNaturel/dangerNaturel";
 import RisqueInformationDrawer from "./risqueInformation/risqueInformation";
 import { Box, Button } from "@mui/material";
+import EastIcon from "@mui/icons-material/East";
 
 type props = {
   isOpen: boolean;
@@ -24,35 +25,29 @@ type props = {
   data?: JsonData;
 };
 
-export default function DrawerInfos(prop: props) {
-  const { isOpen, toggleDrawer, data, type } = prop;
-  const [previousType, setPreviousType] = useState<TypeCards>(
-    TypeCards.CatastropheNaturelle
-  );
-  const [nextType, setNextType] = useState<TypeCards>(
-    TypeCards.CatastropheNaturelle
-  );
+export default function DrawerInfos(props: props) {
+  const { isOpen, toggleDrawer, data, type } = props;
   const types = Object.keys(TypeCards).filter(
     (k) => isNaN(Number(k)) && k !== "null"
   );
-  const [currentTypeIndex, setCurrentTypeIndex] = useState(0);
+  const [currentTypeIndex, setCurrentTypeIndex] = useState(types.indexOf(type));
+
+  useEffect(() => {
+    setCurrentTypeIndex(types.indexOf(type));
+  }, [type]);
+
   const nextCycleType = () => {
     setCurrentTypeIndex((prevIndex) => (prevIndex + 1) % types.length);
   };
-  const PreviousCycleType = () => {
-    setCurrentTypeIndex((prevIndex) => (prevIndex - 1) % types.length);
-  };
+
   const currentType =
     TypeCards[types[currentTypeIndex] as keyof typeof TypeCards];
-  useEffect(() => {
-    setCurrentTypeIndex(types.indexOf(type));
-    setPreviousType(
-      TypeCards[types[currentTypeIndex - 1] as keyof typeof TypeCards]
-    );
-    setNextType(
-      TypeCards[types[currentTypeIndex + 1] as keyof typeof TypeCards]
-    );
-  }, [type]);
+
+  const nextType =
+    TypeCards[
+      types[(currentTypeIndex + 1) % types.length] as keyof typeof TypeCards
+    ];
+
   return (
     <Drawer
       anchor="left"
@@ -84,6 +79,7 @@ export default function DrawerInfos(prop: props) {
             overflowY: "auto",
           }}
         >
+          {currentType}
           {currentType === TypeCards.DPE && data?.dataDPEBatiment && (
             <DPEDrawer allDPE={data.dataDPEBatiment}></DPEDrawer>
           )}
@@ -141,18 +137,12 @@ export default function DrawerInfos(prop: props) {
             justifyContent: "end",
             marginY: "0.25rem",
             paddingY: "0.25rem",
-            borderTop: "1px solid #0F0F0F",
+            borderTop: "1px solid rgba(15, 15, 15, 0.7) ",
           }}
         >
-          <Button
-            sx={{ marginRight: "0.5rem" }}
-            onClick={PreviousCycleType}
-            variant="contained"
-          >
-            {nextType}
-          </Button>
           <Button onClick={nextCycleType} variant="contained">
-            {previousType}
+            {nextType}
+            <EastIcon />
           </Button>
         </Box>
       </Box>

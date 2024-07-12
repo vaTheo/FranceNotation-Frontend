@@ -42,8 +42,8 @@ const MainPage = () => {
       sx={{ maxWidth: { xs: "100%", sm: "80%", md: "lg" } }}
       maxWidth="lg"
     >
-      <Box margin={5} sx={{ textAlign: "center" ,
-         margin: { xs: "0", sm: "3", md: "5" }
+      <Box sx={{ textAlign: "center" ,
+         marginTop: { xs: "0rem", sm: "3rem", md: "5rem" }
       }}>
         <Typography marginY={2} variant="h1" component="h1">
           Est-ce qu’il fait bon vivre chez vous ?
@@ -54,7 +54,7 @@ const MainPage = () => {
         </Typography>
       </Box>
       <Container maxWidth="sm">
-        <Box marginTop={1} sx={{ textAlign: "center" }}>
+        <Box paddingY={2} sx={{ textAlign: "center" }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <AddressSearchBar
               valueAddressSearchBarProps={handleValueAddressSearchBar}

@@ -1,5 +1,5 @@
 // ErrorContext.tsx
-import { Modal } from "@mui/material";
+import { Box, Modal } from "@mui/material";
 import React, { createContext, useContext, useState, ReactNode } from "react";
 
 interface ErrorContextType {
@@ -38,8 +38,7 @@ export const ErrorProvider: React.FC<{ children: ReactNode }> = ({
           aria-labelledby="simple-modal-title"
           aria-describedby="simple-modal-description"
         >
-          {/* Add the required children prop */}
-          <div
+          <Box
             style={{
               position: "absolute",
               top: "40px",
@@ -54,7 +53,7 @@ export const ErrorProvider: React.FC<{ children: ReactNode }> = ({
             }}
           >
             ERROR: {message}
-          </div>
+          </Box>
         </Modal>
       )}
     </ErrorContext.Provider>
