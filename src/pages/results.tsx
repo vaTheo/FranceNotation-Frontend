@@ -25,14 +25,10 @@ const ResultPage = () => {
     TypeCards.CatastropheNaturelle
   );
 
-  //V2///////////////////////
   const [eauData, setEauData] = useState<eauAllData>();
   const [dpeDATA, setDpeData] = useState<DPEAllData>();
   const [parcData, setParcData] = useState<ParcCartoAllData>();
   const [georisqueData, setGeorisqueData] = useState<GeorisqueAllData>();
-  ////////////////////////////
-
-  // Trigger data fetching once when the component mounts.
 
   const fetchDatas = async () => {
     const promises = V2_DATA_ENDPOINTS.map((endpoint) =>
@@ -85,9 +81,7 @@ const ResultPage = () => {
           <Typography variant="h3" component="p" my={2}>
             {addressObject.properties.label}
           </Typography>
-          <CustomSlider
-            customValue={globalNote || 0}
-          ></CustomSlider>
+          <CustomSlider customValue={globalNote || 0}></CustomSlider>
           <Typography variant="body1" component="p" my={2}>
             Les données suivantes sont calculées sur la base des résultats
             donnés par des sites spécialisés en open data.
