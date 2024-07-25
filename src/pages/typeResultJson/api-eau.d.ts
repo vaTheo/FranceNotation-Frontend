@@ -738,6 +738,8 @@ export interface ReseauResultatDis {
 }
 
 export interface eauAllData {
+  rateEauPotable?: number;
+  rateCoursEau?: number;
   eauPotable?: EauPotableData[];
   coursEau?: CoursEauData[];
 }

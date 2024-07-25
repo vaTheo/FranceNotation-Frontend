@@ -1,15 +1,12 @@
 import axios from "axios";
 import { AddressObject } from "../../apiResponseType/apiResponse";
-import { FrontGroupDataValue } from "../../pages/typeResultJson/ResultRespons";
 import axiosInstance from "../../utils/axiosInstance";
 
 const URL = process.env.REACT_APP_API_URL;
 export class ServiceAPIV2 {
   static async wakeUpServer() {
     try {
-      console.error('URL :', `${URL}/v2/fetch/ping`);
-      await axios.get(`${URL}/v2/fetch/ping`, 
-        {
+      await axios.get(`${URL}/v2/fetch/ping`, {
         withCredentials: true,
       });
     } catch (err) {
@@ -20,8 +17,6 @@ export class ServiceAPIV2 {
   static async initiateCycle(address: string): Promise<AddressObject> {
     try {
       const jsonData = { address };
-      console.log(`${URL}//v2/fetch/address`);
-      // Initiate the DB request, associate user with addresse ID, return address object
       const responseGetrate = await axiosInstance.post(
         `${URL}/ratingcontroller/getrate`,
         jsonData,
@@ -38,66 +33,18 @@ export class ServiceAPIV2 {
     }
   }
 
-  static async initialFetchData(addressObject: AddressObject, enpoint: string) {
+  static async fetchData(addressObject: AddressObject, enpoint: string) {
     try {
       // Try to get the information about the addresse if it as allready been searched
-      console.log(
-        `ratings : ${URL}/ratingcontroller${enpoint}/${addressObject.properties.id}`
-      );
-      let fetchGeorisqueResponse = await axios.get(
-        `${URL}/ratingcontroller${enpoint}/${addressObject.properties.id}`,
+      console.log(`ratings : ${URL}/v2/fetch${enpoint}/`);
+      let fetchedResponse = await axios.post(
+        `${URL}/v2/fetch${enpoint}`,
+        addressObject,
         { withCredentials: true }
       );
-
-      // If it's a new addresse fetch the data to this specific address
-      if (!fetchGeorisqueResponse.data) {
-        fetchGeorisqueResponse = await axios.post(
-          `${URL}/ratingcontroller${enpoint}`,
-          addressObject,
-          { withCredentials: true }
-        );
-      }
-      return fetchGeorisqueResponse.data;
+      return fetchedResponse.data;
     } catch (err) {
       console.error(err);
-      throw err;
-    }
-  }
-
-  static async fetchGroupNotation(
-    addressObject: AddressObject
-  ): Promise<FrontGroupDataValue> {
-    try {
-      console.log(
-        "URL :",
-        `${URL}/frontdata/getrates/${addressObject.properties.id}`
-      );
-      const response = await axios.get(
-        `${URL}/frontdata/getrates/${addressObject.properties.id}`,
-
-        { withCredentials: true }
-      );
-      console.log("response.data", response.data);
-      return response.data;
-    } catch (err) {
-      console.log(err);
-      throw err;
-    }
-  }
-
-  static async fetchGroupJson(addressObject: AddressObject, endpoint: string) {
-    try {
-      console.log(
-        `JSON : ${URL}/frontdata/${endpoint}/${addressObject.properties.id}`
-      );
-      const response = await axios.get(
-        `${URL}/frontdata/${endpoint}/${addressObject.properties.id}`,
-
-        { withCredentials: true }
-      );
-      return response.data;
-    } catch (err) {
-      console.log(err);
       throw err;
     }
   }

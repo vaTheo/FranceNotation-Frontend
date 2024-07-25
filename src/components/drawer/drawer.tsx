@@ -9,7 +9,6 @@ import CatnatDrawer from "./catastrophNaurelle/CatNatDrawer";
 import InstallationClasseDrawer from "./installationDangereuse/installationDangereus";
 import ParcNaturelleDrawer from "./parcsNaturelleDrawer/parcNaturelleDrawer";
 import ZoneInnondableDrawer from "./zoneInondableDrawer/zoneInondableDrawer";
-import ZoneNaturelleDrawer from "./zoneNaturelleDrawer.tsx/zoneNaturelleDrawer";
 import PollutionSolDrawer from "./pollutionSolsDrawer/pollutionSolsDrawer";
 import DangerNaturelleDrawer from "./dangerNaturel/dangerNaturel";
 import RisqueInformationDrawer from "./risqueInformation/risqueInformation";
@@ -60,6 +59,7 @@ export default function DrawerInfos(props: props) {
             sm: "60%",
             md: "40%",
           },
+          overflowY: "auto", // Enable scrolling for the entire drawer
         },
       }}
     >
@@ -69,17 +69,31 @@ export default function DrawerInfos(props: props) {
           flexDirection: "column",
           justifyContent: "space-between",
           height: "100%",
-          margin: "1rem 1rem 0rem 1rem",
-          overflowY: "clip",
+          overflow: "hidden",
         }}
       >
         <Box
           sx={{
             justifyContent: "space-between",
             overflowY: "auto",
+            padding: "1rem",
+            "&::-webkit-scrollbar": {
+              width: "8px",
+            },
+            "&::-webkit-scrollbar-track": {
+              background: "transparent",
+            },
+            "&::-webkit-scrollbar-thumb": {
+              background: "#888",
+              borderRadius: "4px",
+            },
+            "&::-webkit-scrollbar-thumb:hover": {
+              background: "#555",
+            },
+            scrollbarWidth: "thin",
+            scrollbarColor: "#888 transparent",
           }}
         >
-          {currentType}
           {currentType === TypeCards.DPE && data?.dataDPEBatiment && (
             <DPEDrawer allDPE={data.dataDPEBatiment}></DPEDrawer>
           )}
@@ -87,47 +101,47 @@ export default function DrawerInfos(props: props) {
             <EAUDrawer data={data.dataEau}></EAUDrawer>
           )}
           {currentType === TypeCards.CatastropheNaturelle &&
-            data?.dataCatastropheNaturelle && (
-              <CatnatDrawer data={data.dataCatastropheNaturelle}></CatnatDrawer>
+            data?.dataGeorisque?.CatnatData && (
+              <CatnatDrawer data={data.dataGeorisque.CatnatData}></CatnatDrawer>
             )}
           {currentType === TypeCards.InstallationClasse &&
-            data?.dataInstallationClassees && (
+            data?.dataGeorisque?.InstallationsClasseesData && (
               <InstallationClasseDrawer
-                data={data.dataInstallationClassees}
+                data={data.dataGeorisque.InstallationsClasseesData}
               ></InstallationClasseDrawer>
             )}
-          {currentType === TypeCards.ParcNaturelle &&
-            data?.dataParcNaturelle && (
-              <ParcNaturelleDrawer
-                data={data.dataParcNaturelle}
-              ></ParcNaturelleDrawer>
-            )}
+          {currentType === TypeCards.ParcNaturelle && data?.dataParcCarto && (
+            <ParcNaturelleDrawer
+              data={data.dataParcCarto}
+            ></ParcNaturelleDrawer>
+          )}
+
           {currentType === TypeCards.ZoneInnondable &&
-            data?.dataZoneInnondable && (
+            data?.dataGeorisque?.AZIData && (
               <ZoneInnondableDrawer
-                data={data.dataZoneInnondable}
+                data={data.dataGeorisque.AZIData}
               ></ZoneInnondableDrawer>
             )}
-          {currentType === TypeCards.ZoneNaturelle &&
-            data?.dataZoneNaturelle && (
-              <ZoneNaturelleDrawer
-                data={data.dataZoneNaturelle}
-              ></ZoneNaturelleDrawer>
+          {currentType === TypeCards.PollutionSol &&
+            data?.dataGeorisque?.SISData && (
+              <PollutionSolDrawer
+                data={data.dataGeorisque.SISData}
+              ></PollutionSolDrawer>
             )}
-          {currentType === TypeCards.PollutionSol && data?.dataPollutionSol && (
-            <PollutionSolDrawer
-              data={data.dataPollutionSol}
-            ></PollutionSolDrawer>
-          )}
-          {currentType === TypeCards.RisqueLocaux && data?.dataRisqueLocaux && (
-            <DangerNaturelleDrawer
-              data={data.dataRisqueLocaux}
-            ></DangerNaturelleDrawer>
-          )}
+          {currentType === TypeCards.RisqueLocaux &&
+            data?.dataGeorisque?.MVTData &&
+            data?.dataGeorisque?.RadonData &&
+            data?.dataGeorisque?.ZonageSismiqueData && (
+              <DangerNaturelleDrawer
+                dataMVT={data.dataGeorisque.MVTData}
+                dataRadon={data.dataGeorisque.RadonData}
+                dataZonageSismique={data.dataGeorisque.ZonageSismiqueData}
+              ></DangerNaturelleDrawer>
+            )}
           {currentType === TypeCards.RisqueInforamtion &&
-            data?.dataRisqueInformation && (
+            data?.dataGeorisque?.RisquesData && (
               <RisqueInformationDrawer
-                data={data.dataRisqueInformation}
+                data={data.dataGeorisque.RisquesData}
               ></RisqueInformationDrawer>
             )}
         </Box>

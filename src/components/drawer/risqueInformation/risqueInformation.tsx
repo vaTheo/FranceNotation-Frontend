@@ -1,6 +1,5 @@
 import { useEffect, useState } from "react";
-import { FrontRisqueInformation } from "../../../pages/typeResultJson/jsonInterface";
-import { RisqueDetail } from "../../../pages/typeResultJson/api-georisque";
+import { RisqueDetail, RisquesData } from "../../../pages/typeResultJson/api-georisque";
 import {
   Accordion,
   AccordionDetails,
@@ -12,7 +11,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type prop = {
-  data: FrontRisqueInformation;
+  data: RisquesData[];
 };
 
 export default function RisqueInformationDrawer(p: prop) {
@@ -20,7 +19,7 @@ export default function RisqueInformationDrawer(p: prop) {
   const [risques, setRisques] = useState<Array<RisqueDetail>>([]);
   const mapping = () => {
     setRisques(
-      data.risqueInformation?.risqueInformation[0].risques_detail.map((d) => {
+      data[0].risques_detail.map((d) => {
         return d;
       }) ?? []
     );

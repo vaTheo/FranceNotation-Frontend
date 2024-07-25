@@ -11,6 +11,19 @@ export interface CartoParcResponse {
     bbox: number[];
   }
   
+  export interface ParcCartoAllData{
+    rate?: number;
+    naturaHabitat?: FeatureCarto[];
+    naturaOiseaux?: FeatureCarto[];
+    rnc?: FeatureCarto[];
+    rnn?: FeatureCarto[];
+    znieff1?: FeatureCarto[];
+    znieff2?: FeatureCarto[];
+    pn?: FeatureCarto[];
+    pnr?: FeatureCarto[];
+    rncf?: FeatureCarto[];
+
+  }
   interface FeatureCarto {
     type?: string;
     id?: string;
@@ -39,3 +52,4 @@ export interface CartoParcResponse {
       name: string;
     };
   }
+

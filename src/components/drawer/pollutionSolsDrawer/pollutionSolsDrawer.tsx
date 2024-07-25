@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { FrontpollutionSol } from "../../../pages/typeResultJson/jsonInterface";
 import { SISData } from "../../../pages/typeResultJson/api-georisque";
 import {
   Box,
@@ -12,7 +11,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type prop = {
-  data: FrontpollutionSol;
+  data: SISData[];
 };
 
 export default function PollutionSolDrawer(p: prop) {
@@ -20,7 +19,7 @@ export default function PollutionSolDrawer(p: prop) {
   const [sol, setSol] = useState<Array<SISData>>([]);
   const mapping = () => {
     setSol(
-      data.pollutionSol.sis?.map((d) => {
+      data?.map((d) => {
         return d;
       }) ?? []
     );

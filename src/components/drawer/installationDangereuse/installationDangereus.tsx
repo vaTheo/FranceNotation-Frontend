@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { FrontInstallationClassees } from "../../../pages/typeResultJson/jsonInterface";
 import { InstallationsClasseesData } from "../../../pages/typeResultJson/api-georisque";
 import {
   Accordion,
@@ -12,7 +11,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FileDownloadSharpIcon from '@mui/icons-material/FileDownloadSharp';
 type prop = {
-  data: FrontInstallationClassees;
+  data: InstallationsClasseesData[];
 };
 
 export default function InstallationClasseDrawer(p: prop) {
@@ -27,12 +26,12 @@ export default function InstallationClasseDrawer(p: prop) {
 
   const mapping = () => {
     setInstallationsClassesNonSeveso(
-      data?.InstallationClassees.filter(
+      data?.filter(
         (d) => d.statutSeveso === "Non Seveso"
       ) || []
     );
     setInstallationsClassesSeveso(
-      data?.InstallationClassees.filter(
+      data?.filter(
         (d) =>
           d?.statutSeveso !== "Non Seveso" &&
           d.statutSeveso !== "" &&
@@ -40,7 +39,7 @@ export default function InstallationClasseDrawer(p: prop) {
       ) || []
     );
     setInstallationsClassesNoStatus(
-      data?.InstallationClassees.filter(
+      data?.filter(
         (d) => !d.statutSeveso || d.statutSeveso === ""
       ) || []
     );

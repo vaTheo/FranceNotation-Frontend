@@ -1,18 +1,6 @@
-export const API_ENDPOINTS_RATES = [
-  "/fetchGeorisque",
-  "/Fetcheau",
-  "/fethParcCarto",
-  "/fethDPE",
-];
-export const API_ENDPOINTS_JSON = [
-  "getdpebatiment",
-  "geteau",
-  "getzoneinnondable",
-  "getcatastrophenaturelle",
-  "getinstallationclassees",
-  "getrisquelocaux",
-  "getzonenaturelle",
-  "getparcnaturelle",
-  "getpollutionsol",
-  "getrisqueinformation",
+export const V2_DATA_ENDPOINTS = [
+  "/eau",
+  "/parcCarto",
+  "/dpe",
+  "/georisque",
 ];

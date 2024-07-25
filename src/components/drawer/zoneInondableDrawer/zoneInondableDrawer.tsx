@@ -1,11 +1,10 @@
 import { useEffect, useState } from "react";
-import { FrontzoneInnondable } from "../../../pages/typeResultJson/jsonInterface";
 import { AZIData } from "../../../pages/typeResultJson/api-georisque";
 import { Accordion, AccordionDetails, AccordionSummary, Box, Link, Typography } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type prop = {
-  data: FrontzoneInnondable;
+  data: AZIData[];
 };
 
 export default function ZoneInnondableDrawer(p: prop) {
@@ -13,15 +12,13 @@ export default function ZoneInnondableDrawer(p: prop) {
   const [AZI, setAZI] = useState<Array<AZIData>>([]);
   const mapping = () => {
     setAZI(
-      data.zoneInnondable?.map((d) => {
+      data?.map((d) => {
         return d;
       }) ?? []
     );
   };
   useEffect(() => {
     mapping();
-    console.error("AZI", AZI);
-    console.error("data", data);
   }, [data]);
 
   return (
