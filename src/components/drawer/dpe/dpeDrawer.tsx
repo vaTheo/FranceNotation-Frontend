@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { DPEAllData, ResultItemDPE } from "../../../pages/typeResultJson/api-DPE";
+import {
+  DPEAllData,
+  ResultItemDPE,
+} from "../../../pages/typeResultJson/api-DPE";
 import {
   Accordion,
   AccordionDetails,
@@ -35,34 +38,35 @@ export default function DPEDrawer(p: prop) {
     Array<ResultItemDPE>
   >([]);
 
-  const dpeMapping = () => {
-    setDPEHabitatExistant(
-      allDPE.DPEHabitatExistant?.map((dpe) => {
-        return dpe;
-      }) ?? []
-    );
-    setDPEHabitatNeuf(
-      allDPE.DPEHabitatNeuf?.map((dpe) => {
-        return dpe;
-      }) ?? []
-    );
-    setDPETertiaire(
-      allDPE.DPETertiaire?.map((dpe) => {
-        return dpe;
-      }) ?? []
-    );
-    setDPEHabitatExistantAvant2021(
-      allDPE.DPEHabitatExistantAvant2021?.map((dpe) => {
-        return dpe;
-      }) ?? []
-    );
-    setDPETertiaireAvant2021(
-      allDPE.DPETertiaireAvant2021?.map((dpe) => {
-        return dpe;
-      }) ?? []
-    );
-  };
   useEffect(() => {
+    const dpeMapping = () => {
+      setDPEHabitatExistant(
+        allDPE.DPEHabitatExistant?.map((dpe) => {
+          return dpe;
+        }) ?? []
+      );
+      setDPEHabitatNeuf(
+        allDPE.DPEHabitatNeuf?.map((dpe) => {
+          return dpe;
+        }) ?? []
+      );
+      setDPETertiaire(
+        allDPE.DPETertiaire?.map((dpe) => {
+          return dpe;
+        }) ?? []
+      );
+      setDPEHabitatExistantAvant2021(
+        allDPE.DPEHabitatExistantAvant2021?.map((dpe) => {
+          return dpe;
+        }) ?? []
+      );
+      setDPETertiaireAvant2021(
+        allDPE.DPETertiaireAvant2021?.map((dpe) => {
+          return dpe;
+        }) ?? []
+      );
+    };
+
     dpeMapping();
   }, [allDPE]);
 

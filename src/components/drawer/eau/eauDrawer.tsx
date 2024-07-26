@@ -27,27 +27,30 @@ export default function EAUDrawer(p: prop) {
   const { data } = p;
   const [courEau, setcourEau] = useState<Array<CoursEauData>>([]);
   const [eauPotable, setEauPotable] = useState<Array<EauPotableData>>([]);
-  const mapping = () => {
-    setcourEau(
-      (data.coursEau ?? []).map((d) => {
-        return d;
-      })
-    );
-    setEauPotable(
-      (data.eauPotable ?? []).map((d) => {
-        return d;
-      })
-    );
-  };
+
   useEffect(() => {
+    const mapping = () => {
+      setcourEau(
+        (data.coursEau ?? []).map((d) => {
+          return d;
+        })
+      );
+      setEauPotable(
+        (data.eauPotable ?? []).map((d) => {
+          return d;
+        })
+      );
+    };
     mapping();
   }, [data]);
 
   return (
     <>
       <Box mb={2}>
-      <Typography variant="titleDrawer" component="p">Données complémentaires sur la qualité de l'eau potable</Typography>
-      <Typography variant="bodyDrawer" component="p">
+        <Typography variant="titleDrawer" component="p">
+          Données complémentaires sur la qualité de l'eau potable
+        </Typography>
+        <Typography variant="bodyDrawer" component="p">
           Les informations sur l'eau potable sont des données publiques. En
           général, les points d'eau mesurés correspondent à des ensembles de
           quartiers ou de villes. Plus d'informations sur{" "}
@@ -71,7 +74,7 @@ export default function EAUDrawer(p: prop) {
           .
         </Typography>
       </Box>
-      <Box >
+      <Box>
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}

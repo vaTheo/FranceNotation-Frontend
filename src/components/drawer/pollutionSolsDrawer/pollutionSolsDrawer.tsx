@@ -17,14 +17,15 @@ type prop = {
 export default function PollutionSolDrawer(p: prop) {
   const { data } = p;
   const [sol, setSol] = useState<Array<SISData>>([]);
-  const mapping = () => {
-    setSol(
-      data?.map((d) => {
-        return d;
-      }) ?? []
-    );
-  };
+  
   useEffect(() => {
+    const mapping = () => {
+      setSol(
+        data?.map((d) => {
+          return d;
+        }) ?? []
+      );
+    };  
     mapping();
   }, [data]);
 

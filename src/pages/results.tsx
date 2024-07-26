@@ -1,7 +1,6 @@
+import React, { useEffect, useState, useCallback, useMemo } from "react";
 import { useLocation } from "react-router-dom";
-import { useEffect, useState } from "react";
 import CustomSlider from "../components/cardRates/slider";
-// import "../styles/results.scss";
 import CardRates from "../components/cardRates/cardRates";
 import { AddressObject } from "../apiResponseType/apiResponse";
 import { V2_DATA_ENDPOINTS } from "../utils/endpointConst";
@@ -15,73 +14,105 @@ import { DPEAllData } from "./typeResultJson/api-DPE";
 import { ParcCartoAllData } from "./typeResultJson/api-cartoParc";
 import { GeorisqueAllData } from "./typeResultJson/api-georisque";
 
-const ResultPage = () => {
+const LOADING_MESSAGE = "Nous sommes en train de rechercher les données";
+const SUCCESS_MESSAGE = "Bonne nouvelle ! Il fait bon vivre";
+const ADDRESS_PREFIX = "au";
+
+type ResultPageState = {
+  isLoading: boolean;
+  isSliderOpen: boolean;
+  sliderValue: TypeCards;
+  eauData: eauAllData | undefined;
+  dpeDATA: DPEAllData | undefined;
+  parcData: ParcCartoAllData | undefined;
+  georisqueData: GeorisqueAllData | undefined;
+};
+
+const ResultPage: React.FC = () => {
   const { state } = useLocation();
-  const [isLoading, setIsLoading] = useState(true);
   const addressObject: AddressObject = state?.addressObject || {};
-  const [globalNote, setGlobalNote] = useState<number>();
-  const [isSliderOpen, setSliderOpen] = useState(false);
-  const [sliderValue, setSliderValue] = useState<TypeCards>(
-    TypeCards.CatastropheNaturelle
-  );
 
-  const [eauData, setEauData] = useState<eauAllData>();
-  const [dpeDATA, setDpeData] = useState<DPEAllData>();
-  const [parcData, setParcData] = useState<ParcCartoAllData>();
-  const [georisqueData, setGeorisqueData] = useState<GeorisqueAllData>();
+  const [pageState, setPageState] = useState<ResultPageState>({
+    isLoading: true,
+    isSliderOpen: false,
+    sliderValue: TypeCards.CatastropheNaturelle,
+    eauData: undefined,
+    dpeDATA: undefined,
+    parcData: undefined,
+    georisqueData: undefined,
+  });
 
-  const fetchDatas = async () => {
+  const fetchDatas = useCallback(async () => {
     const promises = V2_DATA_ENDPOINTS.map((endpoint) =>
       ServiceAPIV2.fetchData(addressObject, endpoint)
     );
     const results = await Promise.all(promises);
-    setEauData(results[0] as eauAllData);
-    setParcData(results[1] as ParcCartoAllData);
-    setDpeData(results[2] as DPEAllData);
-    setGeorisqueData(results[3] as GeorisqueAllData);
-    setGlobalNote(
-      ((eauData?.rateEauPotable || 0) +
-        (dpeDATA?.rateDPE || 0) +
-        (parcData?.rate || 0) +
-        (georisqueData?.ratesCatastropheNaturelle || 0) +
-        (georisqueData?.ratesInstallationClassees || 0) +
-        (georisqueData?.ratesPolutionSol || 0) +
-        (georisqueData?.ratesRisqueGeneraux || 0) +
-        (georisqueData?.ratesRisqueLocaux || 0) +
-        (georisqueData?.ratesZoneInnondable || 0)) /
-        9
-    );
-    setIsLoading(false);
-  };
+
+    setPageState((prevState) => ({
+      ...prevState,
+      eauData: results[0] as eauAllData,
+      parcData: results[1] as ParcCartoAllData,
+      dpeDATA: results[2] as DPEAllData,
+      georisqueData: results[3] as GeorisqueAllData,
+      isLoading: false,
+    }));
+  }, [addressObject]);
+
   useEffect(() => {
     fetchDatas();
-  }, [globalNote]);
+  }, [fetchDatas]);
 
-  const handleTitleClickInParent = (data: TypeCards) => {
-    setSliderValue(data);
-    setSliderOpen(true);
-  };
+  const globalNote = useMemo(() => {
+    if (
+      !pageState.eauData ||
+      !pageState.dpeDATA ||
+      !pageState.parcData ||
+      !pageState.georisqueData
+    ) {
+      return undefined;
+    }
+
+    return (
+      ((pageState.eauData.rateEauPotable || 0) +
+        (pageState.dpeDATA.rateDPE || 0) +
+        (pageState.parcData.rate || 0) +
+        (pageState.georisqueData.ratesCatastropheNaturelle || 0) +
+        (pageState.georisqueData.ratesInstallationClassees || 0) +
+        (pageState.georisqueData.ratesPolutionSol || 0) +
+        (pageState.georisqueData.ratesRisqueGeneraux || 0) +
+        (pageState.georisqueData.ratesRisqueLocaux || 0) +
+        (pageState.georisqueData.ratesZoneInnondable || 0)) /
+      9
+    );
+  }, [
+    pageState.eauData,
+    pageState.dpeDATA,
+    pageState.parcData,
+    pageState.georisqueData,
+  ]);
+
+  const handleTitleClickInParent = useCallback((data: TypeCards) => {
+    setPageState((prevState) => ({
+      ...prevState,
+      sliderValue: data,
+      isSliderOpen: true,
+    }));
+  }, []);
 
   return (
     <Container maxWidth="lg">
       <Box my={6} sx={{ textAlign: "center" }}>
-        {isLoading ? (
-          <Typography variant="h1" component="h1" my={2}>
-            Nous sommes en train de rechercher les données
-          </Typography>
-        ) : (
-          <Typography variant="h1" component="h1" my={2}>
-            Bonne nouvelle ! Il fait bon vivre
-          </Typography>
-        )}
+        <Typography variant="h1" component="h1" my={2}>
+          {pageState.isLoading ? LOADING_MESSAGE : SUCCESS_MESSAGE}
+        </Typography>
         <Container maxWidth="md">
           <Typography variant="body1" component="p" my={2}>
-            au
+            {ADDRESS_PREFIX}
           </Typography>
           <Typography variant="h3" component="p" my={2}>
             {addressObject.properties.label}
           </Typography>
-          <CustomSlider customValue={globalNote || 0}></CustomSlider>
+          <CustomSlider customValue={globalNote || 0} />
           <Typography variant="body1" component="p" my={2}>
             Les données suivantes sont calculées sur la base des résultats
             donnés par des sites spécialisés en open data.
@@ -98,86 +129,87 @@ const ResultPage = () => {
         <CardRates
           titleCard="Qualité de l'eau potable"
           textCard="Indique la qualité de l'eau potable de l'adresse recherchée ainsi que les cours d'eau à proximité."
-          valueCard={eauData?.rateEauPotable || 0}
+          valueCard={pageState.eauData?.rateEauPotable || 0}
           dataTypeJson={TypeCards.Eau}
           onTitleClick={handleTitleClickInParent}
-          loading={isLoading}
+          loading={pageState.isLoading}
         ></CardRates>
         <CardRates
           titleCard="Qualité des sols"
           textCard="Indique la présence de zones où les sols sont polué à proximité de l'addresse"
-          valueCard={georisqueData?.ratesPolutionSol || 0}
+          valueCard={pageState.georisqueData?.ratesPolutionSol || 0}
           dataTypeJson={TypeCards.PollutionSol}
           onTitleClick={handleTitleClickInParent}
-          loading={isLoading}
+          loading={pageState.isLoading}
         ></CardRates>
         <CardRates
           titleCard="Absence de catastrophes naturelles"
           textCard="Indique si des catastrophes naturelles se sont déroulées fréquemment ces 10 dernières années. Comme par exemple des inondations ou des sécheresse."
-          valueCard={georisqueData?.ratesCatastropheNaturelle || 0}
+          valueCard={pageState.georisqueData?.ratesCatastropheNaturelle || 0}
           dataTypeJson={TypeCards.CatastropheNaturelle}
           onTitleClick={handleTitleClickInParent}
-          loading={isLoading}
+          loading={pageState.isLoading}
         ></CardRates>
         <CardRates
           titleCard="Classe énergétique du bâtiment"
           textCard="Indique la qualité du bâtiment selon les diagnostics de performance énergétique récupérés pour cette adresse depuis 10 ans."
-          valueCard={dpeDATA?.rateDPE || 0}
+          valueCard={pageState.dpeDATA?.rateDPE || 0}
           dataTypeJson={TypeCards.DPE}
           onTitleClick={handleTitleClickInParent}
-          loading={isLoading}
+          loading={pageState.isLoading}
         ></CardRates>
         <CardRates
           titleCard="Absence d'installations dangereuses"
           textCard="Donne une indication sur le nombre d'installations dangereuses trouvées autour de cette adresse dans un rayon de 5 km."
-          valueCard={georisqueData?.ratesInstallationClassees || 0}
+          valueCard={pageState.georisqueData?.ratesInstallationClassees || 0}
           dataTypeJson={TypeCards.InstallationClasse}
           onTitleClick={handleTitleClickInParent}
-          loading={isLoading}
+          loading={pageState.isLoading}
         ></CardRates>
         <CardRates
           titleCard="Parcs naturels"
           textCard="Indique la présence de parcs naturels à proximité de l'adresse dans un rayon de 5 km, ces zones ont des restrictions incitatives sur l'urbanisme."
-          valueCard={parcData?.rate || 0}
+          valueCard={pageState.parcData?.rate || 0}
           dataTypeJson={TypeCards.ParcNaturelle}
           onTitleClick={handleTitleClickInParent}
-          loading={isLoading}
+          loading={pageState.isLoading}
         ></CardRates>
         <CardRates
           titleCard="Absence de Risques classés"
           textCard="Indique les risques liés à l'adresse recensés par le ministère de la Transition écologique et de la Cohésion des territoires."
-          valueCard={georisqueData?.ratesRisqueGeneraux || 0}
+          valueCard={pageState.georisqueData?.ratesRisqueGeneraux || 0}
           dataTypeJson={TypeCards.RisqueInforamtion}
           onTitleClick={handleTitleClickInParent}
-          loading={isLoading}
+          loading={pageState.isLoading}
         ></CardRates>
         <CardRates
           titleCard="Absence de dangers naturels"
           textCard="Indique les risques liés à l'environnement de l'adresse tels que la sismicité, les dangers liés au radon ou les mouvements de terrain."
-          valueCard={georisqueData?.ratesRisqueLocaux || 0}
+          valueCard={pageState.georisqueData?.ratesRisqueLocaux || 0}
           dataTypeJson={TypeCards.RisqueLocaux}
           onTitleClick={handleTitleClickInParent}
-          loading={isLoading}
+          loading={pageState.isLoading}
         ></CardRates>
         <CardRates
           titleCard="Zone protégée contre les inondations"
           textCard="Indique si l'adresse se trouve dans une zone inondable à risque plus ou moins élevé."
-          valueCard={georisqueData?.ratesZoneInnondable || 0}
+          valueCard={pageState.georisqueData?.ratesZoneInnondable || 0}
           dataTypeJson={TypeCards.ZoneInnondable}
           onTitleClick={handleTitleClickInParent}
-          loading={isLoading}
+          loading={pageState.isLoading}
         ></CardRates>
       </Grid2>
       <DrawerInfos
         data={{
-          dataEau: eauData,
-          dataDPEBatiment: dpeDATA,
-          dataParcCarto: parcData,
-          dataGeorisque: georisqueData,
+          dataEau: pageState.eauData,
+          dataDPEBatiment: pageState.dpeDATA,
+          dataParcCarto: pageState.parcData,
+          dataGeorisque: pageState.georisqueData,
         }}
-        type={sliderValue}
-        isOpen={isSliderOpen}
-        toggleDrawer={(open) => () => setSliderOpen(open)}
+        type={pageState.sliderValue}
+        isOpen={pageState.isSliderOpen}
+        toggleDrawer={(open) => () =>
+          setPageState((prev) => ({ ...prev, isSliderOpen: open }))}
       />
     </Container>
   );

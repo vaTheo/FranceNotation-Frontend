@@ -18,24 +18,25 @@ export default function DangerNaturelleDrawer(p: prop) {
   const [mvt, setMvt] = useState<Array<MVTData>>([]);
   const [sismique, setsismique] = useState<Array<ZonageSismiqueData>>([]);
   const [radon, setRadon] = useState<Array<RadonData>>([]);
-  const mapping = () => {
-    setMvt(
-      dataMVT?.map((d) => {
-        return d;
-      }) ?? []
-    );
-    setsismique(
-      dataZonageSismique?.map((d) => {
-        return d;
-      }) ?? []
-    );
-    setRadon(
-      dataRadon?.map((d) => {
-        return d;
-      }) ?? []
-    );
-  };
+  
   useEffect(() => {
+    const mapping = () => {
+      setMvt(
+        dataMVT?.map((d) => {
+          return d;
+        }) ?? []
+      );
+      setsismique(
+        dataZonageSismique?.map((d) => {
+          return d;
+        }) ?? []
+      );
+      setRadon(
+        dataRadon?.map((d) => {
+          return d;
+        }) ?? []
+      );
+    };
     mapping();
   }, [dataMVT,dataRadon,dataZonageSismique]);
 

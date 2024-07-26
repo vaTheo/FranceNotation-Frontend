@@ -30,54 +30,55 @@ export default function ParcNaturelleDrawer(p: prop) {
   const [znieff1, setznieff1] = useState<Array<FeatureCarto>>([]);
   const [znieff2, setznieff2] = useState<Array<FeatureCarto>>([]);
 
-  const mapping = () => {
-    setRnc(
-      data.rnc?.map((d) => {
-        return d;
-      }) ?? []
-    );
-    setRnn(
-      data.rnn?.map((d) => {
-        return d;
-      }) ?? []
-    );
-    setPn(
-      data.pn?.map((d) => {
-        return d;
-      }) ?? []
-    );
-    setPnr(
-      data.pnr?.map((d) => {
-        return d;
-      }) ?? []
-    );
-    setRncf(
-      data.rncf?.map((d) => {
-        return d;
-      }) ?? []
-    );
-    setNaturaHabitat(
-      data.naturaHabitat?.map((d) => {
-        return d;
-      }) ?? []
-    );
-    setNaturaOiseaux(
-      data.naturaOiseaux?.map((d) => {
-        return d;
-      }) ?? []
-    );
-    setznieff1(
-      data.znieff1?.map((d) => {
-        return d;
-      }) ?? []
-    );
-    setznieff2(
-      data.znieff2?.map((d) => {
-        return d;
-      }) ?? []
-    );
-  };
+  
   useEffect(() => {
+    const mapping = () => {
+      setRnc(
+        data.rnc?.map((d) => {
+          return d;
+        }) ?? []
+      );
+      setRnn(
+        data.rnn?.map((d) => {
+          return d;
+        }) ?? []
+      );
+      setPn(
+        data.pn?.map((d) => {
+          return d;
+        }) ?? []
+      );
+      setPnr(
+        data.pnr?.map((d) => {
+          return d;
+        }) ?? []
+      );
+      setRncf(
+        data.rncf?.map((d) => {
+          return d;
+        }) ?? []
+      );
+      setNaturaHabitat(
+        data.naturaHabitat?.map((d) => {
+          return d;
+        }) ?? []
+      );
+      setNaturaOiseaux(
+        data.naturaOiseaux?.map((d) => {
+          return d;
+        }) ?? []
+      );
+      setznieff1(
+        data.znieff1?.map((d) => {
+          return d;
+        }) ?? []
+      );
+      setznieff2(
+        data.znieff2?.map((d) => {
+          return d;
+        }) ?? []
+      );
+    };
     mapping();
   }, [data]);
 

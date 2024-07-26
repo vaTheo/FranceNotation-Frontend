@@ -15,14 +15,15 @@ type prop = {
 export default function CatnatDrawer(p: prop) {
   const { data } = p;
   const [catNat, setCatNat] = useState<Array<CatnatData>>([]);
-  const mapping = () => {
-    setCatNat(
-      data.map((d) => {
-        return d;
-      })
-    );
-  };
+
   useEffect(() => {
+    const mapping = () => {
+      setCatNat(
+        data.map((d) => {
+          return d;
+        })
+      );
+    };
     mapping();
   }, [data]);
 

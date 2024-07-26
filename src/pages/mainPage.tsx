@@ -6,7 +6,7 @@ import Button from "@mui/material/Button";
 import { Box, CircularProgress, Container, Typography } from "@mui/material";
 import { ServiceAPIV2 } from "../services/api/api.serviceV2";
 
-const MainPage = () => {
+const MainPage: React.FC = () => {
   const navigate = useNavigate();
   const [valueAddressSearchBar, setValueAddressSearchBar] =
     useState<string>("");

@@ -24,27 +24,28 @@ export default function InstallationClasseDrawer(p: prop) {
   const [installationsClassesNoStatus, setInstallationsClassesNoStatus] =
     useState<Array<InstallationsClasseesData>>([]);
 
-  const mapping = () => {
-    setInstallationsClassesNonSeveso(
-      data?.filter(
-        (d) => d.statutSeveso === "Non Seveso"
-      ) || []
-    );
-    setInstallationsClassesSeveso(
-      data?.filter(
-        (d) =>
-          d?.statutSeveso !== "Non Seveso" &&
-          d.statutSeveso !== "" &&
-          d.statutSeveso
-      ) || []
-    );
-    setInstallationsClassesNoStatus(
-      data?.filter(
-        (d) => !d.statutSeveso || d.statutSeveso === ""
-      ) || []
-    );
-  };
+  
   useEffect(() => {
+    const mapping = () => {
+      setInstallationsClassesNonSeveso(
+        data?.filter(
+          (d) => d.statutSeveso === "Non Seveso"
+        ) || []
+      );
+      setInstallationsClassesSeveso(
+        data?.filter(
+          (d) =>
+            d?.statutSeveso !== "Non Seveso" &&
+            d.statutSeveso !== "" &&
+            d.statutSeveso
+        ) || []
+      );
+      setInstallationsClassesNoStatus(
+        data?.filter(
+          (d) => !d.statutSeveso || d.statutSeveso === ""
+        ) || []
+      );
+    };
     mapping();
   }, [data]);
 

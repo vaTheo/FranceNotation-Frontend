@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { RisqueDetail, RisquesData } from "../../../pages/typeResultJson/api-georisque";
+import {
+  RisqueDetail,
+  RisquesData,
+} from "../../../pages/typeResultJson/api-georisque";
 import {
   Accordion,
   AccordionDetails,
@@ -17,14 +20,16 @@ type prop = {
 export default function RisqueInformationDrawer(p: prop) {
   const { data } = p;
   const [risques, setRisques] = useState<Array<RisqueDetail>>([]);
-  const mapping = () => {
-    setRisques(
-      data[0].risques_detail.map((d) => {
-        return d;
-      }) ?? []
-    );
-  };
+  
   useEffect(() => {
+    const mapping = () => {
+      setRisques(
+        data[0].risques_detail.map((d) => {
+          return d;
+        }) ?? []
+      );
+    };
+
     mapping();
   }, [data]);
 
@@ -60,7 +65,12 @@ export default function RisqueInformationDrawer(p: prop) {
           </AccordionSummary>
           <AccordionDetails>
             {risques.map((d) => {
-              return <Typography variant="contentDrawer" component="p"> {d.libelle_risque_long}</Typography>;
+              return (
+                <Typography variant="contentDrawer" component="p">
+                  {" "}
+                  {d.libelle_risque_long}
+                </Typography>
+              );
             })}
           </AccordionDetails>
         </Accordion>

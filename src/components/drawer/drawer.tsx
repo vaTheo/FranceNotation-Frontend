@@ -14,6 +14,10 @@ import DangerNaturelleDrawer from "./dangerNaturel/dangerNaturel";
 import RisqueInformationDrawer from "./risqueInformation/risqueInformation";
 import { Box, Button } from "@mui/material";
 import EastIcon from "@mui/icons-material/East";
+import { drawerSliderBar } from "../../styles/theme";
+
+const typeOrder = Object.values(TypeCards);
+
 
 type props = {
   isOpen: boolean;
@@ -33,13 +37,11 @@ export default function DrawerInfos(props: props) {
     setCurrentType(type);
   }, [type]);
 
-  const typeOrder = Object.values(TypeCards);
 
   const nextCycleType = () => {
     const currentIndex = typeOrder.indexOf(currentType);
     const nextIndex = (currentIndex + 1) % typeOrder.length;
     setCurrentType(typeOrder[nextIndex]);
-    setNextType(typeOrder[(nextIndex + 1) % typeOrder.length]);
   };
 
   useEffect(() => {
@@ -73,26 +75,7 @@ export default function DrawerInfos(props: props) {
         }}
       >
         <Box
-          sx={{
-            justifyContent: "space-between",
-            overflowY: "auto",
-            padding: "1rem",
-            "&::-webkit-scrollbar": {
-              width: "8px",
-            },
-            "&::-webkit-scrollbar-track": {
-              background: "transparent",
-            },
-            "&::-webkit-scrollbar-thumb": {
-              background: "#888",
-              borderRadius: "4px",
-            },
-            "&::-webkit-scrollbar-thumb:hover": {
-              background: "#555",
-            },
-            scrollbarWidth: "thin",
-            scrollbarColor: "#888 transparent",
-          }}
+          sx={drawerSliderBar}
         >
           {currentType === TypeCards.DPE && data?.dataDPEBatiment && (
             <DPEDrawer allDPE={data.dataDPEBatiment}></DPEDrawer>
