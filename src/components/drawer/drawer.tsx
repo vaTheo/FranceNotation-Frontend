@@ -26,26 +26,26 @@ type props = {
 
 export default function DrawerInfos(props: props) {
   const { isOpen, toggleDrawer, data, type } = props;
-  const types = Object.keys(TypeCards).filter(
-    (k) => isNaN(Number(k)) && k !== "null"
-  );
-  const [currentTypeIndex, setCurrentTypeIndex] = useState(types.indexOf(type));
+  const [currentType, setCurrentType] = useState<TypeCards>(type);
+  const [nextType, setNextType] = useState<TypeCards>(TypeCards.Eau);
 
   useEffect(() => {
-    setCurrentTypeIndex(types.indexOf(type));
+    setCurrentType(type);
   }, [type]);
 
+  const typeOrder = Object.values(TypeCards);
+
   const nextCycleType = () => {
-    setCurrentTypeIndex((prevIndex) => (prevIndex + 1) % types.length);
+    const currentIndex = typeOrder.indexOf(currentType);
+    const nextIndex = (currentIndex + 1) % typeOrder.length;
+    setCurrentType(typeOrder[nextIndex]);
+    setNextType(typeOrder[(nextIndex + 1) % typeOrder.length]);
   };
 
-  const currentType =
-    TypeCards[types[currentTypeIndex] as keyof typeof TypeCards];
-
-  const nextType =
-    TypeCards[
-      types[(currentTypeIndex + 1) % types.length] as keyof typeof TypeCards
-    ];
+  useEffect(() => {
+    const currentIndex = typeOrder.indexOf(currentType);
+    setNextType(typeOrder[(currentIndex + 1) % typeOrder.length]);
+  }, [currentType]);
 
   return (
     <Drawer

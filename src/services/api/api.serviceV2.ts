@@ -18,7 +18,7 @@ export class ServiceAPIV2 {
     try {
       const jsonData = { address };
       const responseGetrate = await axiosInstance.post(
-        `${URL}/ratingcontroller/getrate`,
+        `${URL}/v2/fetch/address`,
         jsonData,
         {
           withCredentials: true,
