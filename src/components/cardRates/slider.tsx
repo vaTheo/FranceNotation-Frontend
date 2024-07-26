@@ -19,7 +19,7 @@ export default function CustomSlider({ customValue }: PropsSlider) {
   const getSidebarBackgroundColor = React.useCallback((value: number): string => {
     const threshold = Object.keys(COLOR_RANGES)
       .map(Number)
-      .find(t => value <= t) || 100.0;
+      .find(t => value <= t) || 100;
     return COLOR_RANGES[threshold as keyof typeof COLOR_RANGES];
   }, []);
 

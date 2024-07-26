@@ -28,6 +28,7 @@ type ResultPageState = {
   georisqueData: GeorisqueAllData | undefined;
 };
 
+
 const ResultPage: React.FC = () => {
   const { state } = useLocation();
   const addressObject: AddressObject = state?.addressObject || {};
@@ -62,7 +63,9 @@ const ResultPage: React.FC = () => {
     fetchDatas();
   }, [fetchDatas]);
 
-  const globalNote = useMemo(() => {
+  const [globalNote, setGlobalNote] = useState<number | undefined>(undefined);
+
+  const calculateGlobalNote = useCallback(() => {
     if (
       !pageState.eauData ||
       !pageState.dpeDATA ||
@@ -84,12 +87,12 @@ const ResultPage: React.FC = () => {
         (pageState.georisqueData.ratesZoneInnondable || 0)) /
       9
     );
-  }, [
-    pageState.eauData,
-    pageState.dpeDATA,
-    pageState.parcData,
-    pageState.georisqueData,
-  ]);
+  }, [pageState.eauData, pageState.dpeDATA, pageState.parcData, pageState.georisqueData]);
+
+  useEffect(() => {
+    const newGlobalNote = calculateGlobalNote();
+    setGlobalNote(newGlobalNote);
+  }, [calculateGlobalNote]);
 
   const handleTitleClickInParent = useCallback((data: TypeCards) => {
     setPageState((prevState) => ({

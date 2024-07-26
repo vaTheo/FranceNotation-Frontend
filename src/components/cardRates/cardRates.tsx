@@ -12,12 +12,14 @@ type Props = {
   onTitleClick?: (data: TypeCards) => void;
 };
 export default function CardRates(props: Props) {
-  const titleCard = props.titleCard;
-  const textCard = props.textCard;
-  const valueCard = props.valueCard;
-  const dataTypeJson = props.dataTypeJson;
-  const onTitleClick = props.onTitleClick;
-  const loading = props.loading;
+  const {
+    titleCard,
+    textCard,
+    valueCard,
+    dataTypeJson,
+    onTitleClick,
+    loading,
+  } = props;
 
   // const loading = true;
   const handleTitleClick = () => {
