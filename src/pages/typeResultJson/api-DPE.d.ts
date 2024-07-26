@@ -1,9 +1,10 @@
 export interface DPEAllData {
-  DPEHabitatExistant: ResultItemDPE[];
-  DPEHabitatNeuf: ResultItemDPE[];
-  DPETertiaire: ResultItemDPE[];
-  DPEHabitatExistantAvant2021: ResultItemDPE[];
-  DPETertiaireAvant2021: ResultItemDPE[];
+  rateDPE?: number;
+  DPEHabitatExistant?: ResultItemDPE[];
+  DPEHabitatNeuf?: ResultItemDPE[];
+  DPETertiaire?: ResultItemDPE[];
+  DPEHabitatExistantAvant2021?: ResultItemDPE[];
+  DPETertiaireAvant2021?: ResultItemDPE[];
 }
 
 // Define the type for the centroid and center (assuming it's an array of numbers)

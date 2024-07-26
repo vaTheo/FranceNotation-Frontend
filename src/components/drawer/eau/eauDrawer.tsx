@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { FrontEau } from "../../../pages/typeResultJson/jsonInterface";
 import {
   CoursEauData,
+  eauAllData,
   EauPotableData,
 } from "../../../pages/typeResultJson/api-eau";
 import {
@@ -21,7 +21,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type prop = {
-  data: FrontEau;
+  data: eauAllData;
 };
 export default function EAUDrawer(p: prop) {
   const { data } = p;
@@ -29,12 +29,12 @@ export default function EAUDrawer(p: prop) {
   const [eauPotable, setEauPotable] = useState<Array<EauPotableData>>([]);
   const mapping = () => {
     setcourEau(
-      (data.eau.coursEau ?? []).map((d) => {
+      (data.coursEau ?? []).map((d) => {
         return d;
       })
     );
     setEauPotable(
-      (data.eau.eauPotable ?? []).map((d) => {
+      (data.eauPotable ?? []).map((d) => {
         return d;
       })
     );

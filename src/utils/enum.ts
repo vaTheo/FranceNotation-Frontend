@@ -6,7 +6,6 @@ export enum TypeCards {
   ParcNaturelle = "Par naturelle",
   RisqueLocaux = "Risque de l'adresse",
   ZoneInnondable = "Risque d'innondation",
-  ZoneNaturelle = "Zones naturelles",
   PollutionSol = "Pollution des sols",
   RisqueInforamtion = "Information sur les risques",
 }

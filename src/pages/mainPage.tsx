@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AddressSearchBar from "../components/BanField/banfield";
 import Button from "@mui/material/Button";
-import { ServiceAPI } from "../services/api/api.service";
 import { Box, CircularProgress, Container, Typography } from "@mui/material";
+import { ServiceAPIV2 } from "../services/api/api.serviceV2";
 
 const MainPage = () => {
   const navigate = useNavigate();
@@ -18,7 +18,7 @@ const MainPage = () => {
   const handleButtonClick = async () => {
     try {
       setIsLoading(true);
-      const addressObject = await ServiceAPI.initiateCycle(
+      const addressObject = await ServiceAPIV2.initiateCycle(
         valueAddressSearchBar.trim()
       );
       navigate("/resultpage", { state: { addressObject: addressObject } });
@@ -29,7 +29,7 @@ const MainPage = () => {
   };
   //wakeup the server at the start of the app
   useEffect(() => {
-    ServiceAPI.wakeUpServer();
+    ServiceAPIV2.wakeUpServer();
   }, []);
 
   // Callback management
