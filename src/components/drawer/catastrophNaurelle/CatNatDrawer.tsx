@@ -1,6 +1,4 @@
 import { useEffect, useState } from "react";
-import { FrontCatastropheNaturelle } from "../../../pages/typeResultJson/jsonInterface";
-
 import { CatnatData } from "../../../pages/typeResultJson/api-georisque";
 import {
   Accordion,
@@ -12,19 +10,20 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type prop = {
-  data: FrontCatastropheNaturelle;
+  data: CatnatData[];
 };
 export default function CatnatDrawer(p: prop) {
   const { data } = p;
   const [catNat, setCatNat] = useState<Array<CatnatData>>([]);
-  const mapping = () => {
-    setCatNat(
-      data.CatastropheNaturelle.map((d) => {
-        return d;
-      })
-    );
-  };
+
   useEffect(() => {
+    const mapping = () => {
+      setCatNat(
+        data.map((d) => {
+          return d;
+        })
+      );
+    };
     mapping();
   }, [data]);
 

@@ -1,58 +1,67 @@
 import * as React from "react";
 import Box from "@mui/material/Box";
 import Slider from "@mui/material/Slider";
-import "../../styles/customSlideBar.scss";
+
 type PropsSlider = {
   customValue: number;
 };
 
-export default function CustomSlider(props: PropsSlider) {
-  const { customValue } = props;
+const COLOR_RANGES = {
+  25: "#ffcccc",
+  50: "#fff4cc",
+  75: "#ccffcc",
+  100: "#79b669",
+} as const;
+
+export default function CustomSlider({ customValue }: PropsSlider) {
   const [value, setValue] = React.useState(customValue);
 
-  // Function to determine sidebar background color based on the slider value
-  const getSidebarBackgroundColor = (value: number): string => {
-    if (value <= 25) return "#ffcccc";
-    else if (value <= 50) return "#fff4cc";
-    else if (value <= 75) return "#ccffcc";
-    else return "#79b669";
-  };
-  const sliderTrackColor = getSidebarBackgroundColor(Math.round(value));
-  const animateSliderChange = (newValue: number) => {
-    const minDuration = 800;
-    const maxDuration = 1400;
-    // Calculate a dynamic duration based on the newValue
-    const range = Math.abs(newValue - value); // The difference between the new value and the current value
-    const normalizedRange = range / 100; // Assuming your slider values range from 0 to 100, adjust this based on your actual range
-    const duration =
-      minDuration + (maxDuration - minDuration) * normalizedRange;
+  const getSidebarBackgroundColor = React.useCallback((value: number): string => {
+    const threshold = Object.keys(COLOR_RANGES)
+      .map(Number)
+      .find(t => value <= t) || 100;
+    return COLOR_RANGES[threshold as keyof typeof COLOR_RANGES];
+  }, []);
 
-    const steps = 50; // Number of steps to reach the new value
-    const stepDuration = duration / steps;
-    const stepSize = (newValue - value) / steps;
+  const animateSliderChange = React.useCallback((newValue: number) => {
+    const startTime = performance.now();
+    const startValue = value;
+    const changeInValue = newValue - startValue;
+    const duration = 800; // 1 second
 
-    for (let i = 1; i <= steps; i++) {
-      setTimeout(() => {
-        setValue((value) => value + stepSize);
-      }, i * stepDuration);
-    }
-  };
+    const animateStep = (currentTime: number) => {
+      const elapsedTime = currentTime - startTime;
+      if (elapsedTime < duration) {
+        const progress = elapsedTime / duration;
+        setValue(startValue + changeInValue * progress);
+        requestAnimationFrame(animateStep);
+      } else {
+        setValue(newValue);
+      }
+    };
+
+    requestAnimationFrame(animateStep);
+  }, [value]);
+
+  const sliderTrackColor = React.useMemo(() => getSidebarBackgroundColor(Math.round(value)), [value, getSidebarBackgroundColor]);
+
   React.useEffect(() => {
     animateSliderChange(customValue);
-  }, [customValue]);
+  }, [customValue, animateSliderChange]);
 
   return (
     <Box>
-        <Slider
-          aria-label="Custom Thumb"
-          value={Math.round(value)}
-          onChange={(event, newValue) => setValue(newValue as number)}
-          valueLabelDisplay="on"
-          step={10}
-          marks
-          style={{ color: sliderTrackColor }} // Apply the dynamic color here
-          disabled={true} // This makes the slider non-interactive
-        />
+      <Slider
+        aria-label="Custom Thumb"
+        value={Math.round(value)}
+        onChange={(event, newValue) => setValue(newValue as number)}
+        valueLabelDisplay="on"
+        step={10}
+        marks
+        style={{ color: sliderTrackColor }}
+        disabled={true}
+        aria-valuetext={`${Math.round(value)}%`}
+      />
     </Box>
   );
 }

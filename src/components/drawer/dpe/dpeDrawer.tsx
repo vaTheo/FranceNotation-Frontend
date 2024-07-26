@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { ResultItemDPE } from "../../../pages/typeResultJson/api-DPE";
-import { FrontDPEBatiment } from "../../../pages/typeResultJson/jsonInterface";
+import {
+  DPEAllData,
+  ResultItemDPE,
+} from "../../../pages/typeResultJson/api-DPE";
 import {
   Accordion,
   AccordionDetails,
@@ -18,7 +20,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type prop = {
-  allDPE: FrontDPEBatiment;
+  allDPE: DPEAllData;
 };
 export default function DPEDrawer(p: prop) {
   const { allDPE } = p;
@@ -36,34 +38,35 @@ export default function DPEDrawer(p: prop) {
     Array<ResultItemDPE>
   >([]);
 
-  const dpeMapping = () => {
-    setDPEHabitatExistant(
-      allDPE.DPEBatiment.DPEHabitatExistant.map((dpe) => {
-        return dpe;
-      })
-    );
-    setDPEHabitatNeuf(
-      allDPE.DPEBatiment.DPEHabitatNeuf.map((dpe) => {
-        return dpe;
-      })
-    );
-    setDPETertiaire(
-      allDPE.DPEBatiment.DPETertiaire.map((dpe) => {
-        return dpe;
-      })
-    );
-    setDPEHabitatExistantAvant2021(
-      allDPE.DPEBatiment.DPEHabitatExistantAvant2021.map((dpe) => {
-        return dpe;
-      })
-    );
-    setDPETertiaireAvant2021(
-      allDPE.DPEBatiment.DPETertiaireAvant2021.map((dpe) => {
-        return dpe;
-      })
-    );
-  };
   useEffect(() => {
+    const dpeMapping = () => {
+      setDPEHabitatExistant(
+        allDPE.DPEHabitatExistant?.map((dpe) => {
+          return dpe;
+        }) ?? []
+      );
+      setDPEHabitatNeuf(
+        allDPE.DPEHabitatNeuf?.map((dpe) => {
+          return dpe;
+        }) ?? []
+      );
+      setDPETertiaire(
+        allDPE.DPETertiaire?.map((dpe) => {
+          return dpe;
+        }) ?? []
+      );
+      setDPEHabitatExistantAvant2021(
+        allDPE.DPEHabitatExistantAvant2021?.map((dpe) => {
+          return dpe;
+        }) ?? []
+      );
+      setDPETertiaireAvant2021(
+        allDPE.DPETertiaireAvant2021?.map((dpe) => {
+          return dpe;
+        }) ?? []
+      );
+    };
+
     dpeMapping();
   }, [allDPE]);
 

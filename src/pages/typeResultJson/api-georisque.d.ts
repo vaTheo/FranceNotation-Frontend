@@ -22,6 +22,29 @@ export interface GasprAPIResponse {
   previous: string | null;
 }
 
+export interface GeorisqueAllData{
+  ratesZoneInnondable?: number;
+  ratesCatastropheNaturelle?: number;
+  ratesInstallationClassees?: number;
+  ratesRisqueLocaux?: number;
+  ratesRisqueGeneraux?: number;
+  ratesPolutionSol?: number;
+  AZIData?: AZIData[];
+  CatnatData?: CatnatData[];
+  CaviteData?: CaviteData[];
+  InstallationsClasseesData?: InstallationsClasseesData[];
+  MVTData?: MVTData[];
+  PAPIData?: PAPIData[];
+  PCSData?: PCSData[];
+  RadonData?: RadonData[];
+  RisquesData?: RisquesData[];
+  SISData?: SISData[];
+  TIMData?: TIMData[];
+  TRIData?: TRIData[];
+  ZonageSismiqueData?: ZonageSismiqueData[];
+
+}
+
 /*Exemple response resultat API GASPAR AZI :
   {
     results: 2,

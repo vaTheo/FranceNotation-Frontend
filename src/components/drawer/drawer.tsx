@@ -9,11 +9,15 @@ import CatnatDrawer from "./catastrophNaurelle/CatNatDrawer";
 import InstallationClasseDrawer from "./installationDangereuse/installationDangereus";
 import ParcNaturelleDrawer from "./parcsNaturelleDrawer/parcNaturelleDrawer";
 import ZoneInnondableDrawer from "./zoneInondableDrawer/zoneInondableDrawer";
-import ZoneNaturelleDrawer from "./zoneNaturelleDrawer.tsx/zoneNaturelleDrawer";
 import PollutionSolDrawer from "./pollutionSolsDrawer/pollutionSolsDrawer";
 import DangerNaturelleDrawer from "./dangerNaturel/dangerNaturel";
 import RisqueInformationDrawer from "./risqueInformation/risqueInformation";
 import { Box, Button } from "@mui/material";
+import EastIcon from "@mui/icons-material/East";
+import { drawerSliderBar } from "../../styles/theme";
+
+const typeOrder = Object.values(TypeCards);
+
 
 type props = {
   isOpen: boolean;
@@ -24,35 +28,27 @@ type props = {
   data?: JsonData;
 };
 
-export default function DrawerInfos(prop: props) {
-  const { isOpen, toggleDrawer, data, type } = prop;
-  const [previousType, setPreviousType] = useState<TypeCards>(
-    TypeCards.CatastropheNaturelle
-  );
-  const [nextType, setNextType] = useState<TypeCards>(
-    TypeCards.CatastropheNaturelle
-  );
-  const types = Object.keys(TypeCards).filter(
-    (k) => isNaN(Number(k)) && k !== "null"
-  );
-  const [currentTypeIndex, setCurrentTypeIndex] = useState(0);
-  const nextCycleType = () => {
-    setCurrentTypeIndex((prevIndex) => (prevIndex + 1) % types.length);
-  };
-  const PreviousCycleType = () => {
-    setCurrentTypeIndex((prevIndex) => (prevIndex - 1) % types.length);
-  };
-  const currentType =
-    TypeCards[types[currentTypeIndex] as keyof typeof TypeCards];
+export default function DrawerInfos(props: props) {
+  const { isOpen, toggleDrawer, data, type } = props;
+  const [currentType, setCurrentType] = useState<TypeCards>(type);
+  const [nextType, setNextType] = useState<TypeCards>(TypeCards.Eau);
+
   useEffect(() => {
-    setCurrentTypeIndex(types.indexOf(type));
-    setPreviousType(
-      TypeCards[types[currentTypeIndex - 1] as keyof typeof TypeCards]
-    );
-    setNextType(
-      TypeCards[types[currentTypeIndex + 1] as keyof typeof TypeCards]
-    );
+    setCurrentType(type);
   }, [type]);
+
+
+  const nextCycleType = () => {
+    const currentIndex = typeOrder.indexOf(currentType);
+    const nextIndex = (currentIndex + 1) % typeOrder.length;
+    setCurrentType(typeOrder[nextIndex]);
+  };
+
+  useEffect(() => {
+    const currentIndex = typeOrder.indexOf(currentType);
+    setNextType(typeOrder[(currentIndex + 1) % typeOrder.length]);
+  }, [currentType]);
+
   return (
     <Drawer
       anchor="left"
@@ -65,6 +61,7 @@ export default function DrawerInfos(prop: props) {
             sm: "60%",
             md: "40%",
           },
+          overflowY: "auto", // Enable scrolling for the entire drawer
         },
       }}
     >
@@ -74,15 +71,11 @@ export default function DrawerInfos(prop: props) {
           flexDirection: "column",
           justifyContent: "space-between",
           height: "100%",
-          margin: "1rem 1rem 0rem 1rem",
-          overflowY: "clip",
+          overflow: "hidden",
         }}
       >
         <Box
-          sx={{
-            justifyContent: "space-between",
-            overflowY: "auto",
-          }}
+          sx={drawerSliderBar}
         >
           {currentType === TypeCards.DPE && data?.dataDPEBatiment && (
             <DPEDrawer allDPE={data.dataDPEBatiment}></DPEDrawer>
@@ -91,47 +84,47 @@ export default function DrawerInfos(prop: props) {
             <EAUDrawer data={data.dataEau}></EAUDrawer>
           )}
           {currentType === TypeCards.CatastropheNaturelle &&
-            data?.dataCatastropheNaturelle && (
-              <CatnatDrawer data={data.dataCatastropheNaturelle}></CatnatDrawer>
+            data?.dataGeorisque?.CatnatData && (
+              <CatnatDrawer data={data.dataGeorisque.CatnatData}></CatnatDrawer>
             )}
           {currentType === TypeCards.InstallationClasse &&
-            data?.dataInstallationClassees && (
+            data?.dataGeorisque?.InstallationsClasseesData && (
               <InstallationClasseDrawer
-                data={data.dataInstallationClassees}
+                data={data.dataGeorisque.InstallationsClasseesData}
               ></InstallationClasseDrawer>
             )}
-          {currentType === TypeCards.ParcNaturelle &&
-            data?.dataParcNaturelle && (
-              <ParcNaturelleDrawer
-                data={data.dataParcNaturelle}
-              ></ParcNaturelleDrawer>
-            )}
+          {currentType === TypeCards.ParcNaturelle && data?.dataParcCarto && (
+            <ParcNaturelleDrawer
+              data={data.dataParcCarto}
+            ></ParcNaturelleDrawer>
+          )}
+
           {currentType === TypeCards.ZoneInnondable &&
-            data?.dataZoneInnondable && (
+            data?.dataGeorisque?.AZIData && (
               <ZoneInnondableDrawer
-                data={data.dataZoneInnondable}
+                data={data.dataGeorisque.AZIData}
               ></ZoneInnondableDrawer>
             )}
-          {currentType === TypeCards.ZoneNaturelle &&
-            data?.dataZoneNaturelle && (
-              <ZoneNaturelleDrawer
-                data={data.dataZoneNaturelle}
-              ></ZoneNaturelleDrawer>
+          {currentType === TypeCards.PollutionSol &&
+            data?.dataGeorisque?.SISData && (
+              <PollutionSolDrawer
+                data={data.dataGeorisque.SISData}
+              ></PollutionSolDrawer>
             )}
-          {currentType === TypeCards.PollutionSol && data?.dataPollutionSol && (
-            <PollutionSolDrawer
-              data={data.dataPollutionSol}
-            ></PollutionSolDrawer>
-          )}
-          {currentType === TypeCards.RisqueLocaux && data?.dataRisqueLocaux && (
-            <DangerNaturelleDrawer
-              data={data.dataRisqueLocaux}
-            ></DangerNaturelleDrawer>
-          )}
+          {currentType === TypeCards.RisqueLocaux &&
+            data?.dataGeorisque?.MVTData &&
+            data?.dataGeorisque?.RadonData &&
+            data?.dataGeorisque?.ZonageSismiqueData && (
+              <DangerNaturelleDrawer
+                dataMVT={data.dataGeorisque.MVTData}
+                dataRadon={data.dataGeorisque.RadonData}
+                dataZonageSismique={data.dataGeorisque.ZonageSismiqueData}
+              ></DangerNaturelleDrawer>
+            )}
           {currentType === TypeCards.RisqueInforamtion &&
-            data?.dataRisqueInformation && (
+            data?.dataGeorisque?.RisquesData && (
               <RisqueInformationDrawer
-                data={data.dataRisqueInformation}
+                data={data.dataGeorisque.RisquesData}
               ></RisqueInformationDrawer>
             )}
         </Box>
@@ -141,18 +134,12 @@ export default function DrawerInfos(prop: props) {
             justifyContent: "end",
             marginY: "0.25rem",
             paddingY: "0.25rem",
-            borderTop: "1px solid #0F0F0F",
+            borderTop: "1px solid rgba(15, 15, 15, 0.7) ",
           }}
         >
-          <Button
-            sx={{ marginRight: "0.5rem" }}
-            onClick={PreviousCycleType}
-            variant="contained"
-          >
-            {nextType}
-          </Button>
           <Button onClick={nextCycleType} variant="contained">
-            {previousType}
+            {nextType}
+            <EastIcon />
           </Button>
         </Box>
       </Box>

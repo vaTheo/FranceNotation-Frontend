@@ -1,9 +1,9 @@
-import React, { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback } from "react";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import debounce from "lodash/debounce";
 import { useInput } from "./useInput.hook";
-import { Box, InputAdornment } from "@mui/material";
+import { Box } from "@mui/material";
 // import "../../styles/banfield.scss";
 
 interface AddressSearchBarProps {
@@ -24,38 +24,40 @@ export default function AddressSearchBar({
   const { value, setValue } = useInput(exampleValue);
 
   // Function to fetch addresses based on the query
-  const fetchAddresses = useCallback(
-    async (query: string) => {
-      try {
-        const response = await fetch(
-          `https://api-adresse.data.gouv.fr/search/?q=${query.replace(
-            " ",
-            "+"
-          )}`,
-          { mode: "cors", method: "GET" }
-        );
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        const data = await response.json();
-        let labels = data.features.map(
-          (feature: any) => feature.properties.label
-        );
-        if (labels.length === 0) {
-          labels = ["Aucune adresse correspondante"];
-        }
-        setOptions(labels);
-      } catch (error) {
-        console.error("Error fetching data:", error);
+  const fetchAddresses = useCallback(async (query: string) => {
+    try {
+      const response = await fetch(
+        `https://api-adresse.data.gouv.fr/search/?q=${query.replace(" ", "+")}`,
+        { mode: "cors", method: "GET" }
+      );
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
       }
-    },
-    [exampleValue]
-  ); // Include necessary dependenc
+      const data = await response.json();
+      let labels = data.features.map(
+        (feature: any) => feature.properties.label
+      );
+      if (labels.length === 0) {
+        labels = ["Aucune adresse correspondante"];
+      }
+      setOptions(labels);
+    } catch (error) {
+      console.error("Error fetching data:", error);
+    }
+  }, []);
 
   // Using useCallback to memoize the debounced version of fetchAddresses
-  const debouncedFetch = useCallback(debounce(fetchAddresses, 300), [
-    fetchAddresses,
-  ]);
+  const debouncedFetch = useCallback(
+    (query: string) => {
+      const debouncedFunction = debounce((q: string) => {
+        fetchAddresses(q);
+      }, 300);
+      debouncedFunction(query);
+      // Clean up the debounced function
+      return () => debouncedFunction.cancel();
+    },
+    [fetchAddresses]
+  );
 
   // useEffect hook to handle side effects related to inputValue changes
   useEffect(() => {
@@ -77,9 +79,8 @@ export default function AddressSearchBar({
   };
   // Rendering the Autocomplete component
   return (
-    <Box sx={{flexGrow: 1}}>
+    <Box sx={{ flexGrow: 1 }}>
       <Autocomplete
-      
         className="Autocomplete"
         freeSolo
         value={value}

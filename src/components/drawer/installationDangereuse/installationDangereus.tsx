@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { FrontInstallationClassees } from "../../../pages/typeResultJson/jsonInterface";
 import { InstallationsClasseesData } from "../../../pages/typeResultJson/api-georisque";
 import {
   Accordion,
@@ -12,7 +11,7 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import FileDownloadSharpIcon from '@mui/icons-material/FileDownloadSharp';
 type prop = {
-  data: FrontInstallationClassees;
+  data: InstallationsClasseesData[];
 };
 
 export default function InstallationClasseDrawer(p: prop) {
@@ -25,27 +24,28 @@ export default function InstallationClasseDrawer(p: prop) {
   const [installationsClassesNoStatus, setInstallationsClassesNoStatus] =
     useState<Array<InstallationsClasseesData>>([]);
 
-  const mapping = () => {
-    setInstallationsClassesNonSeveso(
-      data?.InstallationClassees.filter(
-        (d) => d.statutSeveso === "Non Seveso"
-      ) || []
-    );
-    setInstallationsClassesSeveso(
-      data?.InstallationClassees.filter(
-        (d) =>
-          d?.statutSeveso !== "Non Seveso" &&
-          d.statutSeveso !== "" &&
-          d.statutSeveso
-      ) || []
-    );
-    setInstallationsClassesNoStatus(
-      data?.InstallationClassees.filter(
-        (d) => !d.statutSeveso || d.statutSeveso === ""
-      ) || []
-    );
-  };
+  
   useEffect(() => {
+    const mapping = () => {
+      setInstallationsClassesNonSeveso(
+        data?.filter(
+          (d) => d.statutSeveso === "Non Seveso"
+        ) || []
+      );
+      setInstallationsClassesSeveso(
+        data?.filter(
+          (d) =>
+            d?.statutSeveso !== "Non Seveso" &&
+            d.statutSeveso !== "" &&
+            d.statutSeveso
+        ) || []
+      );
+      setInstallationsClassesNoStatus(
+        data?.filter(
+          (d) => !d.statutSeveso || d.statutSeveso === ""
+        ) || []
+      );
+    };
     mapping();
   }, [data]);
 

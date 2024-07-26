@@ -1,11 +1,20 @@
 import { useEffect, useState } from "react";
-import { FrontParcNaturelle } from "../../../pages/typeResultJson/jsonInterface";
-import { FeatureCarto } from "../../../pages/typeResultJson/api-cartoParc";
-import { Accordion, AccordionDetails, AccordionSummary, Box, Link, Typography } from "@mui/material";
+import {
+  FeatureCarto,
+  ParcCartoAllData,
+} from "../../../pages/typeResultJson/api-cartoParc";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Link,
+  Typography,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type prop = {
-  data: FrontParcNaturelle;
+  data: ParcCartoAllData;
 };
 
 export default function ParcNaturelleDrawer(p: prop) {
@@ -15,42 +24,71 @@ export default function ParcNaturelleDrawer(p: prop) {
   const [pn, setPn] = useState<Array<FeatureCarto>>([]);
   const [pnr, setPnr] = useState<Array<FeatureCarto>>([]);
   const [rncf, setRncf] = useState<Array<FeatureCarto>>([]);
-  const mapping = () => {
-    setRnc(
-      data.parcNaturelle.rnc?.map((d) => {
-        return d;
-      }) ?? []
-    );
-    setRnn(
-      data.parcNaturelle.rnn?.map((d) => {
-        return d;
-      }) ?? []
-    );
-    setPn(
-      data.parcNaturelle.pn?.map((d) => {
-        return d;
-      }) ?? []
-    );
-    setPnr(
-      data.parcNaturelle.pnr?.map((d) => {
-        return d;
-      }) ?? []
-    );
-    setRncf(
-      data.parcNaturelle.rncf?.map((d) => {
-        return d;
-      }) ?? []
-    );
-  };
+
+  const [naturaHabitat, setNaturaHabitat] = useState<Array<FeatureCarto>>([]);
+  const [naturaOiseaux, setNaturaOiseaux] = useState<Array<FeatureCarto>>([]);
+  const [znieff1, setznieff1] = useState<Array<FeatureCarto>>([]);
+  const [znieff2, setznieff2] = useState<Array<FeatureCarto>>([]);
+
+  
   useEffect(() => {
+    const mapping = () => {
+      setRnc(
+        data.rnc?.map((d) => {
+          return d;
+        }) ?? []
+      );
+      setRnn(
+        data.rnn?.map((d) => {
+          return d;
+        }) ?? []
+      );
+      setPn(
+        data.pn?.map((d) => {
+          return d;
+        }) ?? []
+      );
+      setPnr(
+        data.pnr?.map((d) => {
+          return d;
+        }) ?? []
+      );
+      setRncf(
+        data.rncf?.map((d) => {
+          return d;
+        }) ?? []
+      );
+      setNaturaHabitat(
+        data.naturaHabitat?.map((d) => {
+          return d;
+        }) ?? []
+      );
+      setNaturaOiseaux(
+        data.naturaOiseaux?.map((d) => {
+          return d;
+        }) ?? []
+      );
+      setznieff1(
+        data.znieff1?.map((d) => {
+          return d;
+        }) ?? []
+      );
+      setznieff2(
+        data.znieff2?.map((d) => {
+          return d;
+        }) ?? []
+      );
+    };
     mapping();
   }, [data]);
 
   return (
     <>
       <Box mb={2}>
-      <Typography variant="titleDrawer" component="p">Données complémentaires sur les parcs naturels</Typography>
-      <Typography variant="bodyDrawer" component="p">
+        <Typography variant="titleDrawer" component="p">
+          Données complémentaires sur les parcs naturels
+        </Typography>
+        <Typography variant="bodyDrawer" component="p">
           Les données suivantes répertorient les parcs et réserves naturelles se
           trouvant dans un rayon de 10 km de l'adresse sélectionnée. Plus
           d'informations sur les{" "}
@@ -60,8 +98,8 @@ export default function ParcNaturelleDrawer(p: prop) {
             rel="noopener noreferrer"
           >
             Réserves Naturelles de France
-          </Link>
-          {" "}et{" "}
+          </Link>{" "}
+          et{" "}
           <Link
             href="https://geoconfluences.ens-lyon.fr/glossaire/parcs-nationaux-et-parcs-naturels-regionaux-pnr"
             target="_blank"
@@ -72,14 +110,14 @@ export default function ParcNaturelleDrawer(p: prop) {
           .
         </Typography>
       </Box>
-      <Box >
+      <Box>
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
             aria-controls="panel1-content"
             id="panel1-header"
           >
-            Réserves Naturelles Nationales (RNN){" "}
+            Parc Naturelles{" "}
           </AccordionSummary>
           <AccordionDetails>
             {rnn.map((d) => {
@@ -104,17 +142,6 @@ export default function ParcNaturelleDrawer(p: prop) {
                 </Typography>
               );
             })}
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1-content"
-            id="panel1-header"
-          >
-            Reserve Naturelle Regional (RNR)
-          </AccordionSummary>
-          <AccordionDetails>
             {rncf.map((d) => {
               return (
                 <Typography variant="contentDrawer" component="p">
@@ -126,17 +153,6 @@ export default function ParcNaturelleDrawer(p: prop) {
                 </Typography>
               );
             })}
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1-content"
-            id="panel1-header"
-          >
-            Parc National (PN)
-          </AccordionSummary>
-          <AccordionDetails>
             {pn.map((d) => {
               return (
                 <Typography variant="contentDrawer" component="p">
@@ -151,17 +167,6 @@ export default function ParcNaturelleDrawer(p: prop) {
                 </Typography>
               );
             })}
-          </AccordionDetails>
-        </Accordion>
-        <Accordion>
-          <AccordionSummary
-            expandIcon={<ExpandMoreIcon />}
-            aria-controls="panel1-content"
-            id="panel1-header"
-          >
-            Parc Naturelle Regional (PNR)
-          </AccordionSummary>
-          <AccordionDetails>
             {pnr.map((d) => {
               return (
                 <Typography variant="contentDrawer" component="p">
@@ -173,6 +178,79 @@ export default function ParcNaturelleDrawer(p: prop) {
                     {d.properties?.nom}
                   </Link>
                   {" - "} Superficie : {Math.floor(d.area ?? 0)} m²
+                </Typography>
+              );
+            })}
+          </AccordionDetails>
+        </Accordion>
+        <Accordion>
+          <AccordionSummary
+            expandIcon={<ExpandMoreIcon />}
+            aria-controls="panel1-content"
+            id="panel1-header"
+          >
+            Zonne Naturelle
+          </AccordionSummary>
+          <AccordionDetails>
+            {naturaHabitat.map((d) => {
+              return (
+                <Box>
+                  <Link
+                    href={d.properties?.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {d.properties?.nom ?? d.id}
+                  </Link>
+                  <Typography variant="contentDrawer" component="p">
+                    {" "}
+                    Superficie : {Math.floor(d.area ?? 0)} m²
+                  </Typography>
+                </Box>
+              );
+            })}
+            {naturaOiseaux.map((d) => {
+              return (
+                <Box>
+                  <Link
+                    href={d.properties?.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {d.properties?.nom}
+                  </Link>
+                  <Typography variant="contentDrawer" component="p">
+                    {" "}
+                    Superficie : {Math.floor(d.area ?? 0)} m²
+                  </Typography>
+                </Box>
+              );
+            })}
+            {znieff1.map((d) => {
+              return (
+                <Typography variant="contentDrawer" component="p">
+                  <Link
+                    href={d.properties?.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {d.properties?.nom}
+                  </Link>
+                  {" - "} Superficie : {Math.floor(d.area ?? 0)} m²
+                </Typography>
+              );
+            })}
+            {znieff2.map((d) => {
+              return (
+                <Typography variant="contentDrawer" component="p">
+                  <Link
+                    href={d.properties?.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {d.properties?.nom}
+                  </Link>
+                  {" - "}Superficie : {Math.floor(d.area ?? 0)} m²
                 </Typography>
               );
             })}

@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import AddressSearchBar from "../components/BanField/banfield";
 import Button from "@mui/material/Button";
-import { ServiceAPI } from "../services/api/api.service";
 import { Box, CircularProgress, Container, Typography } from "@mui/material";
+import { ServiceAPIV2 } from "../services/api/api.serviceV2";
 
-const MainPage = () => {
+const MainPage: React.FC = () => {
   const navigate = useNavigate();
   const [valueAddressSearchBar, setValueAddressSearchBar] =
     useState<string>("");
@@ -18,7 +18,7 @@ const MainPage = () => {
   const handleButtonClick = async () => {
     try {
       setIsLoading(true);
-      const addressObject = await ServiceAPI.initiateCycle(
+      const addressObject = await ServiceAPIV2.initiateCycle(
         valueAddressSearchBar.trim()
       );
       navigate("/resultpage", { state: { addressObject: addressObject } });
@@ -29,7 +29,7 @@ const MainPage = () => {
   };
   //wakeup the server at the start of the app
   useEffect(() => {
-    ServiceAPI.wakeUpServer();
+    ServiceAPIV2.wakeUpServer();
   }, []);
 
   // Callback management
@@ -42,8 +42,8 @@ const MainPage = () => {
       sx={{ maxWidth: { xs: "100%", sm: "80%", md: "lg" } }}
       maxWidth="lg"
     >
-      <Box margin={5} sx={{ textAlign: "center" ,
-         margin: { xs: "0", sm: "3", md: "5" }
+      <Box sx={{ textAlign: "center" ,
+         marginTop: { xs: "0rem", sm: "3rem", md: "5rem" }
       }}>
         <Typography marginY={2} variant="h1" component="h1">
           Est-ce qu’il fait bon vivre chez vous ?
@@ -54,7 +54,7 @@ const MainPage = () => {
         </Typography>
       </Box>
       <Container maxWidth="sm">
-        <Box marginTop={1} sx={{ textAlign: "center" }}>
+        <Box paddingY={2} sx={{ textAlign: "center" }}>
           <Box sx={{ display: "flex", alignItems: "center" }}>
             <AddressSearchBar
               valueAddressSearchBarProps={handleValueAddressSearchBar}

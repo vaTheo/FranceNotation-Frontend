@@ -176,6 +176,27 @@ const tableUi = {
   },
 };
 
+export const drawerSliderBar = {
+  justifyContent: "space-between",
+  overflowY: "auto",
+  padding: "1rem",
+  "&::-webkit-scrollbar": {
+    width: "8px",
+  },
+  "&::-webkit-scrollbar-track": {
+    background: "transparent",
+  },
+  "&::-webkit-scrollbar-thumb": {
+    background: "#888",
+    borderRadius: "4px",
+  },
+  "&::-webkit-scrollbar-thumb:hover": {
+    background: "#555",
+  },
+  scrollbarWidth: "thin",
+  scrollbarColor: "#888 transparent",
+};
+
 export const theme = createTheme({
   palette: {
     mode: "dark",

@@ -1,34 +1,42 @@
 import { useEffect, useState } from "react";
-import { FrontzoneInnondable } from "../../../pages/typeResultJson/jsonInterface";
 import { AZIData } from "../../../pages/typeResultJson/api-georisque";
-import { Accordion, AccordionDetails, AccordionSummary, Box, Link, Typography } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Box,
+  Link,
+  Typography,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type prop = {
-  data: FrontzoneInnondable;
+  data: AZIData[];
 };
 
 export default function ZoneInnondableDrawer(p: prop) {
   const { data } = p;
   const [AZI, setAZI] = useState<Array<AZIData>>([]);
-  const mapping = () => {
-    setAZI(
-      data.zoneInnondable?.map((d) => {
-        return d;
-      }) ?? []
-    );
-  };
+
   useEffect(() => {
+    const mapping = () => {
+      setAZI(
+        data?.map((d) => {
+          return d;
+        }) ?? []
+      );
+    };
+
     mapping();
-    console.error("AZI", AZI);
-    console.error("data", data);
   }, [data]);
 
   return (
     <>
       <Box mb={2}>
-      <Typography variant="titleDrawer" component="p">Données complémentaires sur les risques d'inondations</Typography>
-      <Typography variant="bodyDrawer" component="p">
+        <Typography variant="titleDrawer" component="p">
+          Données complémentaires sur les risques d'inondations
+        </Typography>
+        <Typography variant="bodyDrawer" component="p">
           Les données suivantes répertorient les risques d'inondation. Plus
           d'informations sur{" "}
           <Link
@@ -41,7 +49,7 @@ export default function ZoneInnondableDrawer(p: prop) {
           .
         </Typography>
       </Box>
-      <Box >
+      <Box>
         <Accordion>
           <AccordionSummary
             expandIcon={<ExpandMoreIcon />}
@@ -52,7 +60,9 @@ export default function ZoneInnondableDrawer(p: prop) {
           </AccordionSummary>
           <AccordionDetails>
             {AZI.length === 0 ? (
-              <Typography variant="contentDrawer" component="p">Aucune zone innondable a été trouvé à cette addresse</Typography>
+              <Typography variant="contentDrawer" component="p">
+                Aucune zone innondable a été trouvé à cette addresse
+              </Typography>
             ) : (
               AZI.map((d) => {
                 return (

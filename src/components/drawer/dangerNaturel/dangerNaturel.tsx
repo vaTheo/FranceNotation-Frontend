@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { FrontrisqueLocaux } from "../../../pages/typeResultJson/jsonInterface";
 import {
   MVTData,
   RadonData,
@@ -9,34 +8,37 @@ import { Accordion, AccordionDetails, AccordionSummary, Box, Typography } from "
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type prop = {
-  data: FrontrisqueLocaux;
+  dataMVT: MVTData[];
+  dataRadon: RadonData[];
+  dataZonageSismique: ZonageSismiqueData[];
 };
 
 export default function DangerNaturelleDrawer(p: prop) {
-  const { data } = p;
+  const { dataMVT,dataRadon,dataZonageSismique } = p;
   const [mvt, setMvt] = useState<Array<MVTData>>([]);
   const [sismique, setsismique] = useState<Array<ZonageSismiqueData>>([]);
   const [radon, setRadon] = useState<Array<RadonData>>([]);
-  const mapping = () => {
-    setMvt(
-      data.risqueLocaux.MVTData?.map((d) => {
-        return d;
-      }) ?? []
-    );
-    setsismique(
-      data.risqueLocaux.ZonageSismiqueData?.map((d) => {
-        return d;
-      }) ?? []
-    );
-    setRadon(
-      data.risqueLocaux.RadonData?.map((d) => {
-        return d;
-      }) ?? []
-    );
-  };
+  
   useEffect(() => {
+    const mapping = () => {
+      setMvt(
+        dataMVT?.map((d) => {
+          return d;
+        }) ?? []
+      );
+      setsismique(
+        dataZonageSismique?.map((d) => {
+          return d;
+        }) ?? []
+      );
+      setRadon(
+        dataRadon?.map((d) => {
+          return d;
+        }) ?? []
+      );
+    };
     mapping();
-  }, [data]);
+  }, [dataMVT,dataRadon,dataZonageSismique]);
 
   return (
     <>

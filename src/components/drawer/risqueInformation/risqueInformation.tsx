@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import { FrontRisqueInformation } from "../../../pages/typeResultJson/jsonInterface";
-import { RisqueDetail } from "../../../pages/typeResultJson/api-georisque";
+import {
+  RisqueDetail,
+  RisquesData,
+} from "../../../pages/typeResultJson/api-georisque";
 import {
   Accordion,
   AccordionDetails,
@@ -12,20 +14,22 @@ import {
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 type prop = {
-  data: FrontRisqueInformation;
+  data: RisquesData[];
 };
 
 export default function RisqueInformationDrawer(p: prop) {
   const { data } = p;
   const [risques, setRisques] = useState<Array<RisqueDetail>>([]);
-  const mapping = () => {
-    setRisques(
-      data.risqueInformation?.risqueInformation[0].risques_detail.map((d) => {
-        return d;
-      }) ?? []
-    );
-  };
+  
   useEffect(() => {
+    const mapping = () => {
+      setRisques(
+        data[0].risques_detail.map((d) => {
+          return d;
+        }) ?? []
+      );
+    };
+
     mapping();
   }, [data]);
 
@@ -61,7 +65,12 @@ export default function RisqueInformationDrawer(p: prop) {
           </AccordionSummary>
           <AccordionDetails>
             {risques.map((d) => {
-              return <Typography variant="contentDrawer" component="p"> {d.libelle_risque_long}</Typography>;
+              return (
+                <Typography variant="contentDrawer" component="p">
+                  {" "}
+                  {d.libelle_risque_long}
+                </Typography>
+              );
             })}
           </AccordionDetails>
         </Accordion>
