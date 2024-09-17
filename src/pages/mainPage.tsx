@@ -42,13 +42,16 @@ const MainPage: React.FC = () => {
       sx={{ maxWidth: { xs: "100%", sm: "80%", md: "lg" } }}
       maxWidth="lg"
     >
-      <Box sx={{ textAlign: "center" ,
-         marginTop: { xs: "0rem", sm: "3rem", md: "5rem" }
-      }}>
+      <Box
+        sx={{
+          textAlign: "center",
+          marginTop: { xs: "0rem", sm: "3rem", md: "5rem" },
+        }}
+      >
         <Typography marginY={2} variant="h1" component="h1">
           Est-ce qu’il fait bon vivre chez vous ?
         </Typography>
-        <Typography  my={3} variant="h2" component="h2">
+        <Typography my={3} variant="h2" component="h2">
           Renseignez l'adresse de votre choix et découvrez sa note ainsi que des
           informations essentielles
         </Typography>
@@ -77,11 +80,11 @@ const MainPage: React.FC = () => {
           </Box>
           <Box marginTop={4}>
             <Typography variant="body1" component="p">
-              Nous avons croisées les données disponible en libre service
-              d’écologie, de risques de catastrophe naturelle (et bien plus)
-              pourque chaque français puisse voir les informations sur l’indice.
-              Ce sont donc des données accesssible à tous mais nous essayon de
-              les rendre accessible le plus facilement poissible
+              Nous avons croisé les données disponibles en libre service
+              d'écologie, de risques de catastrophes naturelles (et bien plus)
+              pour que chaque Français puisse voir les informations sur
+              l'indice. Ce sont donc des données accessibles à tous, mais nous
+              essayons de les rendre accessibles le plus facilement possible.
             </Typography>
           </Box>
         </Box>
