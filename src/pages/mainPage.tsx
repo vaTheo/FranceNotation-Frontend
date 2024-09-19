@@ -1,10 +1,17 @@
 import { useEffect, useState } from "react";
-// import "../styles/mainPage.scss";
 import { useNavigate } from "react-router-dom";
 import AddressSearchBar from "../components/BanField/banfield";
 import Button from "@mui/material/Button";
-import { Box, CircularProgress, Container, Typography } from "@mui/material";
+import {
+  Box,
+  CircularProgress,
+  Container,
+  Link,
+  Typography,
+} from "@mui/material";
 import { ServiceAPIV2 } from "../services/api/api.serviceV2";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import { LinkedIn } from "@mui/icons-material";
 
 const MainPage: React.FC = () => {
   const navigate = useNavigate();
@@ -89,6 +96,46 @@ const MainPage: React.FC = () => {
           </Box>
         </Box>
       </Container>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "right",
+          paddingX: "1.25rem",
+          gap: "1.25rem",
+        }}
+      >
+        <Link
+          href="https://github.com/vaTheo/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <GitHubIcon
+            sx={{
+              transition: "font-size 0.5s ease",
+              fontSize: "2.5rem",
+              "&:hover": {
+                fontSize: "2.7rem",
+              },
+             
+            }}
+          ></GitHubIcon>
+        </Link>
+        <Link
+          href="https://www.linkedin.com/in/vatheo/"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          <LinkedIn
+            sx={{
+              transition: "font-size 0.5s ease",
+              fontSize: "2.5rem",
+              "&:hover": {
+                fontSize: "2.7rem",
+              },
+            }}
+          ></LinkedIn>
+        </Link>
+      </Box>
     </Container>
   );
 };
