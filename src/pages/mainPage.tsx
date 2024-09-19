@@ -105,7 +105,7 @@ const MainPage: React.FC = () => {
         }}
       >
         <Link
-          href="https://github.com/vaTheo/"
+          href="https://github.com/vaTheo/Geonote-Frontend"
           target="_blank"
           rel="noopener noreferrer"
         >
