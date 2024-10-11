@@ -35,7 +35,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "deploy":"fly deploy",
+    "deploy": "fly deploy",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
